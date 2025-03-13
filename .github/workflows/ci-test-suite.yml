@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "lib/**"
-    types: [opened, synchronize, reopened, edited]
 
 jobs:
   react-ci:
