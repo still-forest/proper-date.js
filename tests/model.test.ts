@@ -100,8 +100,8 @@ describe("ProperDate", () => {
     });
 
     test("with a ProperDate", () => {
-      const ProperDate = new ProperDate("2023-12-25");
-      const subject = new ProperDate(ProperDate);
+      const properDate = new ProperDate("2023-12-25");
+      const subject = new ProperDate(properDate);
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUTCDatetime()).toStrictEqual(
         new Date("2023-12-25T00:00:00.000Z")
