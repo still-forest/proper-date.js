@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { ProperDate } from "../lib/model";
+import ProperDate from "../lib/model";
 
 describe("ProperDate", () => {
   describe("constructor", () => {
