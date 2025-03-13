@@ -19,7 +19,7 @@ class SimpleDate {
       this.day = parsedDate.getDate();
     } else {
       throw new Error(
-        "Date must be either a Date, SimpleDate, or stringified date"
+        "Date must be either a Date, SimpleDate, or stringified date",
       );
     }
   }
@@ -133,8 +133,8 @@ class SimpleDate {
       Date.UTC(
         baseDate.getFullYear(),
         baseDate.getMonth() - n,
-        baseDate.getDate()
-      )
+        baseDate.getDate(),
+      ),
     );
 
     // Handle cases where the target date overflows to the next month
@@ -152,9 +152,9 @@ class SimpleDate {
         Date.UTC(
           baseDate.getFullYear() - n,
           baseDate.getMonth(),
-          baseDate.getDate()
-        )
-      )
+          baseDate.getDate(),
+        ),
+      ),
     );
   }
 
@@ -167,7 +167,7 @@ class SimpleDate {
   getEndOfNMonthsAgo(n: number): SimpleDate {
     return new SimpleDate(
       // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0))
+      new Date(Date.UTC(this.year, this.month - n + 1, 0)),
     );
   }
 }
