@@ -15,13 +15,13 @@ importers:
         specifier: 3.0.8
         version: 3.0.8(vitest@3.0.8)
       tsup:
-        specifier: ^8.4.0
+        specifier: 8.4.0
         version: 8.4.0(postcss@8.5.3)(typescript@5.8.2)
       typescript:
-        specifier: ^5.8.2
+        specifier: 5.8.2
         version: 5.8.2
       vitest:
-        specifier: ^3.0.8
+        specifier: 3.0.8
         version: 3.0.8
 
 packages:
