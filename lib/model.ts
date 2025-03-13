@@ -1,4 +1,6 @@
-export default class ProperDate {
+import type { ProperDateInterface } from "./interface";
+
+export default class ProperDate implements ProperDateInterface {
   year: number;
   month: number;
   day: number;
@@ -24,18 +26,16 @@ export default class ProperDate {
     }
   }
 
+  // TODO: move to a factory
   static get Today(): ProperDate {
     return new ProperDate();
   }
 
+  // TODO: move to a factory
   static get Yesterday(): ProperDate {
     const now = new Date();
     now.setDate(now.getDate() - 1);
     return new ProperDate(now);
-  }
-
-  equals(other: ProperDate): boolean {
-    return this.toString() === other.toString();
   }
 
   static compare(a: ProperDate, b: ProperDate) {
@@ -46,11 +46,24 @@ export default class ProperDate {
     return this.toString();
   }
 
-  get jsDate(): Date {
-    return new Date(Date.UTC(this.year, this.month, this.day));
+  get priorYearEnd(): ProperDate {
+    return this.getEndOfNYearsAgo(1);
   }
 
+  get priorMonthEnd(): ProperDate {
+    return this.getEndOfNMonthsAgo(1);
+  }
+
+  equals(other: ProperDate): boolean {
+    return this.toString() === other.toString();
+  }
+
+  // TODO: deprecated
   formatDateDifference(other: ProperDate): string {
+    console.warn(
+      "Warning: formatDateDifference() is deprecated and will be removed prior to v1.0.0."
+    );
+
     const baseDate = this.toUTCDatetime();
     const pastDate = other.toUTCDatetime();
 
@@ -75,17 +88,7 @@ export default class ProperDate {
     return this.jsDate.toISOString().split("T")[0];
   }
 
-  // This is important for Chrome DevTools -- doesn't seem to work
-  [Symbol.for("nodejs.util.inspect.custom")](): string {
-    return this.toString();
-  }
-
-  // For Firefox DevTools
-  inspect(): string {
-    return this.toString();
-  }
-
-  toJSON() {
+  toJSON(): string {
     // serialize to JSON
     return this.toString();
   }
@@ -94,21 +97,17 @@ export default class ProperDate {
     return this.toUTCDatetime();
   }
 
+  // TODO: deprecated
   toUTCDatetime(): Date {
+    console.warn(
+      "Warning: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead."
+    );
     return new Date(this.toString());
   }
 
   // TODO: This is used to sort ProperDate objects.  Can we do something better?
   getTime(): number {
     return this.toUTCDatetime().getTime();
-  }
-
-  get priorYearEnd(): ProperDate {
-    return this.getEndOfNYearsAgo(1);
-  }
-
-  get priorMonthEnd(): ProperDate {
-    return this.getEndOfNMonthsAgo(1);
   }
 
   // TODO: Make this a generic 'add' function that also takes a 'unit' parameter
@@ -158,16 +157,20 @@ export default class ProperDate {
     );
   }
 
+  getEndOfNMonthsAgo(n: number): ProperDate {
+    return new ProperDate(
+      // `0` gives the last day of the previous month.
+      new Date(Date.UTC(this.year, this.month - n + 1, 0))
+    );
+  }
+
   getEndOfNYearsAgo(n: number): ProperDate {
     const priorYear = this.toUTCDatetime().getFullYear() - n;
     const priorYearEndDate = new Date(Date.UTC(priorYear, 11, 31));
     return new ProperDate(priorYearEndDate);
   }
 
-  getEndOfNMonthsAgo(n: number): ProperDate {
-    return new ProperDate(
-      // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0))
-    );
+  private get jsDate(): Date {
+    return new Date(Date.UTC(this.year, this.month, this.day));
   }
 }
