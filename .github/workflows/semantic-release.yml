@@ -1,7 +1,7 @@
 name: Semantic Release
 
 on:
-  pull_request: # TODO: change to push
+  push:
     branches:
       - main
   workflow_dispatch:
@@ -10,7 +10,7 @@ permissions:
   contents: read # for checkout
 
 jobs:
-  verify-release:
+  release:
     runs-on: ubuntu-latest
     environment: release
 
@@ -49,8 +49,8 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release --dry-run
 
-      # - name: Release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npx semantic-release
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
