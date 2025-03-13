@@ -13,13 +13,13 @@ class SimpleDate {
       this.month = date.month;
       this.day = date.day;
     } else if (typeof date === "string") {
-      date = new Date(date);
-      this.year = date.getFullYear();
-      this.month = date.getMonth();
-      this.day = date.getDate();
+      const parsedDate = new Date(date);
+      this.year = parsedDate.getFullYear();
+      this.month = parsedDate.getMonth();
+      this.day = parsedDate.getDate();
     } else {
       throw new Error(
-        "Date must be either a Date, SimpleDate, or stringified date"
+        "Date must be either a Date, SimpleDate, or stringified date",
       );
     }
   }
@@ -58,15 +58,17 @@ class SimpleDate {
     const numDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
     if (numDays === 0) {
-      return `today`;
-    } else if (numDays === 1) {
-      return `yesterday`;
-    } else if (numDays > 30) {
+      return "today";
+    }
+    if (numDays === 1) {
+      return "yesterday";
+    }
+    if (numDays > 30) {
       const numMonths = Math.floor(numDays / 30.42); // Approximation for months
       return `${numMonths} month${numMonths > 1 ? "s" : ""} ago`;
-    } else {
-      return `${numDays} day${numDays > 1 ? "s" : ""} ago`;
     }
+
+    return `${numDays} day${numDays > 1 ? "s" : ""} ago`;
   }
 
   toString(): string {
@@ -131,8 +133,8 @@ class SimpleDate {
       Date.UTC(
         baseDate.getFullYear(),
         baseDate.getMonth() - n,
-        baseDate.getDate()
-      )
+        baseDate.getDate(),
+      ),
     );
 
     // Handle cases where the target date overflows to the next month
@@ -150,9 +152,9 @@ class SimpleDate {
         Date.UTC(
           baseDate.getFullYear() - n,
           baseDate.getMonth(),
-          baseDate.getDate()
-        )
-      )
+          baseDate.getDate(),
+        ),
+      ),
     );
   }
 
@@ -165,7 +167,7 @@ class SimpleDate {
   getEndOfNMonthsAgo(n: number): SimpleDate {
     return new SimpleDate(
       // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0))
+      new Date(Date.UTC(this.year, this.month - n + 1, 0)),
     );
   }
 }

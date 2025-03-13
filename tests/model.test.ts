@@ -7,7 +7,7 @@ describe("SimpleDate", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUTCDatetime()).toStrictEqual(
-        new Date("2023-12-25T00:00:00.000Z")
+        new Date("2023-12-25T00:00:00.000Z"),
       );
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
@@ -20,7 +20,7 @@ describe("SimpleDate", () => {
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-25");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
+          new Date("2023-12-25T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -32,13 +32,13 @@ describe("SimpleDate", () => {
 
         const date = new Date("2023-12-25 00:00:00");
         expect(date.toString()).toStrictEqual(
-          "Mon Dec 25 2023 00:00:00 GMT+0800 (Singapore Standard Time)"
+          "Mon Dec 25 2023 00:00:00 GMT+0800 (Singapore Standard Time)",
         );
 
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-25");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
+          new Date("2023-12-25T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -50,7 +50,7 @@ describe("SimpleDate", () => {
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-25");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
+          new Date("2023-12-25T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -64,7 +64,7 @@ describe("SimpleDate", () => {
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-25");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
+          new Date("2023-12-25T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -79,7 +79,7 @@ describe("SimpleDate", () => {
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-26");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-26T00:00:00.000Z")
+          new Date("2023-12-26T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -91,7 +91,7 @@ describe("SimpleDate", () => {
         const subject = new SimpleDate(date);
         expect(subject.toString()).toStrictEqual("2023-12-25");
         expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
+          new Date("2023-12-25T00:00:00.000Z"),
         );
         expect(subject.year).toStrictEqual(2023);
         expect(subject.month).toStrictEqual(11);
@@ -104,7 +104,7 @@ describe("SimpleDate", () => {
       const subject = new SimpleDate(simpleDate);
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUTCDatetime()).toStrictEqual(
-        new Date("2023-12-25T00:00:00.000Z")
+        new Date("2023-12-25T00:00:00.000Z"),
       );
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
@@ -141,10 +141,10 @@ describe("SimpleDate", () => {
 
       expect(subject.equals(new SimpleDate("2023-12-25"))).toStrictEqual(true);
       expect(
-        subject.equals(new SimpleDate(new Date("2023-12-25")))
+        subject.equals(new SimpleDate(new Date("2023-12-25"))),
       ).toStrictEqual(true);
       expect(
-        subject.equals(new SimpleDate(new Date(Date.UTC(2023, 11, 25))))
+        subject.equals(new SimpleDate(new Date(Date.UTC(2023, 11, 25)))),
       ).toStrictEqual(true);
     });
 
@@ -152,10 +152,10 @@ describe("SimpleDate", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.equals(new SimpleDate("2023-12-24"))).toStrictEqual(false);
       expect(
-        subject.equals(new SimpleDate(new Date("2023-12-24")))
+        subject.equals(new SimpleDate(new Date("2023-12-24"))),
       ).toStrictEqual(false);
       expect(
-        subject.equals(new SimpleDate(new Date(Date.UTC(2023, 11, 24))))
+        subject.equals(new SimpleDate(new Date(Date.UTC(2023, 11, 24)))),
       ).toStrictEqual(false);
     });
   });
@@ -188,16 +188,16 @@ describe("SimpleDate", () => {
     test("returns a SimpleDate for 12/31 of the prior year", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.getDateNDaysAgo(1)).toStrictEqual(
-        new SimpleDate("2023-12-24")
+        new SimpleDate("2023-12-24"),
       );
       expect(subject.getDateNDaysAgo(2)).toStrictEqual(
-        new SimpleDate("2023-12-23")
+        new SimpleDate("2023-12-23"),
       );
       expect(subject.getDateNDaysAgo(10)).toStrictEqual(
-        new SimpleDate("2023-12-15")
+        new SimpleDate("2023-12-15"),
       );
       expect(subject.getDateNDaysAgo(365)).toStrictEqual(
-        new SimpleDate("2022-12-25")
+        new SimpleDate("2022-12-25"),
       );
     });
   });
@@ -206,16 +206,16 @@ describe("SimpleDate", () => {
     test("returns a SimpleDate for 12/31 of the prior year", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.getDateNMonthsAgo(1)).toStrictEqual(
-        new SimpleDate("2023-11-25")
+        new SimpleDate("2023-11-25"),
       );
       expect(subject.getDateNMonthsAgo(2)).toStrictEqual(
-        new SimpleDate("2023-10-25")
+        new SimpleDate("2023-10-25"),
       );
       expect(subject.getDateNMonthsAgo(10)).toStrictEqual(
-        new SimpleDate("2023-02-25")
+        new SimpleDate("2023-02-25"),
       );
       expect(subject.getDateNMonthsAgo(12)).toStrictEqual(
-        new SimpleDate("2022-12-25")
+        new SimpleDate("2022-12-25"),
       );
     });
   });
@@ -224,13 +224,13 @@ describe("SimpleDate", () => {
     test("returns a SimpleDate for 12/31 of the prior year", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.getDateNYearsAgo(1)).toStrictEqual(
-        new SimpleDate("2022-12-25")
+        new SimpleDate("2022-12-25"),
       );
       expect(subject.getDateNYearsAgo(2)).toStrictEqual(
-        new SimpleDate("2021-12-25")
+        new SimpleDate("2021-12-25"),
       );
       expect(subject.getDateNYearsAgo(10)).toStrictEqual(
-        new SimpleDate("2013-12-25")
+        new SimpleDate("2013-12-25"),
       );
     });
   });
@@ -239,13 +239,13 @@ describe("SimpleDate", () => {
     test("returns a SimpleDate for 12/31 of the prior year", () => {
       const subject = new SimpleDate("2023-12-25");
       expect(subject.getEndOfNYearsAgo(1)).toStrictEqual(
-        new SimpleDate("2022-12-31")
+        new SimpleDate("2022-12-31"),
       );
       expect(subject.getEndOfNYearsAgo(2)).toStrictEqual(
-        new SimpleDate("2021-12-31")
+        new SimpleDate("2021-12-31"),
       );
       expect(subject.getEndOfNYearsAgo(10)).toStrictEqual(
-        new SimpleDate("2013-12-31")
+        new SimpleDate("2013-12-31"),
       );
     });
   });
