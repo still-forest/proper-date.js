@@ -1,12 +1,19 @@
 {
   "name": "@jszymanowski/proper-date.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "John Szymanowski",
   "license": "MIT",
   "description": "Simple, lightweight date object library for JavaScript/TypeScript, without the time nonsense.",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -21,8 +28,8 @@
   },
   "type": "module",
   "scripts": {
-    "build": "tsup lib/index.ts --dts",
-    "dev": "tsup lib/index.ts --watch",
+    "build": "tsup lib/index.ts --format esm,cjs --dts",
+    "dev": "tsup lib/index.ts --format esm,cjs --watch",
     "format": "pnpm biome format --write",
     "lint": "pnpm biome lint",
     "test": "vitest",
