@@ -1,0 +1,23 @@
+{
+  "name": "simple-date",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup lib/index.ts --dts",
+    "dev": "tsup lib/index.ts --watch",
+    "lint": "pwd",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.2",
+  "devDependencies": {
+    "@vitest/coverage-v8": "3.0.8",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}
