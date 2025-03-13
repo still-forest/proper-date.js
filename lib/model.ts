@@ -1,14 +1,14 @@
-class SimpleDate {
+class ProperDate {
   year: number;
   month: number;
   day: number;
 
-  constructor(date: Date | SimpleDate | string = new Date()) {
+  constructor(date: Date | ProperDate | string = new Date()) {
     if (date instanceof Date) {
       this.year = date.getFullYear();
       this.month = date.getMonth();
       this.day = date.getDate();
-    } else if (date instanceof SimpleDate) {
+    } else if (date instanceof ProperDate) {
       this.year = date.year;
       this.month = date.month;
       this.day = date.day;
@@ -19,26 +19,26 @@ class SimpleDate {
       this.day = parsedDate.getDate();
     } else {
       throw new Error(
-        "Date must be either a Date, SimpleDate, or stringified date",
+        "Date must be either a Date, ProperDate, or stringified date"
       );
     }
   }
 
-  static get Today(): SimpleDate {
-    return new SimpleDate();
+  static get Today(): ProperDate {
+    return new ProperDate();
   }
 
-  static get Yesterday(): SimpleDate {
+  static get Yesterday(): ProperDate {
     const now = new Date();
     now.setDate(now.getDate() - 1);
-    return new SimpleDate(now);
+    return new ProperDate(now);
   }
 
-  equals(other: SimpleDate): boolean {
+  equals(other: ProperDate): boolean {
     return this.toString() === other.toString();
   }
 
-  static compare(a: SimpleDate, b: SimpleDate) {
+  static compare(a: ProperDate, b: ProperDate) {
     return a.getTime() - b.getTime();
   }
 
@@ -50,7 +50,7 @@ class SimpleDate {
     return new Date(Date.UTC(this.year, this.month, this.day));
   }
 
-  formatDateDifference(other: SimpleDate): string {
+  formatDateDifference(other: ProperDate): string {
     const baseDate = this.toUTCDatetime();
     const pastDate = other.toUTCDatetime();
 
@@ -98,43 +98,43 @@ class SimpleDate {
     return new Date(this.toString());
   }
 
-  // TODO: This is used to sort SimpleDate objects.  Can we do something better?
+  // TODO: This is used to sort ProperDate objects.  Can we do something better?
   getTime(): number {
     return this.toUTCDatetime().getTime();
   }
 
-  get priorYearEnd(): SimpleDate {
+  get priorYearEnd(): ProperDate {
     return this.getEndOfNYearsAgo(1);
   }
 
-  get priorMonthEnd(): SimpleDate {
+  get priorMonthEnd(): ProperDate {
     return this.getEndOfNMonthsAgo(1);
   }
 
   // TODO: Make this a generic 'add' function that also takes a 'unit' parameter
-  addDays(n: number): SimpleDate {
+  addDays(n: number): ProperDate {
     const baseDate = this.toUTCDatetime();
     const newDate = baseDate;
     newDate.setDate(baseDate.getDate() + n);
-    return new SimpleDate(newDate);
+    return new ProperDate(newDate);
   }
 
   // TODO: use a similar pattern as addDays
-  getDateNDaysAgo(n: number): SimpleDate {
+  getDateNDaysAgo(n: number): ProperDate {
     const baseDate = this.toUTCDatetime();
     const newDate = baseDate;
     newDate.setDate(baseDate.getDate() - n);
-    return new SimpleDate(newDate);
+    return new ProperDate(newDate);
   }
 
-  getDateNMonthsAgo(n: number): SimpleDate {
+  getDateNMonthsAgo(n: number): ProperDate {
     const baseDate = this.toUTCDatetime();
     const targetDate = new Date(
       Date.UTC(
         baseDate.getFullYear(),
         baseDate.getMonth() - n,
-        baseDate.getDate(),
-      ),
+        baseDate.getDate()
+      )
     );
 
     // Handle cases where the target date overflows to the next month
@@ -142,34 +142,34 @@ class SimpleDate {
       targetDate.setDate(0); // Set to the last day of the previous month
     }
 
-    return new SimpleDate(targetDate);
+    return new ProperDate(targetDate);
   }
 
-  getDateNYearsAgo(n: number): SimpleDate {
+  getDateNYearsAgo(n: number): ProperDate {
     const baseDate = this.toUTCDatetime();
-    return new SimpleDate(
+    return new ProperDate(
       new Date(
         Date.UTC(
           baseDate.getFullYear() - n,
           baseDate.getMonth(),
-          baseDate.getDate(),
-        ),
-      ),
+          baseDate.getDate()
+        )
+      )
     );
   }
 
-  getEndOfNYearsAgo(n: number): SimpleDate {
+  getEndOfNYearsAgo(n: number): ProperDate {
     const priorYear = this.toUTCDatetime().getFullYear() - n;
     const priorYearEndDate = new Date(Date.UTC(priorYear, 11, 31));
-    return new SimpleDate(priorYearEndDate);
+    return new ProperDate(priorYearEndDate);
   }
 
-  getEndOfNMonthsAgo(n: number): SimpleDate {
-    return new SimpleDate(
+  getEndOfNMonthsAgo(n: number): ProperDate {
+    return new ProperDate(
       // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0)),
+      new Date(Date.UTC(this.year, this.month - n + 1, 0))
     );
   }
 }
 
-export { SimpleDate };
+export { ProperDate };
