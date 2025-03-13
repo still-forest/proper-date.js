@@ -25,6 +25,9 @@ npm i yalc -g
 yarn global add yalc
 pnpm add -g yalc
 
+# Build this library, as usual:
+pnpm build
+
 # "Publish" this library locally (run in this directory)
 yalc publish
 
@@ -33,6 +36,10 @@ yalc publish
 ## package.json to look for this library there.  You will want to add `.yalc` to your `.gitignore`,
 ## and be sure to change back to the real published version before shipping.
 yalc add @jszymanowski/proper-date.js
+
+# As needed: update the locally "published" package
+yalc update @jszymanowski/proper-date.js
+yalc update # all packages in yalc.lock
 
 ```
 
