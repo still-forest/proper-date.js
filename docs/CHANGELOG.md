@@ -1,4 +1,8 @@
-# ProperDate
+# ProperDate - changelog
+
+## 0.1.3
+
+- More fixes for output/distributable file formats
 
 ## 0.1.2
 
