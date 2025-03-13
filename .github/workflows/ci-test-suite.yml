@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        task: [lint, test, build]
+        task: [audit, lint, test, build]
 
     steps:
       - name: Checkout code
@@ -42,7 +42,9 @@ jobs:
 
       - name: Run ${{ matrix.task }}
         run: |
-          if [ "${{ matrix.task }}" == "test" ]; then
+          if [ "${{ matrix.task }}" == "audit" ]; then
+            pnpm audit
+          elif [ "${{ matrix.task }}" == "test" ]; then
             pnpm test
           elif [ "${{ matrix.task }}" == "lint" ]; then
             pnpm lint
