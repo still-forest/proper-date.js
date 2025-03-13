@@ -2,6 +2,8 @@
 
 A simple, lightweight date object library for JavaScript/TypeScript, without the time and timezone nonsense.
 
+[![codecov](https://codecov.io/gh/jszymanowski/proper-date.js/branch/main/graph/badge.svg)](https://codecov.io/gh/jszymanowski/proper-date.js)
+
 ## Usage
 
 ```js
