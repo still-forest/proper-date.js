@@ -1,0 +1,43 @@
+name: "Lint pull request"
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  main:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    if: ${{ !contains(github.event.pull_request.title, '[WIP]') && !contains(github.event.pull_request.title, '[wip]') && !contains(github.event.pull_request.title, '[Wip]') && !contains(github.event.pull_request.title, '[DRAFT]') && !contains(github.event.pull_request.title, '[draft]') && !contains(github.event.pull_request.title, '[Draft]') }}
+
+    steps:
+      - name: Validate PR Title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Use the Conventional Commits standard
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          wip: true
+          requireScope: false
+          subjectPattern: ^[A-Z].+$
+          subjectPatternError: |
+            Your PR title must follow the format: <type>(<optional-scope>): <subject>
+            Examples:
+              feat: Add new feature
+              feat!: Redeisgn the whole project
+              fix(auth): Fix login issue
+              docs: Update README
