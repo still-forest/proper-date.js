@@ -41,6 +41,13 @@ yalc add @jszymanowski/proper-date.js
 yalc update @jszymanowski/proper-date.js
 yalc update # all packages in yalc.lock
 
+# When done
+## In consuming app/library:
+yalc remove @jszymanowski/proper-date.js
+yalc remove --all # all packages in yalc.lock
+
+## In this package:
+yalc installations clean @jszymanowski/proper-date.js # unpublish / reverts yalc publish
 ```
 
 ### Publishing
