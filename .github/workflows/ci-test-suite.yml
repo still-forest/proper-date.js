@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  react-ci:
+  ci:
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
