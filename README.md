@@ -1,4 +1,4 @@
-# simple-date
+# ProperDate.js
 
 ### Publishing
 

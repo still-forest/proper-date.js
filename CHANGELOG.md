@@ -1,4 +1,4 @@
-# SimpleDate
+# ProperDate
 
 ## 0.1.0
 
