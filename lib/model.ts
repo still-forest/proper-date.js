@@ -1,4 +1,4 @@
-class ProperDate {
+export default class ProperDate {
   year: number;
   month: number;
   day: number;
@@ -171,5 +171,3 @@ class ProperDate {
     );
   }
 }
-
-export { ProperDate };
