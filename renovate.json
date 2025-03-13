@@ -1,6 +1,46 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "automerge": false,
+  "commitMessagePrefix": "{{#if isMajor}}🚨 {{else}}⬆️ {{/if}}",
+  "commitMessageAction": "Update",
+  "commitMessageTopic": "{{{depName}}}",
+  "commitMessageExtra": "from {{currentValue}} to {{newValue}}",
+  "enabledManagers": ["npm"],
   "extends": [
-    "config:recommended"
-  ]
+    "config:best-practices",
+    "group:recommended",
+    "group:monorepos",
+    "npm:unpublishSafe",
+    "packages:eslint",
+    "packages:jsUnitTest",
+    "packages:linters",
+    "packages:react",
+    "packages:vite"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "recreateWhen": "auto",
+    "schedule": ["before 5am on tuesday"],
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": [
+        "@babel/*",
+        "*eslint*",
+        "prettier",
+        "@types/*",
+        "typescript*",
+        "vitest"
+      ],
+      "automerge": true
+    },
+    {
+      "enabled": false,
+      "matchDepTypes": ["peerDependencies"]
+    }
+  ],
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10
 }
