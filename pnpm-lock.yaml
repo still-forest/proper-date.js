@@ -7,7 +7,10 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
+      '@biomejs/biome':
+        specifier: 1.9.4
+        version: 1.9.4
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@24.2.3(typescript@5.8.2))
@@ -20,19 +23,15 @@ importers:
       '@semantic-release/release-notes-generator':
         specifier: ^14.0.3
         version: 14.0.3(semantic-release@24.2.3(typescript@5.8.2))
+      '@vitest/coverage-v8':
+        specifier: 3.0.8
+        version: 3.0.8(vitest@3.0.8)
       conventional-changelog-conventionalcommits:
         specifier: ^8.0.0
         version: 8.0.0
       semantic-release:
         specifier: ^24.2.3
         version: 24.2.3(typescript@5.8.2)
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 1.9.4
-        version: 1.9.4
-      '@vitest/coverage-v8':
-        specifier: 3.0.8
-        version: 3.0.8(vitest@3.0.8)
       tsup:
         specifier: 8.4.0
         version: 8.4.0(postcss@8.5.3)(typescript@5.8.2)
