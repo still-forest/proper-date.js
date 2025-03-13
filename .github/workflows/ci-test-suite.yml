@@ -5,19 +5,13 @@ on:
     branches:
       - main
     paths:
-      - "packages/react/**"
+      - "lib/**"
     types: [opened, synchronize, reopened, edited]
 
 jobs:
   react-ci:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-
-    if: ${{ !contains(github.event.pull_request.title, '[WIP]') && !contains(github.event.pull_request.title, '[wip]') && !contains(github.event.pull_request.title, '[Wip]') && !contains(github.event.pull_request.title, '[DRAFT]') && !contains(github.event.pull_request.title, '[draft]') && !contains(github.event.pull_request.title, '[Draft]') }}
-
-    defaults:
-      run:
-        working-directory: ./packages/react
 
     strategy:
       matrix:

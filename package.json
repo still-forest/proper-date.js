@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsup lib/index.ts --dts",
     "dev": "tsup lib/index.ts --watch",
-    "lint": "tbd",
+    "lint": "pwd",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
