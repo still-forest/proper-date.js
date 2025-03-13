@@ -1,6 +1,6 @@
 {
   "name": "@jszymanowski/proper-date.js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "John Szymanowski",
   "license": "MIT",
   "description": "Simple, lightweight date object library for JavaScript/TypeScript, without the time nonsense.",
@@ -10,8 +10,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
