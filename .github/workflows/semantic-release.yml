@@ -9,10 +9,6 @@ on:
 permissions:
   contents: read # for checkout
 
-defaults:
-  run:
-    working-directory: ./packages/react
-
 jobs:
   verify-release:
     runs-on: ubuntu-latest
