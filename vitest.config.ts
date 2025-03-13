@@ -7,7 +7,7 @@ export default defineConfig({
     coverage: {
       include: ["lib/**/*"],
       exclude: ["lib/index.ts"],
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "json", "html", "lcov"], // lcov is needed for Codecov
     },
   },
 });
