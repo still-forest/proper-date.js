@@ -8,7 +8,7 @@ export default class ProperDate implements ProperDateInterface {
 
   constructor(date: Date | ProperDate | string = new Date()) {
     if (date instanceof ProperDate) {
-      // TODO: can I just return a copy?
+      // TODO: can this just be in parseInput too?
       this.year = date.year;
       this.month = date.month;
       this.day = date.day;
