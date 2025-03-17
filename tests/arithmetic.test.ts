@@ -47,5 +47,21 @@ describe("arithmetic", () => {
         new ProperDate("2024-02-29")
       );
     });
+
+    test("with years, returns ProperDate with years added", () => {
+      const base = new ProperDate("2023-12-25");
+      expect(add(base, 1, Period.Year)).toStrictEqual(
+        new ProperDate("2024-12-25")
+      );
+      expect(add(base, 2, Period.Years)).toStrictEqual(
+        new ProperDate("2025-12-25")
+      );
+      expect(add(base, 10, Period.Years)).toStrictEqual(
+        new ProperDate("2033-12-25")
+      );
+      expect(add(base, 120, Period.Years)).toStrictEqual(
+        new ProperDate("2143-12-25")
+      );
+    });
   });
 });

@@ -1,6 +1,7 @@
 import ProperDate from "./model";
 import { Period } from "./types";
 
+// TODO: refactor this to not use Date
 export const add = (
   base: ProperDate,
   n: number,
@@ -28,6 +29,18 @@ export const add = (
     }
 
     return new ProperDate(targetDate);
+  }
+  if (period === Period.Year || period === Period.Years) {
+    const baseDate = base.toDate();
+    return new ProperDate(
+      new Date(
+        Date.UTC(
+          baseDate.getFullYear() + n,
+          baseDate.getMonth(),
+          baseDate.getDate()
+        )
+      )
+    );
   }
 
   throw new Error(`Period ${period} is not supported`);
