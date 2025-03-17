@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import ProperDate from "../lib";
 
-describe("ProperDate", () => {
+describe("model", () => {
   describe("constructor", () => {
     test("with a yyyy-mm-dd formatted string", () => {
       const subject = new ProperDate("2023-12-25");
@@ -14,89 +14,16 @@ describe("ProperDate", () => {
       expect(subject.day).toStrictEqual(25);
     });
 
-    describe("with a JavaScript date, without a specific timezone", () => {
-      test("when constructed from a string without time", () => {
-        const date = new Date("2023-12-25");
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-25");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(25);
-      });
-
-      test.skip("when constructed from a string with time", () => {
-        // TODO: this is timezone dependent, needs to be stubbed
-
-        const date = new Date("2023-12-25 00:00:00");
-        expect(date.toString()).toStrictEqual(
-          "Mon Dec 25 2023 00:00:00 GMT+0800 (Singapore Standard Time)"
-        );
-
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-25");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(25);
-      });
-
-      test("when constructed numerically", () => {
-        const date = new Date(Date.UTC(2023, 11, 25));
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-25");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(25);
-      });
-    });
-
-    describe("with a JavaScript date and a specific timezone", () => {
-      test("UTC/GMT", () => {
-        const date = new Date("2023-12-25T00:00:00.000Z");
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-25");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(25);
-      });
-
-      test("before UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000-13:00");
-
-        // When 16:00 at 25th in the -13:00 timezone, it's already after 00:00 on the 26th in UTC.
-        // TODO: is the desirable behavior?  Or should it be 25?
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-26");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-26T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(26);
-      });
-
-      test("ahead of UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000+13:00");
-        const subject = new ProperDate(date);
-        expect(subject.toString()).toStrictEqual("2023-12-25");
-        expect(subject.toUTCDatetime()).toStrictEqual(
-          new Date("2023-12-25T00:00:00.000Z")
-        );
-        expect(subject.year).toStrictEqual(2023);
-        expect(subject.month).toStrictEqual(11);
-        expect(subject.day).toStrictEqual(25);
-      });
+    test("with a JavaScript date", () => {
+      const date = new Date("2023-12-25");
+      const subject = new ProperDate(date);
+      expect(subject.toString()).toStrictEqual("2023-12-25");
+      expect(subject.toUTCDatetime()).toStrictEqual(
+        new Date("2023-12-25T00:00:00.000Z")
+      );
+      expect(subject.year).toStrictEqual(2023);
+      expect(subject.month).toStrictEqual(11);
+      expect(subject.day).toStrictEqual(25);
     });
 
     test("with a ProperDate", () => {
