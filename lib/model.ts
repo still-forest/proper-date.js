@@ -94,7 +94,7 @@ export default class ProperDate implements ProperDateInterface {
   }
 
   toDate(): Date {
-    return this.toUTCDatetime();
+    return new Date(this.toString());
   }
 
   // TODO: deprecated

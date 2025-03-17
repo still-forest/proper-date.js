@@ -1,7 +1,7 @@
 export enum Period {
   Day = "day",
   Days = "days",
-  Month = "months",
+  Month = "month",
   Months = "months",
   Year = "year",
   Years = "years",
