@@ -127,45 +127,28 @@ export default class ProperDate implements ProperDateInterface {
     return this.add(n, "day");
   }
 
-  // TODO: use a similar pattern as addDays
   getDateNDaysAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const newDate = baseDate;
-    newDate.setDate(baseDate.getDate() - n);
-    return new ProperDate(newDate);
+    console.warn(
+      "DEPRECATION WARNING: getDateNDaysAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'days') instead"
+    );
+    return this.subtract(n, "days");
   }
 
   getDateNMonthsAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const targetDate = new Date(
-      Date.UTC(
-        baseDate.getFullYear(),
-        baseDate.getMonth() - n,
-        baseDate.getDate()
-      )
+    console.warn(
+      "DEPRECATION WARNING: getDateNMonthsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'months') instead"
     );
-
-    // Handle cases where the target date overflows to the next month
-    if (targetDate.getMonth() !== (baseDate.getMonth() - n + 12) % 12) {
-      targetDate.setDate(0); // Set to the last day of the previous month
-    }
-
-    return new ProperDate(targetDate);
+    return this.subtract(n, "months");
   }
 
   getDateNYearsAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    return new ProperDate(
-      new Date(
-        Date.UTC(
-          baseDate.getFullYear() - n,
-          baseDate.getMonth(),
-          baseDate.getDate()
-        )
-      )
+    console.warn(
+      "DEPRECATION WARNING: getDateNYearsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'years') instead"
     );
+    return this.subtract(n, "years");
   }
 
+  // TODO: do something different here
   getEndOfNMonthsAgo(n: number): ProperDate {
     return new ProperDate(
       // `0` gives the last day of the previous month.
@@ -173,6 +156,7 @@ export default class ProperDate implements ProperDateInterface {
     );
   }
 
+  // TODO: do something different here
   getEndOfNYearsAgo(n: number): ProperDate {
     const priorYear = this.toUTCDatetime().getFullYear() - n;
     const priorYearEndDate = new Date(Date.UTC(priorYear, 11, 31));
