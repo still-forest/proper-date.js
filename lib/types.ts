@@ -6,3 +6,5 @@ export enum Period {
   Year = "year",
   Years = "years",
 }
+
+export type PeriodType = "day" | "days" | "month" | "months" | "year" | "years";

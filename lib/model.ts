@@ -1,4 +1,6 @@
 import type { ProperDateInterface } from "./interface";
+import { add, subtract } from "./arithmetic";
+import type { PeriodType } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
   year: number;
@@ -100,7 +102,7 @@ export default class ProperDate implements ProperDateInterface {
   // TODO: deprecated
   toUTCDatetime(): Date {
     console.warn(
-      "Warning: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead."
+      "DEPRECATION WARNING: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead."
     );
     return new Date(this.toString());
   }
@@ -110,12 +112,19 @@ export default class ProperDate implements ProperDateInterface {
     return this.toUTCDatetime().getTime();
   }
 
-  // TODO: Make this a generic 'add' function that also takes a 'unit' parameter
+  add(n: number, period: PeriodType): ProperDate {
+    return add(this, n, period);
+  }
+
+  subtract(n: number, period: PeriodType): ProperDate {
+    return subtract(this, n, period);
+  }
+
   addDays(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const newDate = baseDate;
-    newDate.setDate(baseDate.getDate() + n);
-    return new ProperDate(newDate);
+    console.warn(
+      "DEPRECATION WARNING: addDays() is deprecated and will be removed before 1.0.0. Use add(n, 'days') instead"
+    );
+    return this.add(n, "day");
   }
 
   // TODO: use a similar pattern as addDays

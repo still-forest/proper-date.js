@@ -1,11 +1,11 @@
 import ProperDate from "./model";
-import { Period } from "./types";
+import { Period, type PeriodType } from "./types";
 
 // TODO: refactor this to not use Date
 export const add = (
   base: ProperDate,
   n: number,
-  period: Period
+  period: Period | PeriodType
 ): ProperDate => {
   if (period === Period.Day || period === Period.Days) {
     const baseDate = base.toDate();
@@ -49,7 +49,7 @@ export const add = (
 export const subtract = (
   base: ProperDate,
   n: number,
-  period: Period
+  period: Period | PeriodType
 ): ProperDate => {
   return add(base, -1 * n, period);
 };
