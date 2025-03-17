@@ -45,3 +45,11 @@ export const add = (
 
   throw new Error(`Period ${period} is not supported`);
 };
+
+export const subtract = (
+  base: ProperDate,
+  n: number,
+  period: Period
+): ProperDate => {
+  return add(base, -1 * n, period);
+};
