@@ -20,22 +20,8 @@ describe("utils", () => {
     });
 
     describe("with a JavaScript date, without a specific timezone", () => {
-      test("when constructed from a string without time", () => {
+      test("when constructed from a string", () => {
         const date = new Date("2023-12-25");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-
-      test.skip("when constructed from a string with time", () => {
-        // TODO: this is timezone dependent, needs to be stubbed
-
-        const date = new Date("2023-12-25 00:00:00");
-        expect(date.toString()).toStrictEqual(
-          "Mon Dec 25 2023 00:00:00 GMT+0800 (Singapore Standard Time)"
-        );
-
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
         expect(result.month).toStrictEqual(11);
