@@ -4,7 +4,7 @@ import { add, subtract } from "../lib/arithmetic";
 import { Period } from "../lib/types";
 
 describe("arithmetic", () => {
-  // TODO: compare this to what ruby does
+  // TODO: Review these results, particularly months-related logic: https://github.com/jszymanowski/proper-date.js/issues/22
   describe("add", () => {
     test("with days, returns ProperDate with days added", () => {
       const base = new ProperDate("2023-12-25");
@@ -95,7 +95,7 @@ describe("arithmetic", () => {
         new ProperDate("2023-02-25")
       );
       expect(subtract(base, 120, Period.Months)).toStrictEqual(
-        new ProperDate("2013-11-30") // TODO: this is weird
+        new ProperDate("2013-12-25")
       );
     });
 
