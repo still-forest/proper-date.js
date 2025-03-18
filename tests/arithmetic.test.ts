@@ -50,6 +50,44 @@ describe("arithmetic", () => {
       );
     });
 
+    // TODO: Review this leap year handling: https://github.com/jszymanowski/proper-date.js/issues/23
+    test("leap year handling", () => {
+      const leapDay = new ProperDate("2020-02-29");
+
+      expect(add(leapDay, 1, "day")).toStrictEqual(
+        new ProperDate("2020-03-01")
+      );
+      expect(add(leapDay, 365, "days")).toStrictEqual(
+        new ProperDate("2021-02-28")
+      );
+      expect(add(leapDay, 1461, "days")).toStrictEqual(
+        new ProperDate("2024-02-29")
+      );
+
+      expect(add(leapDay, 1, "month")).toStrictEqual(
+        new ProperDate("2020-03-29")
+      );
+      expect(add(leapDay, 12, "months")).toStrictEqual(
+        new ProperDate("2021-02-28")
+      );
+      expect(add(leapDay, 48, "months")).toStrictEqual(
+        new ProperDate("2024-02-29")
+      );
+      expect(add(leapDay, 60, "months")).toStrictEqual(
+        new ProperDate("2025-02-28")
+      );
+
+      expect(add(leapDay, 1, "year")).toStrictEqual(
+        new ProperDate("2021-03-01")
+      );
+      expect(add(leapDay, 4, "years")).toStrictEqual(
+        new ProperDate("2024-02-29")
+      );
+      expect(add(leapDay, 5, "years")).toStrictEqual(
+        new ProperDate("2025-03-01")
+      );
+    });
+
     test("throws error for unsupported period", () => {
       const base = new ProperDate();
       expect(() => add(base, 1, "minutes" as Period)).toThrowError(
@@ -115,6 +153,44 @@ describe("arithmetic", () => {
       );
       expect(subtract(base, 120, "years")).toStrictEqual(
         new ProperDate("1903-12-25")
+      );
+    });
+
+    // TODO: Review this leap year handling: https://github.com/jszymanowski/proper-date.js/issues/23
+    test("leap year handling", () => {
+      const leapDay = new ProperDate("2020-02-29");
+
+      expect(subtract(leapDay, 1, "day")).toStrictEqual(
+        new ProperDate("2020-02-28")
+      );
+      expect(subtract(leapDay, 365, "days")).toStrictEqual(
+        new ProperDate("2019-03-01")
+      );
+      expect(subtract(leapDay, 1461, "days")).toStrictEqual(
+        new ProperDate("2016-02-29")
+      );
+
+      expect(subtract(leapDay, 1, "month")).toStrictEqual(
+        new ProperDate("2020-01-29")
+      );
+      expect(subtract(leapDay, 12, "months")).toStrictEqual(
+        new ProperDate("2019-02-28")
+      );
+      expect(subtract(leapDay, 48, "months")).toStrictEqual(
+        new ProperDate("2016-02-29")
+      );
+      expect(subtract(leapDay, 60, "months")).toStrictEqual(
+        new ProperDate("2015-02-28")
+      );
+
+      expect(subtract(leapDay, 1, "year")).toStrictEqual(
+        new ProperDate("2019-03-01")
+      );
+      expect(subtract(leapDay, 4, "years")).toStrictEqual(
+        new ProperDate("2016-02-29")
+      );
+      expect(subtract(leapDay, 5, "years")).toStrictEqual(
+        new ProperDate("2015-03-01")
       );
     });
 
