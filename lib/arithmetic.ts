@@ -1,19 +1,19 @@
 import ProperDate from "./model";
-import { Period, type PeriodType } from "./types";
+import type { Period } from "./types";
 
 // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
 export const add = (
   base: ProperDate,
   n: number,
-  period: Period | PeriodType
+  period: Period
 ): ProperDate => {
-  if (period === Period.Day || period === Period.Days) {
+  if (period === "day" || period === "days") {
     const baseDate = base.toDate();
     const newDate = new Date(baseDate.getTime());
     newDate.setDate(baseDate.getDate() + n);
     return new ProperDate(newDate);
   }
-  if (period === Period.Month || period === Period.Months) {
+  if (period === "month" || period === "months") {
     const baseDate = base.toDate();
     const targetDate = new Date(
       Date.UTC(
@@ -32,7 +32,7 @@ export const add = (
 
     return new ProperDate(targetDate);
   }
-  if (period === Period.Year || period === Period.Years) {
+  if (period === "year" || period === "years") {
     const baseDate = base.toDate();
     return new ProperDate(
       new Date(
@@ -51,7 +51,7 @@ export const add = (
 export const subtract = (
   base: ProperDate,
   n: number,
-  period: Period | PeriodType
+  period: Period
 ): ProperDate => {
   return add(base, -1 * n, period);
 };

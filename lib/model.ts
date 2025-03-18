@@ -1,6 +1,6 @@
 import type { ProperDateInterface } from "./interface";
 import { add, subtract } from "./arithmetic";
-import type { PeriodType } from "./types";
+import type { Period } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
   year: number;
@@ -112,11 +112,11 @@ export default class ProperDate implements ProperDateInterface {
     return this.toUTCDatetime().getTime();
   }
 
-  add(n: number, period: PeriodType): ProperDate {
+  add(n: number, period: Period): ProperDate {
     return add(this, n, period);
   }
 
-  subtract(n: number, period: PeriodType): ProperDate {
+  subtract(n: number, period: Period): ProperDate {
     return subtract(this, n, period);
   }
 

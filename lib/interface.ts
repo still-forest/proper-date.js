@@ -1,4 +1,4 @@
-import type { PeriodType } from "./types";
+import type { Period } from "./types";
 
 export interface ProperDateInterface {
   year: number;
@@ -15,8 +15,8 @@ export interface ProperDateInterface {
   toDate(): Date;
   toUTCDatetime(): Date;
   getTime(): number;
-  add(n: number, period: PeriodType): ProperDateInterface;
-  subtract(n: number, period: PeriodType): ProperDateInterface;
+  add(n: number, period: Period): ProperDateInterface;
+  subtract(n: number, period: Period): ProperDateInterface;
   addDays(days: number): ProperDateInterface;
   getDateNDaysAgo(n: number): ProperDateInterface;
   getDateNMonthsAgo(n: number): ProperDateInterface;
