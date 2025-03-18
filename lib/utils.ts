@@ -13,15 +13,34 @@ export const parseInput = (date: ProperDate | Date | string) => {
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();
-  } else if (typeof date === "string") {
+  } else if (typeof date === "string" && isValidDateFormat(date)) {
     const parsedDate = new Date(date);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else {
-    throw new Error( // TODO: custom error type
-      "Date must be either a Date, ProperDate, or stringified date"
+    throw new Error(
+      "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
     );
   }
   return { year, month, day };
 };
+
+function isValidDateFormat(dateString: string): boolean {
+  // This pattern checks for YYYY-MM-DD format and basic validity
+  const pattern = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (!pattern.test(dateString)) {
+    return false;
+  }
+
+  // Further validate the date is real
+  const date = new Date(dateString);
+  const [year, month, day] = dateString.split("-").map(Number);
+
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}

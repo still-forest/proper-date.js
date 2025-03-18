@@ -80,10 +80,20 @@ describe("utils", () => {
       });
     });
 
+    describe("with an improperly formatted string", () => {
+      test("throws an error", () => {
+        expect(() =>
+          parseInput("my birthday last year" as unknown as string)
+        ).toThrowError(
+          "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
+        );
+      });
+    });
+
     describe("with something else", () => {
       test("throws an error", () => {
         expect(() => parseInput(86795309 as unknown as string)).toThrowError(
-          "Date must be either a Date, ProperDate, or stringified date"
+          "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
         );
       });
     });
