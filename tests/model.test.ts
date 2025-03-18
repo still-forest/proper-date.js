@@ -112,7 +112,7 @@ describe("model", () => {
   });
 
   describe("#getDateNDaysAgo", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
+    test("returns a ProperDate for N days ago", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.getDateNDaysAgo(1)).toStrictEqual(
         new ProperDate("2023-12-24")
