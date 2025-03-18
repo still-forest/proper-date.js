@@ -15,18 +15,6 @@ export default class ProperDate implements ProperDateInterface {
     this.day = day;
   }
 
-  // TODO: move to a factory
-  static get Today(): ProperDate {
-    return new ProperDate();
-  }
-
-  // TODO: move to a factory
-  static get Yesterday(): ProperDate {
-    const now = new Date();
-    now.setDate(now.getDate() - 1);
-    return new ProperDate(now);
-  }
-
   static compare(a: ProperDate, b: ProperDate) {
     return a.getTime() - b.getTime();
   }

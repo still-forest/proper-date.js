@@ -39,29 +39,6 @@ describe("model", () => {
     });
   });
 
-  describe(".Today", () => {
-    test("returns an instance for today's date", () => {
-      const subject = ProperDate.Today;
-      const now = new Date();
-      const otherDate = new Date("1963-03-15");
-
-      expect(subject.equals(new ProperDate(now))).toStrictEqual(true);
-      expect(subject.equals(new ProperDate(otherDate))).toStrictEqual(false);
-    });
-  });
-
-  describe(".Yesterday", () => {
-    test("returns an instance for yesterday's date", () => {
-      const subject = ProperDate.Yesterday;
-      const now = new Date();
-      const yesterday = new Date(now);
-      yesterday.setDate(now.getDate() - 1);
-
-      expect(subject.equals(new ProperDate(yesterday))).toStrictEqual(true);
-      expect(subject.equals(new ProperDate(now))).toStrictEqual(false);
-    });
-  });
-
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
