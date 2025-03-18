@@ -124,7 +124,7 @@ export default class ProperDate implements ProperDateInterface {
     console.warn(
       "DEPRECATION WARNING: addDays() is deprecated and will be removed before 1.0.0. Use add(n, 'days') instead"
     );
-    return this.add(n, "day");
+    return this.add(n, "days");
   }
 
   getDateNDaysAgo(n: number): ProperDate {
