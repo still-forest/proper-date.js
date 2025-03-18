@@ -2,9 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": false,
   "commitMessagePrefix": "chore(deps): ",
-  "commitMessageAction": "Update",
-  "commitMessageTopic": "{{{depName}}}",
-  "commitMessageExtra": "from {{currentValue}} to {{newValue}} {{#if isMajor}}🚨{{else}}⬆️{{/if}}",
   "enabledManagers": ["npm"],
   "extends": [
     "config:best-practices",
