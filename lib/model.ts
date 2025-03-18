@@ -1,4 +1,5 @@
 import type { ProperDateInterface } from "./interface";
+import { parseInput } from "./utils";
 import { add, subtract } from "./arithmetic";
 import type { Period } from "./types";
 
@@ -8,24 +9,10 @@ export default class ProperDate implements ProperDateInterface {
   day: number;
 
   constructor(date: Date | ProperDate | string = new Date()) {
-    if (date instanceof Date) {
-      this.year = date.getFullYear();
-      this.month = date.getMonth();
-      this.day = date.getDate();
-    } else if (date instanceof ProperDate) {
-      this.year = date.year;
-      this.month = date.month;
-      this.day = date.day;
-    } else if (typeof date === "string") {
-      const parsedDate = new Date(date);
-      this.year = parsedDate.getFullYear();
-      this.month = parsedDate.getMonth();
-      this.day = parsedDate.getDate();
-    } else {
-      throw new Error(
-        "Date must be either a Date, ProperDate, or stringified date"
-      );
-    }
+    const { year, month, day } = parseInput(date);
+    this.year = year;
+    this.month = month;
+    this.day = day;
   }
 
   // TODO: move to a factory
