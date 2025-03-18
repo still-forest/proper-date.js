@@ -49,6 +49,13 @@ describe("arithmetic", () => {
         new ProperDate("2143-12-25")
       );
     });
+
+    test("throws error for unsupported period", () => {
+      const base = new ProperDate();
+      expect(() => add(base, 1, "minutes" as Period)).toThrowError(
+        "Period 'minutes' is not supported"
+      );
+    });
   });
 
   // TODO: compare this to what ruby does
@@ -108,6 +115,13 @@ describe("arithmetic", () => {
       );
       expect(subtract(base, 120, "years")).toStrictEqual(
         new ProperDate("1903-12-25")
+      );
+    });
+
+    test("throws error for unsupported period", () => {
+      const base = new ProperDate();
+      expect(() => subtract(base, 1, "minutes" as Period)).toThrowError(
+        "Period 'minutes' is not supported"
       );
     });
   });

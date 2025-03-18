@@ -45,7 +45,7 @@ export const add = (
     );
   }
 
-  throw new Error(`Period ${period} is not supported`);
+  throw new Error(`Period '${period}' is not supported`);
 };
 
 export const subtract = (
