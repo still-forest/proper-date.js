@@ -80,22 +80,19 @@ describe("utils", () => {
       });
     });
 
-    describe("with an improperly formatted string", () => {
-      test("throws an error", () => {
-        expect(() =>
-          parseInput("my birthday last year" as unknown as string)
-        ).toThrowError(
-          "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
-        );
-      });
-    });
+    test("throws error for invalid input types", () => {
+      const expectedErrorMessage =
+        "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string";
 
-    describe("with something else", () => {
-      test("throws an error", () => {
-        expect(() => parseInput(86795309 as unknown as string)).toThrowError(
-          "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
-        );
-      });
+      expect(() => parseInput("my birthday last year")).toThrowError(
+        expectedErrorMessage
+      );
+      // @ts-expect-error Testing invalid input
+      expect(() => parseInput(123)).toThrow(expectedErrorMessage);
+      // @ts-expect-error Testing invalid input
+      expect(() => parseInput(null)).toThrow(expectedErrorMessage);
+      // @ts-expect-error Testing invalid input
+      expect(() => parseInput(undefined)).toThrow(expectedErrorMessage);
     });
   });
 });
