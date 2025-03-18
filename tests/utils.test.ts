@@ -4,6 +4,14 @@ import { parseInput } from "../lib/utils";
 
 describe("utils", () => {
   describe("parseInput", () => {
+    test("with a ProperDate", () => {
+      const input = new ProperDate("2023-12-25");
+      const result = parseInput(input);
+      expect(result.year).toStrictEqual(2023);
+      expect(result.month).toStrictEqual(11);
+      expect(result.day).toStrictEqual(25);
+    });
+
     test("with a yyyy-mm-dd formatted string", () => {
       const result = parseInput("2023-12-25");
       expect(result.year).toStrictEqual(2023);
@@ -69,6 +77,14 @@ describe("utils", () => {
         expect(result.year).toStrictEqual(2023);
         expect(result.month).toStrictEqual(11);
         expect(result.day).toStrictEqual(25);
+      });
+    });
+
+    describe("with something else", () => {
+      test("throws an error", () => {
+        expect(() => parseInput(86795309 as unknown as string)).toThrowError(
+          "Date must be either a Date, ProperDate, or stringified date"
+        );
       });
     });
   });

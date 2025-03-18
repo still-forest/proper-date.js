@@ -1,9 +1,15 @@
-export const parseInput = (date: Date | string) => {
+import ProperDate from "./model";
+
+export const parseInput = (date: ProperDate | Date | string) => {
   let year: number;
   let month: number;
   let day: number;
 
-  if (date instanceof Date) {
+  if (date instanceof ProperDate) {
+    year = date.year;
+    month = date.month;
+    day = date.day;
+  } else if (date instanceof Date) {
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();

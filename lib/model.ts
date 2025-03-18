@@ -9,17 +9,10 @@ export default class ProperDate implements ProperDateInterface {
   day: number;
 
   constructor(date: Date | ProperDate | string = new Date()) {
-    if (date instanceof ProperDate) {
-      // TODO: can this just be in parseInput too?
-      this.year = date.year;
-      this.month = date.month;
-      this.day = date.day;
-    } else {
-      const { year, month, day } = parseInput(date);
-      this.year = year;
-      this.month = month;
-      this.day = day;
-    }
+    const { year, month, day } = parseInput(date);
+    this.year = year;
+    this.month = month;
+    this.day = day;
   }
 
   // TODO: move to a factory
