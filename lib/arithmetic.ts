@@ -7,6 +7,10 @@ export const add = (
   n: number,
   period: Period
 ): ProperDate => {
+  if (n !== Math.round(n)) {
+    throw new Error(`Value '${n}' is not an integer`);
+  }
+
   if (period === "day" || period === "days") {
     const baseDate = base.toDate();
     const newDate = new Date(baseDate.getTime());

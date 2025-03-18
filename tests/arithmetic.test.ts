@@ -36,6 +36,11 @@ describe("arithmetic", () => {
       expect(add(base, 13, "months")).toStrictEqual(
         new ProperDate("2024-02-29")
       );
+
+      const thirtyDayMonth = new ProperDate("2023-04-30");
+      expect(add(thirtyDayMonth, 1, "month")).toStrictEqual(
+        new ProperDate("2023-05-30")
+      );
     });
 
     test("with years, returns ProperDate with years added", () => {
@@ -109,6 +114,10 @@ describe("arithmetic", () => {
       expect(() => add(base, 1, "minutes" as Period)).toThrowError(
         "Period 'minutes' is not supported"
       );
+
+      expect(() => add(base, 1.5, "days")).toThrowError(
+        "Value '1.5' is not an integer"
+      );
     });
   });
 
@@ -153,6 +162,11 @@ describe("arithmetic", () => {
       );
       expect(subtract(base, 13, "months")).toStrictEqual(
         new ProperDate("2022-02-28")
+      );
+
+      const thirtyDayMonth = new ProperDate("2023-04-30");
+      expect(subtract(thirtyDayMonth, 1, "month")).toStrictEqual(
+        new ProperDate("2023-03-30")
       );
     });
 
