@@ -3,7 +3,6 @@ import ProperDate, { getToday, getYesterday } from "../lib";
 
 describe("ProperDate", () => {
   beforeEach(() => {
-    // TODO: this doesn't seem to work
     vi.setSystemTime(new Date("2025-01-02T00:00:00Z"));
   });
 
