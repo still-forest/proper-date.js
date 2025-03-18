@@ -88,6 +88,22 @@ describe("arithmetic", () => {
       );
     });
 
+    test("with zero and negative values", () => {
+      const base = new ProperDate("2023-12-25");
+
+      expect(add(base, 0, "days")).toStrictEqual(base);
+      expect(add(base, 0, "months")).toStrictEqual(base);
+      expect(add(base, 0, "years")).toStrictEqual(base);
+
+      expect(add(base, -1, "days")).toStrictEqual(new ProperDate("2023-12-24"));
+      expect(add(base, -1, "months")).toStrictEqual(
+        new ProperDate("2023-11-25")
+      );
+      expect(add(base, -1, "years")).toStrictEqual(
+        new ProperDate("2022-12-25")
+      );
+    });
+
     test("throws error for unsupported period", () => {
       const base = new ProperDate();
       expect(() => add(base, 1, "minutes" as Period)).toThrowError(
@@ -191,6 +207,24 @@ describe("arithmetic", () => {
       );
       expect(subtract(leapDay, 5, "years")).toStrictEqual(
         new ProperDate("2015-03-01")
+      );
+    });
+
+    test("with zero and negative values", () => {
+      const base = new ProperDate("2023-12-25");
+
+      expect(subtract(base, 0, "days")).toStrictEqual(base);
+      expect(subtract(base, 0, "months")).toStrictEqual(base);
+      expect(subtract(base, 0, "years")).toStrictEqual(base);
+
+      expect(subtract(base, -1, "days")).toStrictEqual(
+        new ProperDate("2023-12-26")
+      );
+      expect(subtract(base, -1, "months")).toStrictEqual(
+        new ProperDate("2024-01-25")
+      );
+      expect(subtract(base, -1, "years")).toStrictEqual(
+        new ProperDate("2024-12-25")
       );
     });
 
