@@ -1,5 +1,7 @@
 import type { ProperDateInterface } from "./interface";
 import { parseInput } from "./utils";
+import { add, subtract } from "./arithmetic";
+import type { Period } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
   year: number;
@@ -88,13 +90,13 @@ export default class ProperDate implements ProperDateInterface {
   }
 
   toDate(): Date {
-    return this.toUTCDatetime();
+    return new Date(this.toString());
   }
 
   // TODO: deprecated
   toUTCDatetime(): Date {
     console.warn(
-      "Warning: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead."
+      "DEPRECATION WARNING: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead."
     );
     return new Date(this.toString());
   }
@@ -104,53 +106,43 @@ export default class ProperDate implements ProperDateInterface {
     return this.toUTCDatetime().getTime();
   }
 
-  // TODO: Make this a generic 'add' function that also takes a 'unit' parameter
-  addDays(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const newDate = baseDate;
-    newDate.setDate(baseDate.getDate() + n);
-    return new ProperDate(newDate);
+  add(n: number, period: Period): ProperDate {
+    return add(this, n, period);
   }
 
-  // TODO: use a similar pattern as addDays
+  subtract(n: number, period: Period): ProperDate {
+    return subtract(this, n, period);
+  }
+
+  addDays(n: number): ProperDate {
+    console.warn(
+      "DEPRECATION WARNING: addDays() is deprecated and will be removed before 1.0.0. Use add(n, 'days') instead"
+    );
+    return this.add(n, "days");
+  }
+
   getDateNDaysAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const newDate = baseDate;
-    newDate.setDate(baseDate.getDate() - n);
-    return new ProperDate(newDate);
+    console.warn(
+      "DEPRECATION WARNING: getDateNDaysAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'days') instead"
+    );
+    return this.subtract(n, "days");
   }
 
   getDateNMonthsAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    const targetDate = new Date(
-      Date.UTC(
-        baseDate.getFullYear(),
-        baseDate.getMonth() - n,
-        baseDate.getDate()
-      )
+    console.warn(
+      "DEPRECATION WARNING: getDateNMonthsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'months') instead"
     );
-
-    // Handle cases where the target date overflows to the next month
-    if (targetDate.getMonth() !== (baseDate.getMonth() - n + 12) % 12) {
-      targetDate.setDate(0); // Set to the last day of the previous month
-    }
-
-    return new ProperDate(targetDate);
+    return this.subtract(n, "months");
   }
 
   getDateNYearsAgo(n: number): ProperDate {
-    const baseDate = this.toUTCDatetime();
-    return new ProperDate(
-      new Date(
-        Date.UTC(
-          baseDate.getFullYear() - n,
-          baseDate.getMonth(),
-          baseDate.getDate()
-        )
-      )
+    console.warn(
+      "DEPRECATION WARNING: getDateNYearsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'years') instead"
     );
+    return this.subtract(n, "years");
   }
 
+  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
   getEndOfNMonthsAgo(n: number): ProperDate {
     return new ProperDate(
       // `0` gives the last day of the previous month.
@@ -158,6 +150,7 @@ export default class ProperDate implements ProperDateInterface {
     );
   }
 
+  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
   getEndOfNYearsAgo(n: number): ProperDate {
     const priorYear = this.toUTCDatetime().getFullYear() - n;
     const priorYearEndDate = new Date(Date.UTC(priorYear, 11, 31));
