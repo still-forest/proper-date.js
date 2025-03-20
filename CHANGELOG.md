@@ -1,5 +1,12 @@
 # ProperDate - changelog
 
+## [0.4.0](https://github.com/jszymanowski/proper-date.js/compare/v0.3.1...v0.4.0) (2025-03-20)
+
+
+### Features
+
+* Remove deprecated functions ([#35](https://github.com/jszymanowski/proper-date.js/issues/35)) ([2d24df5](https://github.com/jszymanowski/proper-date.js/commit/2d24df5610f1bcfdbe230cff0f2b0d735e0f8e0d))
+
 ## [0.3.1](https://github.com/jszymanowski/proper-date.js/compare/v0.3.0...v0.3.1) (2025-03-20)
 
 ### Bug Fixes
