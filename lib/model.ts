@@ -18,7 +18,7 @@ export default class ProperDate implements ProperDateInterface {
   // experimental
   static compare(a: ProperDate, b: ProperDate) {
     console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
-    return a.getTime() - b.getTime();
+    return a.toDate().getTime() - b.toDate().getTime();
   }
 
   get formatted() {

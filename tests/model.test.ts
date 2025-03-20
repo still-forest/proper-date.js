@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import ProperDate from "../lib";
 
 describe("model", () => {
@@ -62,6 +62,19 @@ describe("model", () => {
     });
   });
 
+  describe('.compare', () => {
+    test("should warn for experimental ProperDate.compare()", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      
+      ProperDate.compare(new ProperDate(), new ProperDate());
+      
+      expect(warnSpy).toHaveBeenCalledWith(
+        "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release."
+      );
+      warnSpy.mockRestore();
+    });
+  });
+
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
@@ -90,6 +103,21 @@ describe("model", () => {
     test("returns the date as a string", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.toJSON()).toStrictEqual("2023-12-25");
+    });
+  });
+
+
+  describe('#getTime', () => {
+    test("should warn method is deprecated", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      
+      const date = new ProperDate('2022-12-31');
+      expect(date.getTime()).toBe(1672444800000);
+      
+      expect(warnSpy).toHaveBeenCalledWith(
+        "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead."
+      );
+      warnSpy.mockRestore();
     });
   });
 
