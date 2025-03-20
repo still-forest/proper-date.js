@@ -74,14 +74,6 @@ export default class ProperDate implements ProperDateInterface {
     return new Date(this.toString());
   }
 
-  // TODO: deprecated
-  toUTCDatetime(): Date {
-    console.warn(
-      "DEPRECATION WARNING: toUTCDatetime() is deprecated and will be removed prior to v1.0.0.  Use toDate() instead.",
-    );
-    return new Date(this.toString());
-  }
-
   // TODO: This is used to sort ProperDate objects.  Can we do something better?
   getTime(): number {
     return this.toDate().getTime();
@@ -93,34 +85,6 @@ export default class ProperDate implements ProperDateInterface {
 
   subtract(n: number, period: Period): ProperDate {
     return subtract(this, n, period);
-  }
-
-  addDays(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: addDays() is deprecated and will be removed before 1.0.0. Use add(n, 'days') instead",
-    );
-    return this.add(n, "days");
-  }
-
-  getDateNDaysAgo(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: getDateNDaysAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'days') instead",
-    );
-    return this.subtract(n, "days");
-  }
-
-  getDateNMonthsAgo(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: getDateNMonthsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'months') instead",
-    );
-    return this.subtract(n, "months");
-  }
-
-  getDateNYearsAgo(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: getDateNYearsAgo() is deprecated and will be removed before 1.0.0. Use subtract(n, 'years') instead",
-    );
-    return this.subtract(n, "years");
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
