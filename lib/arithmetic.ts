@@ -2,11 +2,7 @@ import ProperDate from "./model";
 import type { Period } from "./types";
 
 // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
-export const add = (
-  base: ProperDate,
-  n: number,
-  period: Period,
-): ProperDate => {
+export const add = (base: ProperDate, n: number, period: Period): ProperDate => {
   if (n !== Math.round(n)) {
     throw new Error(`Value '${n}' is not an integer`);
   }
@@ -20,11 +16,7 @@ export const add = (
   if (period === "month" || period === "months") {
     const baseDate = base.toDate();
     const targetDate = new Date(
-      Date.UTC(
-        baseDate.getFullYear(),
-        baseDate.getMonth() + n,
-        baseDate.getDate(),
-      ),
+      Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()),
     );
 
     // Handle cases where the target date overflows to the next month
@@ -39,23 +31,13 @@ export const add = (
   if (period === "year" || period === "years") {
     const baseDate = base.toDate();
     return new ProperDate(
-      new Date(
-        Date.UTC(
-          baseDate.getFullYear() + n,
-          baseDate.getMonth(),
-          baseDate.getDate(),
-        ),
-      ),
+      new Date(Date.UTC(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate())),
     );
   }
 
   throw new Error(`Period '${period}' is not supported`);
 };
 
-export const subtract = (
-  base: ProperDate,
-  n: number,
-  period: Period,
-): ProperDate => {
+export const subtract = (base: ProperDate, n: number, period: Period): ProperDate => {
   return add(base, -1 * n, period);
 };

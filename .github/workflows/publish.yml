@@ -1,12 +1,6 @@
-name: Publish to npm Registry
+name: Publish (manual)
 
-on:
-  push:
-    tags:
-      - "v*"
-  release:
-    types: [created, published]
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   build-and-publish:
@@ -26,7 +20,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 10.6.2
+          version: 10.6.5
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

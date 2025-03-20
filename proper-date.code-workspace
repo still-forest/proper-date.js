@@ -1,0 +1,34 @@
+{
+  "settings": {
+    "npm.packageManager": "pnpm",
+    "files.exclude": {
+      "**/dist": true,
+      "**/coverage": true,
+      "**/node_modules": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "prettier.enable": false
+  },
+  "extensions": {
+    "recommendations": ["biomejs.biome"]
+  }
+}

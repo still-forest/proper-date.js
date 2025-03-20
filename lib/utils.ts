@@ -19,9 +19,7 @@ export const parseInput = (date: ProperDate | Date | string) => {
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else {
-    throw new Error(
-      "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string",
-    );
+    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string");
   }
   return { year, month, day };
 };
@@ -38,9 +36,5 @@ function isValidDateFormat(dateString: string): boolean {
   const date = new Date(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
 
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day
-  );
+  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
 }
