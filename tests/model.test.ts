@@ -33,6 +33,35 @@ describe("model", () => {
     });
   });
 
+  describe('comparison', () => {
+    test('sorts in order', () => {
+      const dates = [
+        new ProperDate('2023-12-25'),
+        new ProperDate('2024-12-20'),
+        new ProperDate('2023-12-24'),
+        new ProperDate('2023-12-26'),
+      ];
+      expect(dates.sort()).toEqual([
+        new ProperDate('2023-12-24'),
+        new ProperDate('2023-12-25'),
+        new ProperDate('2023-12-26'),
+        new ProperDate('2024-12-20'),
+      ]);
+    });
+
+    test('compares correctly', () => {
+      const dec_25_2023 = new ProperDate('2023-12-25');
+      const dec_24_2023 = new ProperDate('2023-12-24');
+      const dec_20_2024 = new ProperDate('2024-12-20');
+
+      expect(dec_24_2023 > dec_25_2023).toBe(false);
+      expect(dec_24_2023 < dec_25_2023).toBe(true);
+
+      expect(dec_20_2024 < dec_25_2023).toBe(false);
+      expect(dec_20_2024 > dec_25_2023).toBe(true);
+    });
+  });
+
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
