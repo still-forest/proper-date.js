@@ -20,7 +20,7 @@ export const parseInput = (date: ProperDate | Date | string) => {
     day = parsedDate.getDate();
   } else {
     throw new Error(
-      "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string"
+      "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string",
     );
   }
   return { year, month, day };

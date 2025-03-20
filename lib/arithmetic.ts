@@ -5,7 +5,7 @@ import type { Period } from "./types";
 export const add = (
   base: ProperDate,
   n: number,
-  period: Period
+  period: Period,
 ): ProperDate => {
   if (n !== Math.round(n)) {
     throw new Error(`Value '${n}' is not an integer`);
@@ -23,8 +23,8 @@ export const add = (
       Date.UTC(
         baseDate.getFullYear(),
         baseDate.getMonth() + n,
-        baseDate.getDate()
-      )
+        baseDate.getDate(),
+      ),
     );
 
     // Handle cases where the target date overflows to the next month
@@ -43,9 +43,9 @@ export const add = (
         Date.UTC(
           baseDate.getFullYear() + n,
           baseDate.getMonth(),
-          baseDate.getDate()
-        )
-      )
+          baseDate.getDate(),
+        ),
+      ),
     );
   }
 
@@ -55,7 +55,7 @@ export const add = (
 export const subtract = (
   base: ProperDate,
   n: number,
-  period: Period
+  period: Period,
 ): ProperDate => {
   return add(base, -1 * n, period);
 };
