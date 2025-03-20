@@ -86,6 +86,31 @@ describe("model", () => {
     });
   });
 
+  describe("#toJSON", () => {
+    test("returns the date as a string", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.toJSON()).toStrictEqual("2023-12-25");
+    });
+  });
+
+  describe("#add", () => {
+    test("adds days, months, or years to the date, returning a new ProperDate", () => {
+      const base = new ProperDate("2023-12-25");
+      expect(base.add(1, "day")).toStrictEqual(new ProperDate("2023-12-26"));
+      expect(base.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
+      expect(base.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
+    });
+  });
+
+  describe("#subtract", () => {
+    test("subtracts days, months, or years to the date, returning a new ProperDate", () => {
+      const base = new ProperDate("2023-12-25");
+      expect(base.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
+      expect(base.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
+      expect(base.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
+    });
+  });
+
   describe("#priorYearEnd", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");

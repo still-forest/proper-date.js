@@ -8,7 +8,7 @@ export interface ProperDateInterface {
   priorYearEnd: ProperDateInterface;
   priorMonthEnd: ProperDateInterface;
   equals(other: ProperDateInterface): boolean;
-  getTime(): number;
+  getTime(): number; // deprecated
   toString(): string;
   toJSON(): string;
   toDate(): Date;

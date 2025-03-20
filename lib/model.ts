@@ -15,7 +15,9 @@ export default class ProperDate implements ProperDateInterface {
     this.day = day;
   }
 
+  // experimental
   static compare(a: ProperDate, b: ProperDate) {
+    console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
     return a.getTime() - b.getTime();
   }
 
@@ -40,7 +42,6 @@ export default class ProperDate implements ProperDateInterface {
   }
 
   toJSON(): string {
-    // serialize to JSON
     return this.toString();
   }
 
@@ -48,8 +49,9 @@ export default class ProperDate implements ProperDateInterface {
     return new Date(this.toString());
   }
 
-  // TODO: This is used to sort ProperDate objects.  Can we do something better?
+  // deprecated
   getTime(): number {
+    console.warn("DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.");
     return this.toDate().getTime();
   }
 
