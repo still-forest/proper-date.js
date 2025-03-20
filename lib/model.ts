@@ -15,8 +15,10 @@ export default class ProperDate implements ProperDateInterface {
     this.day = day;
   }
 
+  // experimental
   static compare(a: ProperDate, b: ProperDate) {
-    return a.getTime() - b.getTime();
+    console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
+    return a.toDate().getTime() - b.toDate().getTime();
   }
 
   get formatted() {
@@ -35,38 +37,11 @@ export default class ProperDate implements ProperDateInterface {
     return this.toString() === other.toString();
   }
 
-  // TODO: deprecated
-  formatDateDifference(other: ProperDate): string {
-    console.warn(
-      "Warning: formatDateDifference() is deprecated and will be removed prior to v1.0.0.",
-    );
-
-    const baseDate = this.toDate();
-    const pastDate = other.toDate();
-
-    const diffMs = baseDate.getTime() - pastDate.getTime();
-    const numDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (numDays === 0) {
-      return "today";
-    }
-    if (numDays === 1) {
-      return "yesterday";
-    }
-    if (numDays > 30) {
-      const numMonths = Math.floor(numDays / 30.42); // Approximation for months
-      return `${numMonths} month${numMonths > 1 ? "s" : ""} ago`;
-    }
-
-    return `${numDays} day${numDays > 1 ? "s" : ""} ago`;
-  }
-
   toString(): string {
     return this.jsDate.toISOString().split("T")[0];
   }
 
   toJSON(): string {
-    // serialize to JSON
     return this.toString();
   }
 
@@ -74,8 +49,9 @@ export default class ProperDate implements ProperDateInterface {
     return new Date(this.toString());
   }
 
-  // TODO: This is used to sort ProperDate objects.  Can we do something better?
+  // deprecated
   getTime(): number {
+    console.warn("DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.");
     return this.toDate().getTime();
   }
 

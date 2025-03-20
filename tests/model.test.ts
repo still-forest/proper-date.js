@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import ProperDate from "../lib";
 
 describe("model", () => {
@@ -33,6 +33,48 @@ describe("model", () => {
     });
   });
 
+  describe('comparison', () => {
+    test('sorts in order', () => {
+      const dates = [
+        new ProperDate('2023-12-25'),
+        new ProperDate('2024-12-20'),
+        new ProperDate('2023-12-24'),
+        new ProperDate('2023-12-26'),
+      ];
+      expect(dates.sort()).toEqual([
+        new ProperDate('2023-12-24'),
+        new ProperDate('2023-12-25'),
+        new ProperDate('2023-12-26'),
+        new ProperDate('2024-12-20'),
+      ]);
+    });
+
+    test('compares correctly', () => {
+      const dec_25_2023 = new ProperDate('2023-12-25');
+      const dec_24_2023 = new ProperDate('2023-12-24');
+      const dec_20_2024 = new ProperDate('2024-12-20');
+
+      expect(dec_24_2023 > dec_25_2023).toBe(false);
+      expect(dec_24_2023 < dec_25_2023).toBe(true);
+
+      expect(dec_20_2024 < dec_25_2023).toBe(false);
+      expect(dec_20_2024 > dec_25_2023).toBe(true);
+    });
+  });
+
+  describe('.compare', () => {
+    test("should warn for experimental ProperDate.compare()", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      
+      ProperDate.compare(new ProperDate(), new ProperDate());
+      
+      expect(warnSpy).toHaveBeenCalledWith(
+        "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release."
+      );
+      warnSpy.mockRestore();
+    });
+  });
+
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
@@ -47,6 +89,53 @@ describe("model", () => {
       expect(subject.equals(new ProperDate("2023-12-24"))).toStrictEqual(false);
       expect(subject.equals(new ProperDate(new Date("2023-12-24")))).toStrictEqual(false);
       expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 24))))).toStrictEqual(false);
+    });
+  });
+
+  describe("#formatted", () => {
+    test("returns the date as a string", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.formatted).toStrictEqual("2023-12-25");
+    });
+  });
+
+  describe("#toJSON", () => {
+    test("returns the date as a string", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.toJSON()).toStrictEqual("2023-12-25");
+    });
+  });
+
+
+  describe('#getTime', () => {
+    test("should warn method is deprecated", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      
+      const date = new ProperDate('2022-12-31');
+      expect(date.getTime()).toBe(1672444800000);
+      
+      expect(warnSpy).toHaveBeenCalledWith(
+        "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead."
+      );
+      warnSpy.mockRestore();
+    });
+  });
+
+  describe("#add", () => {
+    test("adds days, months, or years to the date, returning a new ProperDate", () => {
+      const base = new ProperDate("2023-12-25");
+      expect(base.add(1, "day")).toStrictEqual(new ProperDate("2023-12-26"));
+      expect(base.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
+      expect(base.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
+    });
+  });
+
+  describe("#subtract", () => {
+    test("subtracts days, months, or years to the date, returning a new ProperDate", () => {
+      const base = new ProperDate("2023-12-25");
+      expect(base.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
+      expect(base.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
+      expect(base.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
     });
   });
 

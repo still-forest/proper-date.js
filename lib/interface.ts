@@ -8,12 +8,10 @@ export interface ProperDateInterface {
   priorYearEnd: ProperDateInterface;
   priorMonthEnd: ProperDateInterface;
   equals(other: ProperDateInterface): boolean;
-  formatDateDifference(other: ProperDateInterface): string;
-  getTime(): number;
+  getTime(): number; // deprecated
   toString(): string;
   toJSON(): string;
   toDate(): Date;
-  getTime(): number;
   add(n: number, period: Period): ProperDateInterface;
   subtract(n: number, period: Period): ProperDateInterface;
 }
