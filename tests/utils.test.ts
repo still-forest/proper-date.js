@@ -71,7 +71,7 @@ describe("utils", () => {
         "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string";
 
       expect(() => parseInput("my birthday last year")).toThrowError(
-        expectedErrorMessage
+        expectedErrorMessage,
       );
       // @ts-expect-error Testing invalid input
       expect(() => parseInput(123)).toThrow(expectedErrorMessage);
