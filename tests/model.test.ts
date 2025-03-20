@@ -79,6 +79,13 @@ describe("model", () => {
     });
   });
 
+  describe("#formatted", () => {
+    test("returns the date as a string", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.formatted).toStrictEqual("2023-12-25");
+    });
+  });
+
   describe("#priorYearEnd", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");

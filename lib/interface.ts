@@ -8,7 +8,6 @@ export interface ProperDateInterface {
   priorYearEnd: ProperDateInterface;
   priorMonthEnd: ProperDateInterface;
   equals(other: ProperDateInterface): boolean;
-  formatDateDifference(other: ProperDateInterface): string;
   getTime(): number;
   toString(): string;
   toJSON(): string;

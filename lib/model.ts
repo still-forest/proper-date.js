@@ -35,32 +35,6 @@ export default class ProperDate implements ProperDateInterface {
     return this.toString() === other.toString();
   }
 
-  // TODO: deprecated
-  formatDateDifference(other: ProperDate): string {
-    console.warn(
-      "Warning: formatDateDifference() is deprecated and will be removed prior to v1.0.0.",
-    );
-
-    const baseDate = this.toDate();
-    const pastDate = other.toDate();
-
-    const diffMs = baseDate.getTime() - pastDate.getTime();
-    const numDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (numDays === 0) {
-      return "today";
-    }
-    if (numDays === 1) {
-      return "yesterday";
-    }
-    if (numDays > 30) {
-      const numMonths = Math.floor(numDays / 30.42); // Approximation for months
-      return `${numMonths} month${numMonths > 1 ? "s" : ""} ago`;
-    }
-
-    return `${numDays} day${numDays > 1 ? "s" : ""} ago`;
-  }
-
   toString(): string {
     return this.jsDate.toISOString().split("T")[0];
   }
