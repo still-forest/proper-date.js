@@ -1,12 +1,6 @@
-name: Publish to npm Registry
+name: Publish (manual)
 
-on:
-  push:
-    tags:
-      - "v*"
-  release:
-    types: [created, published]
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   build-and-publish:
@@ -20,13 +14,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 10.6.2
+          version: 10.6.3
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
