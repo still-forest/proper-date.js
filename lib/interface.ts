@@ -12,7 +12,6 @@ export interface ProperDateInterface {
   toString(): string;
   toJSON(): string;
   toDate(): Date;
-  getTime(): number;
   add(n: number, period: Period): ProperDateInterface;
   subtract(n: number, period: Period): ProperDateInterface;
 }
