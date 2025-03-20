@@ -7,6 +7,13 @@
 
 * Clean up existing interface, earmark areas for improvement and deprecation ([#13](https://github.com/jszymanowski/proper-date.js/issues/13)) ([aba6612](https://github.com/jszymanowski/proper-date.js/commit/aba66128c5f1739f6fa6de86d02b1456827ed2d3))
 
+## [0.3.1](https://github.com/jszymanowski/proper-date.js/compare/v0.3.0...v0.3.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* Remove internal usage of deprecated functions ([#31](https://github.com/jszymanowski/proper-date.js/issues/31)) ([43d20ce](https://github.com/jszymanowski/proper-date.js/commit/43d20ce3bfa40cd9911ff5a9ec7b515c79db2616))
+
 ## [0.3.0](https://github.com/jszymanowski/proper-date.js/compare/v0.2.0...v0.3.0) (2025-03-18)
 
 
