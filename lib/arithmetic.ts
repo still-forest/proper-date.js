@@ -1,5 +1,5 @@
 import ProperDate from "./model";
-import type { Period } from "./types";
+import type { Period, ArithmeticOptions } from "./types";
 
 // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
 export const add = (base: ProperDate, n: number, period: Period): ProperDate => {
@@ -42,9 +42,11 @@ export const subtract = (base: ProperDate, n: number, period: Period): ProperDat
   return add(base, -1 * n, period);
 };
 
-export const difference = (base: ProperDate, other: ProperDate, unit: Period = 'days'): number => {
-  if (unit !== 'days') {
-    throw new Error(`Unsupported unit: ${unit}`);
+export const difference = (base: ProperDate, other: ProperDate, options: ArithmeticOptions): number => {
+  const { period = "days" } = options;
+
+  if (period !== 'days') {
+    throw new Error(`Unsupported option: period=${period}`);
   }
   const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
   const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));

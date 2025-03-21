@@ -193,7 +193,7 @@ describe("arithmetic", () => {
 
     test("throws an error for unsupported units", () => {
       // @ts-expect-error Testing invalid input
-      expect(() => base.difference(new ProperDate(), 'hours')).toThrowError('Unsupported unit: hours');
+      expect(() => base.difference(new ProperDate(), { period: "hours" })).toThrowError('Unsupported option: period=hours');
     });
   });
 });
