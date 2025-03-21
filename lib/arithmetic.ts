@@ -1,5 +1,7 @@
 import ProperDate from "./model";
-import type { Period } from "./types";
+import type { Period, ArithmeticOptions } from "./types";
+
+const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
 // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
 export const add = (base: ProperDate, n: number, period: Period): ProperDate => {
@@ -40,4 +42,28 @@ export const add = (base: ProperDate, n: number, period: Period): ProperDate => 
 
 export const subtract = (base: ProperDate, n: number, period: Period): ProperDate => {
   return add(base, -1 * n, period);
+};
+
+
+/**
+ * Calculates the absolute difference in days between two ProperDate objects.
+ * @param base - The first date for comparison
+ * @param other - The second date for comparison
+ * @param options - An optional object specifying the desired `period` / unit of measurement for the difference (currently only 'days' is supported)
+ * @returns The absolute difference in days between the two dates
+ * @throws Error when a unit other than 'days' is provided
+ */
+export const difference = (
+  base: ProperDate,
+  other: ProperDate,
+  options: ArithmeticOptions = DEFAULT_OPTIONS,
+): number => {
+  const { period = "days" } = options;
+
+  if (period !== "days") {
+    throw new Error(`Unsupported option: period=${period}`);
+  }
+  const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
+  const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+  return diffInDays;
 };

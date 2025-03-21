@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import ProperDate from "../lib";
-import { add, subtract } from "../lib/arithmetic";
+import { add, subtract, difference } from "../lib/arithmetic";
 import type { Period } from "../lib/types";
 
 describe("arithmetic", () => {
@@ -172,6 +172,32 @@ describe("arithmetic", () => {
       const base = new ProperDate();
       expect(() => subtract(base, 1, "minutes" as Period)).toThrowError(
         "Period 'minutes' is not supported",
+      );
+    });
+  });
+
+  describe(".difference", () => {
+    const base = new ProperDate("2023-12-25");
+
+    test("returns the number of days between two dates", () => {
+      expect(difference(base, new ProperDate(base))).toBe(0);
+      expect(difference(base, new ProperDate("2023-12-25"))).toBe(0);
+      expect(difference(base, new ProperDate("2023-12-26"))).toBe(1);
+      expect(difference(base, new ProperDate("2023-12-24"))).toBe(1);
+
+      expect(difference(base, new ProperDate("2024-01-24"))).toBe(30);
+      expect(difference(base, new ProperDate("2022-12-25"))).toBe(365);
+
+      // leap year
+      const dayAfterLeapDay = new ProperDate("2020-03-01");
+      expect(difference(dayAfterLeapDay, new ProperDate("2021-03-01"))).toBe(365);
+      expect(difference(dayAfterLeapDay, new ProperDate("2019-03-01"))).toBe(366);
+    });
+
+    test("throws an error for unsupported units", () => {
+      // @ts-expect-error Testing invalid input
+      expect(() => difference(base, new ProperDate(), { period: "hours" })).toThrowError(
+        "Unsupported option: period=hours",
       );
     });
   });

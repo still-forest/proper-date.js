@@ -1,7 +1,7 @@
 import type { ProperDateInterface } from "./interface";
 import { parseInput } from "./utils";
-import { add, subtract } from "./arithmetic";
-import type { Period } from "./types";
+import { add, subtract, difference } from "./arithmetic";
+import type { Period, ArithmeticOptions } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
   year: number;
@@ -17,7 +17,9 @@ export default class ProperDate implements ProperDateInterface {
 
   // experimental
   static compare(a: ProperDate, b: ProperDate) {
-    console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
+    console.warn(
+      "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.",
+    );
     return a.toDate().getTime() - b.toDate().getTime();
   }
 
@@ -51,7 +53,9 @@ export default class ProperDate implements ProperDateInterface {
 
   // deprecated
   getTime(): number {
-    console.warn("DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.");
+    console.warn(
+      "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.",
+    );
     return this.toDate().getTime();
   }
 
@@ -61,6 +65,18 @@ export default class ProperDate implements ProperDateInterface {
 
   subtract(n: number, period: Period): ProperDate {
     return subtract(this, n, period);
+  }
+
+  /**
+   * Calculates the absolute difference in days between this date and another date.
+   * @param other - The date to compare against
+   * @param period - The unit of measurement (currently only 'days' is supported)
+   * @param options - An optional object specifying the desired `period` / unit of measurement for the difference (currently only 'days' is supported)
+   * @returns The number of days between the dates
+   * @throws Error when a period other than 'days' is provided
+   */
+  difference(other: ProperDate, options?: ArithmeticOptions): number {
+    return difference(this, other, options);
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
