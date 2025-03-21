@@ -67,6 +67,14 @@ export default class ProperDate implements ProperDateInterface {
     return subtract(this, n, period);
   }
 
+  /**
+   * Calculates the absolute difference in days between this date and another date.
+   * @param other - The date to compare against
+   * @param period - The unit of measurement (currently only 'days' is supported)
+   * @param options - An optional object specifying the desired `period` / unit of measurement for the difference (currently only 'days' is supported)
+   * @returns The number of days between the dates
+   * @throws Error when a period other than 'days' is provided
+   */
   difference(other: ProperDate, options?: ArithmeticOptions): number {
     return difference(this, other, options);
   }

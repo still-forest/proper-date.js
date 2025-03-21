@@ -185,6 +185,9 @@ describe("arithmetic", () => {
       expect(difference(base, new ProperDate("2023-12-26"))).toBe(1);
       expect(difference(base, new ProperDate("2023-12-24"))).toBe(1);
 
+      expect(difference(base, new ProperDate("2024-01-24"))).toBe(30);
+      expect(difference(base, new ProperDate("2022-12-25"))).toBe(365);
+
       // leap year
       const dayAfterLeapDay = new ProperDate("2020-03-01");
       expect(difference(dayAfterLeapDay, new ProperDate("2021-03-01"))).toBe(365);
