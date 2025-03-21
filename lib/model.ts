@@ -1,9 +1,9 @@
-import type { ProperDateInterface } from "./interface";
+
 import { parseInput } from "./utils";
 import { add, subtract, difference } from "./arithmetic";
 import type { Period, ArithmeticOptions } from "./types";
 
-export default class ProperDate implements ProperDateInterface {
+export default class ProperDate {
   year: number;
   month: number;
   day: number;
