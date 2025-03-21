@@ -1,6 +1,6 @@
 import type { ProperDateInterface } from "./interface";
 import { parseInput } from "./utils";
-import { add, subtract } from "./arithmetic";
+import { add, subtract, difference } from "./arithmetic";
 import type { Period } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
@@ -19,15 +19,6 @@ export default class ProperDate implements ProperDateInterface {
   static compare(a: ProperDate, b: ProperDate) {
     console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
     return a.toDate().getTime() - b.toDate().getTime();
-  }
-
-  static difference(a: ProperDate, b: ProperDate, unit: Period = 'days'): number {
-    if (unit !== 'days') {
-      throw new Error(`Unsupported unit: ${unit}`);
-    }
-    const diffInMilliseconds = Math.abs(a.toDate().getTime() - b.toDate().getTime());
-    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-    return diffInDays;
   }
 
   get formatted() {
@@ -70,6 +61,10 @@ export default class ProperDate implements ProperDateInterface {
 
   subtract(n: number, period: Period): ProperDate {
     return subtract(this, n, period);
+  }
+
+  difference(other: ProperDate, period: Period = 'days'): number {
+    return difference(this, other, period);
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20

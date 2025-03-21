@@ -41,3 +41,12 @@ export const add = (base: ProperDate, n: number, period: Period): ProperDate => 
 export const subtract = (base: ProperDate, n: number, period: Period): ProperDate => {
   return add(base, -1 * n, period);
 };
+
+export const difference = (base: ProperDate, other: ProperDate, unit: Period = 'days'): number => {
+  if (unit !== 'days') {
+    throw new Error(`Unsupported unit: ${unit}`);
+  }
+  const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
+  const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+  return diffInDays;
+}
