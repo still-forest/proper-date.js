@@ -1,5 +1,13 @@
 # ProperDate - changelog
 
+## [0.5.0](https://github.com/jszymanowski/proper-date.js/compare/v0.4.0...v0.5.0) (2025-03-21)
+
+
+### Features
+
+* Compute the difference between two dates, in number of days ([#39](https://github.com/jszymanowski/proper-date.js/issues/39)) ([4aec73c](https://github.com/jszymanowski/proper-date.js/commit/4aec73cb320ab0d73e7ff83a7ba35bef4fcef3b5))
+* Support arithmetic option object in add, subtract methods ([#41](https://github.com/jszymanowski/proper-date.js/issues/41)) ([79957a7](https://github.com/jszymanowski/proper-date.js/commit/79957a79fb4f7e4e2a5c4b61d4d7a52208659f4c))
+
 ## [0.4.0](https://github.com/jszymanowski/proper-date.js/compare/v0.3.1...v0.4.0) (2025-03-20)
 
 
