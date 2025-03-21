@@ -75,6 +75,24 @@ describe("model", () => {
     });
   });
 
+  describe('.difference', () => {
+    test("returns the number of days between two dates", () => {
+      expect(ProperDate.difference(new ProperDate(), new ProperDate())).toBe(0);
+      expect(ProperDate.difference(new ProperDate('2023-12-25'), new ProperDate('2023-12-25'))).toBe(0);
+      expect(ProperDate.difference(new ProperDate('2023-12-25'), new ProperDate('2023-12-26'))).toBe(1);
+      expect(ProperDate.difference(new ProperDate('2023-12-25'), new ProperDate('2023-12-24'))).toBe(1);
+
+      // leap year
+      expect(ProperDate.difference(new ProperDate('2023-03-01'), new ProperDate('2022-03-01'))).toBe(365);
+      expect(ProperDate.difference(new ProperDate('2024-03-01'), new ProperDate('2023-03-01'))).toBe(366);
+    });
+
+    test("throws an error for unsupported units", () => {
+      // @ts-expect-error Testing invalid input
+      expect(() => ProperDate.difference(new ProperDate(), new ProperDate(), 'hours')).toThrowError('Unsupported unit: hours');
+    });
+  });
+
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
