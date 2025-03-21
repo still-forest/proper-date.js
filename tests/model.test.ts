@@ -33,26 +33,26 @@ describe("model", () => {
     });
   });
 
-  describe('comparison', () => {
-    test('sorts in order', () => {
+  describe("comparison", () => {
+    test("sorts in order", () => {
       const dates = [
-        new ProperDate('2023-12-25'),
-        new ProperDate('2024-12-20'),
-        new ProperDate('2023-12-24'),
-        new ProperDate('2023-12-26'),
+        new ProperDate("2023-12-25"),
+        new ProperDate("2024-12-20"),
+        new ProperDate("2023-12-24"),
+        new ProperDate("2023-12-26"),
       ];
       expect(dates.sort()).toEqual([
-        new ProperDate('2023-12-24'),
-        new ProperDate('2023-12-25'),
-        new ProperDate('2023-12-26'),
-        new ProperDate('2024-12-20'),
+        new ProperDate("2023-12-24"),
+        new ProperDate("2023-12-25"),
+        new ProperDate("2023-12-26"),
+        new ProperDate("2024-12-20"),
       ]);
     });
 
-    test('compares correctly', () => {
-      const dec_25_2023 = new ProperDate('2023-12-25');
-      const dec_24_2023 = new ProperDate('2023-12-24');
-      const dec_20_2024 = new ProperDate('2024-12-20');
+    test("compares correctly", () => {
+      const dec_25_2023 = new ProperDate("2023-12-25");
+      const dec_24_2023 = new ProperDate("2023-12-24");
+      const dec_20_2024 = new ProperDate("2024-12-20");
 
       expect(dec_24_2023 > dec_25_2023).toBe(false);
       expect(dec_24_2023 < dec_25_2023).toBe(true);
@@ -62,14 +62,14 @@ describe("model", () => {
     });
   });
 
-  describe('.compare', () => {
+  describe(".compare", () => {
     test("should warn for experimental ProperDate.compare()", () => {
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      
+
       ProperDate.compare(new ProperDate(), new ProperDate());
-      
+
       expect(warnSpy).toHaveBeenCalledWith(
-        "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release."
+        "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.",
       );
       warnSpy.mockRestore();
     });
@@ -106,16 +106,15 @@ describe("model", () => {
     });
   });
 
-
-  describe('#getTime', () => {
+  describe("#getTime", () => {
     test("should warn method is deprecated", () => {
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      
-      const date = new ProperDate('2022-12-31');
+
+      const date = new ProperDate("2022-12-31");
       expect(date.getTime()).toBe(1672444800000);
-      
+
       expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead."
+        "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.",
       );
       warnSpy.mockRestore();
     });
@@ -139,18 +138,20 @@ describe("model", () => {
     });
   });
 
-  describe('#difference', () => {
+  describe("#difference", () => {
     const subject = new ProperDate("2023-12-25");
 
     test("returns the number of days between another dates", () => {
       expect(subject.difference(new ProperDate(subject))).toBe(0);
-      expect(subject.difference(new ProperDate('2023-12-26'))).toBe(1);
-      expect(subject.difference(new ProperDate('2023-12-24'))).toBe(1);
+      expect(subject.difference(new ProperDate("2023-12-26"))).toBe(1);
+      expect(subject.difference(new ProperDate("2023-12-24"))).toBe(1);
     });
-    
+
     test("throws an error for unsupported units", () => {
       // @ts-expect-error Testing invalid input
-      expect(() => subject.difference(new ProperDate(), { period: "hours" })).toThrowError('Unsupported option: period=hours');
+      expect(() => subject.difference(new ProperDate(), { period: "hours" })).toThrowError(
+        "Unsupported option: period=hours",
+      );
     });
   });
 

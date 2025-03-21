@@ -17,7 +17,9 @@ export default class ProperDate implements ProperDateInterface {
 
   // experimental
   static compare(a: ProperDate, b: ProperDate) {
-    console.warn("EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.");
+    console.warn(
+      "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.",
+    );
     return a.toDate().getTime() - b.toDate().getTime();
   }
 
@@ -51,7 +53,9 @@ export default class ProperDate implements ProperDateInterface {
 
   // deprecated
   getTime(): number {
-    console.warn("DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.");
+    console.warn(
+      "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.",
+    );
     return this.toDate().getTime();
   }
 

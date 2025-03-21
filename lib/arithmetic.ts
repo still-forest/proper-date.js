@@ -44,13 +44,17 @@ export const subtract = (base: ProperDate, n: number, period: Period): ProperDat
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
-export const difference = (base: ProperDate, other: ProperDate, options: ArithmeticOptions = DEFAULT_OPTIONS): number => {
+export const difference = (
+  base: ProperDate,
+  other: ProperDate,
+  options: ArithmeticOptions = DEFAULT_OPTIONS,
+): number => {
   const { period = "days" } = options;
 
-  if (period !== 'days') {
+  if (period !== "days") {
     throw new Error(`Unsupported option: period=${period}`);
   }
   const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
   const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
   return diffInDays;
-}
+};
