@@ -1,7 +1,7 @@
 import type { ProperDateInterface } from "./interface";
 import { parseInput } from "./utils";
 import { add, subtract, difference } from "./arithmetic";
-import type { Period } from "./types";
+import type { Period, ArithmeticOptions } from "./types";
 
 export default class ProperDate implements ProperDateInterface {
   year: number;
@@ -63,8 +63,8 @@ export default class ProperDate implements ProperDateInterface {
     return subtract(this, n, period);
   }
 
-  difference(other: ProperDate, period: Period = 'days'): number {
-    return difference(this, other, period);
+  difference(other: ProperDate, options?: ArithmeticOptions): number {
+    return difference(this, other, options);
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20

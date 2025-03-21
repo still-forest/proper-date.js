@@ -123,28 +123,34 @@ describe("model", () => {
 
   describe("#add", () => {
     test("adds days, months, or years to the date, returning a new ProperDate", () => {
-      const base = new ProperDate("2023-12-25");
-      expect(base.add(1, "day")).toStrictEqual(new ProperDate("2023-12-26"));
-      expect(base.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
-      expect(base.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.add(1, "day")).toStrictEqual(new ProperDate("2023-12-26"));
+      expect(subject.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
+      expect(subject.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
     });
   });
 
   describe("#subtract", () => {
     test("subtracts days, months, or years to the date, returning a new ProperDate", () => {
-      const base = new ProperDate("2023-12-25");
-      expect(base.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
-      expect(base.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
-      expect(base.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
+      expect(subject.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
+      expect(subject.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
     });
   });
 
   describe('#difference', () => {
+    const subject = new ProperDate("2023-12-25");
+
     test("returns the number of days between another dates", () => {
-      const base = new ProperDate("2023-12-25");
-      expect(base.difference(new ProperDate(base))).toBe(0);
-      expect(base.difference(new ProperDate('2023-12-26'))).toBe(1);
-      expect(base.difference(new ProperDate('2023-12-24'))).toBe(1);
+      expect(subject.difference(new ProperDate(subject))).toBe(0);
+      expect(subject.difference(new ProperDate('2023-12-26'))).toBe(1);
+      expect(subject.difference(new ProperDate('2023-12-24'))).toBe(1);
+    });
+    
+    test("throws an error for unsupported units", () => {
+      // @ts-expect-error Testing invalid input
+      expect(() => subject.difference(new ProperDate(), { period: "hours" })).toThrowError('Unsupported option: period=hours');
     });
   });
 

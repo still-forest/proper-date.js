@@ -42,7 +42,9 @@ export const subtract = (base: ProperDate, n: number, period: Period): ProperDat
   return add(base, -1 * n, period);
 };
 
-export const difference = (base: ProperDate, other: ProperDate, options: ArithmeticOptions): number => {
+const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
+
+export const difference = (base: ProperDate, other: ProperDate, options: ArithmeticOptions = DEFAULT_OPTIONS): number => {
   const { period = "days" } = options;
 
   if (period !== 'days') {
