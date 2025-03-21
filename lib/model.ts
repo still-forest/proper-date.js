@@ -69,11 +69,11 @@ export default class ProperDate implements ProperDateInterface {
   }
 
   add(n: number, period: Period): ProperDate {
-    return add(this, n, period);
+    return add(this, n, { period });
   }
 
   subtract(n: number, period: Period): ProperDate {
-    return subtract(this, n, period);
+    return subtract(this, n, { period });
   }
 
   /**
