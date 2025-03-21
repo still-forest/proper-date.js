@@ -127,6 +127,13 @@ describe("model", () => {
       expect(subject.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
       expect(subject.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
     });
+
+    test("accepts an option object", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.add(1, { period: "day" })).toStrictEqual(new ProperDate("2023-12-26"));
+      expect(subject.add(2, { period: "months" })).toStrictEqual(new ProperDate("2024-02-25"));
+      expect(subject.add(10, { period: "years" })).toStrictEqual(new ProperDate("2033-12-25"));
+    });
   });
 
   describe("#subtract", () => {
@@ -135,6 +142,13 @@ describe("model", () => {
       expect(subject.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
       expect(subject.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
       expect(subject.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
+    });
+
+    test("accepts an option object", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.subtract(1, { period: "day" })).toStrictEqual(new ProperDate("2023-12-24"));
+      expect(subject.subtract(2, { period: "months" })).toStrictEqual(new ProperDate("2023-10-25"));
+      expect(subject.subtract(10, { period: "years" })).toStrictEqual(new ProperDate("2013-12-25"));
     });
   });
 

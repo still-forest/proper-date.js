@@ -59,12 +59,24 @@ export default class ProperDate {
     return this.toDate().getTime();
   }
 
-  add(n: number, period: Period): ProperDate {
-    return add(this, n, period);
+  /**
+   * Adds a specified number of units to the current date.
+   * @param n - The number of units to add.
+   * @param periodOrOptions - The period specifying the unit of measurement (e.g., 'days', 'months', 'years'), or an object containing the period.
+   * @returns A new ProperDate instance with the added units.
+   */
+  add(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
+    return add(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
-  subtract(n: number, period: Period): ProperDate {
-    return subtract(this, n, period);
+  /**
+   * Subtracts a specified number of units from the current date.
+   * @param n - The number of units to subtract.
+   * @param periodOrOptions - The period specifying the unit of measurement (e.g., 'days', 'months', 'years'), or an object containing the period.
+   * @returns A new ProperDate instance with the subtracted units.
+   */
+  subtract(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
+    return subtract(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
   /**
