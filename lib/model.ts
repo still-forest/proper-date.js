@@ -23,15 +23,6 @@ export default class ProperDate implements ProperDateInterface {
     return a.toDate().getTime() - b.toDate().getTime();
   }
 
-  static difference(a: ProperDate, b: ProperDate, unit: Period = 'days'): number {
-    if (unit !== 'days') {
-      throw new Error(`Unsupported unit: ${unit}`);
-    }
-    const diffInMilliseconds = Math.abs(a.toDate().getTime() - b.toDate().getTime());
-    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-    return diffInDays;
-  }
-
   get formatted() {
     return this.toString();
   }
@@ -68,12 +59,12 @@ export default class ProperDate implements ProperDateInterface {
     return this.toDate().getTime();
   }
 
-  add(n: number, period: Period): ProperDate {
-    return add(this, n, { period });
+  add(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
+    return add(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
-  subtract(n: number, period: Period): ProperDate {
-    return subtract(this, n, { period });
+  subtract(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
+    return subtract(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
   /**
