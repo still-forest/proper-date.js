@@ -28,11 +28,11 @@ export default class ProperDate {
   }
 
   get priorYearEnd(): ProperDate {
-    return this.getEndOfNYearsAgo(1);
+    return this.subtract(1, 'year').endOfYear;
   }
 
   get priorMonthEnd(): ProperDate {
-    return this.getEndOfNMonthsAgo(1);
+    return this.subtract(1, 'month').endOfMonth;
   }
 
   get endOfMonth(): ProperDate {
