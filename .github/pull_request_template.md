@@ -17,7 +17,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/) specificatio
 - `perf:` Performance improvements
 - `refactor:` Code refactoring
 - `revert:` Revert a previous commit
-- `tweak:` Minor change with no obivous end-user changes
+- `tweak:` Minor change with no obvious end-user changes
 
 ### Minor version `_.N.0`
 
