@@ -1,5 +1,17 @@
 # ProperDate - changelog
 
+## [0.6.0](https://github.com/jszymanowski/proper-date.js/compare/v0.5.0...v0.6.0) (2025-03-22)
+
+
+### Features
+
+* Introduce endOfMonth and endOfYear getters ([#44](https://github.com/jszymanowski/proper-date.js/issues/44)) ([50a611f](https://github.com/jszymanowski/proper-date.js/commit/50a611f162234d91a13620e150a636d85d5b9f9e))
+
+
+### Code Refactoring
+
+* Drop deprecated functions ([#43](https://github.com/jszymanowski/proper-date.js/issues/43)) ([c6f9459](https://github.com/jszymanowski/proper-date.js/commit/c6f945938da17643a74bdd268c1836967366ffd3))
+
 ## [0.5.0](https://github.com/jszymanowski/proper-date.js/compare/v0.4.0...v0.5.0) (2025-03-21)
 
 
