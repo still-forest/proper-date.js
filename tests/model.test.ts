@@ -184,7 +184,7 @@ describe("model", () => {
   });
 
   describe("#endOfMonth", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
+    test("returns a ProperDate for the last day of the given month", () => {
       expect(new ProperDate("2023-12-25").endOfMonth()).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2023-12-31").endOfMonth()).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2025-11-11").endOfMonth()).toStrictEqual(new ProperDate("2025-11-30"));
@@ -192,6 +192,15 @@ describe("model", () => {
       // February
       expect(new ProperDate("2024-02-01").endOfMonth()).toStrictEqual(new ProperDate("2024-02-29"));
       expect(new ProperDate("2023-02-01").endOfMonth()).toStrictEqual(new ProperDate("2023-02-28"));
+    });
+  });
+
+  describe("#endOfYear", () => {
+    test("returns a ProperDate for 12/31 of the given year", () => {
+      expect(new ProperDate("2023-12-25").endOfYear()).toStrictEqual(new ProperDate("2023-12-31"));
+      expect(new ProperDate("2023-12-31").endOfYear()).toStrictEqual(new ProperDate("2023-12-31"));
+      expect(new ProperDate("2025-11-11").endOfYear()).toStrictEqual(new ProperDate("2025-12-31"));
+      expect(new ProperDate("1981-01-01").endOfYear()).toStrictEqual(new ProperDate("1981-12-31"));      
     });
   });
 

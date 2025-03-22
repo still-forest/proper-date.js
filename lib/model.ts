@@ -95,14 +95,13 @@ export default class ProperDate {
     return new ProperDate(new Date(Date.UTC(this.year, this.month + 1, 0)));
   }
 
-  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
+  endOfYear(): ProperDate {
+    return new ProperDate(new Date(Date.UTC(this.year, 11, 31)));
+  }
+
   getEndOfNMonthsAgo(n: number): ProperDate {
     console.warn("DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract().endOfMonth() instead.");
-    // return this.subtract(n, "months").endOfMonth();
-    return new ProperDate(
-      // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0)),
-    );
+    return this.subtract(n, "months").endOfMonth();
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
