@@ -183,6 +183,19 @@ describe("model", () => {
     });
   });
 
+  describe("#getEndOfNMonthsAgo", () => {
+    test("returns a ProperDate for 12/31 of the prior year", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2023-11-30"));
+      expect(subject.getEndOfNMonthsAgo(2)).toStrictEqual(new ProperDate("2023-10-31"));
+      expect(subject.getEndOfNMonthsAgo(10)).toStrictEqual(new ProperDate("2023-02-28"));
+      
+      const postLeapDay = new ProperDate("2024-03-01");
+      expect(postLeapDay.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2024-02-29"));
+      expect(postLeapDay.getEndOfNMonthsAgo(13)).toStrictEqual(new ProperDate("2023-02-28"));
+    });
+  });
+
   describe("#getEndOfNYearsAgo", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");
