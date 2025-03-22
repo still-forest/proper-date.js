@@ -15,14 +15,6 @@ export default class ProperDate {
     this.day = day;
   }
 
-  // experimental
-  static compare(a: ProperDate, b: ProperDate) {
-    console.warn(
-      "EXPERIMENTAL: ProperDate.compare() is experimental and may be removed in a future release.",
-    );
-    return a.toDate().getTime() - b.toDate().getTime();
-  }
-
   get formatted() {
     return this.toString();
   }
@@ -49,14 +41,6 @@ export default class ProperDate {
 
   toDate(): Date {
     return new Date(this.toString());
-  }
-
-  // deprecated
-  getTime(): number {
-    console.warn(
-      "DEPRECATION WARNING: getTime() is deprecated and will be removed in a future release. Use toDate().getTime() instead.",
-    );
-    return this.toDate().getTime();
   }
 
   /**
