@@ -236,7 +236,7 @@ describe("model", () => {
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
       subject.getEndOfNYearsAgo(1)
       expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
+        "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
       );
       warnSpy.mockRestore();
 
