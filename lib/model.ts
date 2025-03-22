@@ -19,12 +19,20 @@ export default class ProperDate {
     return this.toString();
   }
 
-  get priorYearEnd(): ProperDate {
-    return this.getEndOfNYearsAgo(1);
+  get priorMonthEnd(): ProperDate {
+    return this.subtract(1, 'month').endOfMonth;
   }
 
-  get priorMonthEnd(): ProperDate {
-    return this.getEndOfNMonthsAgo(1);
+  get priorYearEnd(): ProperDate {
+    return this.subtract(1, 'year').endOfYear;
+  }
+
+  get endOfMonth(): ProperDate {
+    return new ProperDate(new Date(Date.UTC(this.year, this.month + 1, 0)));
+  }
+
+  get endOfYear(): ProperDate {
+    return new ProperDate(new Date(Date.UTC(this.year, 11, 31)));
   }
 
   equals(other: ProperDate): boolean {
@@ -75,19 +83,16 @@ export default class ProperDate {
     return difference(this, other, options);
   }
 
-  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
+
   getEndOfNMonthsAgo(n: number): ProperDate {
-    return new ProperDate(
-      // `0` gives the last day of the previous month.
-      new Date(Date.UTC(this.year, this.month - n + 1, 0)),
-    );
+    console.warn("DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.");
+    return this.subtract(n, "months").endOfMonth;
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
   getEndOfNYearsAgo(n: number): ProperDate {
-    const priorYear = this.toDate().getFullYear() - n;
-    const priorYearEndDate = new Date(Date.UTC(priorYear, 11, 31));
-    return new ProperDate(priorYearEndDate);
+    console.warn("DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.");
+    return this.subtract(n, "years").endOfYear;
   }
 
   private get jsDate(): Date {
