@@ -183,9 +183,29 @@ describe("model", () => {
     });
   });
 
+  describe("#endOfMonth", () => {
+    test("returns a ProperDate for 12/31 of the prior year", () => {
+      expect(new ProperDate("2023-12-25").endOfMonth()).toStrictEqual(new ProperDate("2023-12-31"));
+      expect(new ProperDate("2023-12-31").endOfMonth()).toStrictEqual(new ProperDate("2023-12-31"));
+      expect(new ProperDate("2025-11-11").endOfMonth()).toStrictEqual(new ProperDate("2025-11-30"));
+      
+      // February
+      expect(new ProperDate("2024-02-01").endOfMonth()).toStrictEqual(new ProperDate("2024-02-29"));
+      expect(new ProperDate("2023-02-01").endOfMonth()).toStrictEqual(new ProperDate("2023-02-28"));
+    });
+  });
+
   describe("#getEndOfNMonthsAgo", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");
+
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      subject.getEndOfNMonthsAgo(1)
+      expect(warnSpy).toHaveBeenCalledWith(
+        "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract().endOfMonth() instead.",
+      );
+      warnSpy.mockRestore();
+
       expect(subject.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2023-11-30"));
       expect(subject.getEndOfNMonthsAgo(2)).toStrictEqual(new ProperDate("2023-10-31"));
       expect(subject.getEndOfNMonthsAgo(10)).toStrictEqual(new ProperDate("2023-02-28"));
