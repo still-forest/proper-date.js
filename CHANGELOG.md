@@ -1,5 +1,12 @@
 # ProperDate - changelog
 
+## [0.6.1](https://github.com/jszymanowski/proper-date.js/compare/v0.6.0...v0.6.1) (2025-03-25)
+
+
+### Minor tweaks
+
+* Export all type definitions ([#47](https://github.com/jszymanowski/proper-date.js/issues/47)) ([e614c39](https://github.com/jszymanowski/proper-date.js/commit/e614c39b5a709e8b942c5c9acf00b6eb89f9a6c7))
+
 ## [0.6.0](https://github.com/jszymanowski/proper-date.js/compare/v0.5.0...v0.6.0) (2025-03-22)
 
 
