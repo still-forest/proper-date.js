@@ -161,7 +161,7 @@ describe("model", () => {
       expect(new ProperDate("2023-12-25").endOfMonth).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2023-12-31").endOfMonth).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2025-11-11").endOfMonth).toStrictEqual(new ProperDate("2025-11-30"));
-      
+
       // February
       expect(new ProperDate("2024-02-01").endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
       expect(new ProperDate("2023-02-01").endOfMonth).toStrictEqual(new ProperDate("2023-02-28"));
@@ -173,7 +173,7 @@ describe("model", () => {
       expect(new ProperDate("2023-12-25").endOfYear).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2023-12-31").endOfYear).toStrictEqual(new ProperDate("2023-12-31"));
       expect(new ProperDate("2025-11-11").endOfYear).toStrictEqual(new ProperDate("2025-12-31"));
-      expect(new ProperDate("1981-01-01").endOfYear).toStrictEqual(new ProperDate("1981-12-31"));      
+      expect(new ProperDate("1981-01-01").endOfYear).toStrictEqual(new ProperDate("1981-12-31"));
     });
   });
 
@@ -182,7 +182,7 @@ describe("model", () => {
       const subject = new ProperDate("2023-12-25");
 
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNMonthsAgo(1)
+      subject.getEndOfNMonthsAgo(1);
       expect(warnSpy).toHaveBeenCalledWith(
         "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
       );
@@ -191,14 +191,16 @@ describe("model", () => {
       expect(subject.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2023-11-30"));
       expect(subject.getEndOfNMonthsAgo(2)).toStrictEqual(new ProperDate("2023-10-31"));
       expect(subject.getEndOfNMonthsAgo(10)).toStrictEqual(new ProperDate("2023-02-28"));
-      
+
       const postLeapDay = new ProperDate("2024-03-01");
       expect(postLeapDay.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2024-02-29"));
       expect(postLeapDay.getEndOfNMonthsAgo(13)).toStrictEqual(new ProperDate("2023-02-28"));
 
       // new pattern
-      expect(subject.subtract(2, 'months').endOfMonth).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(postLeapDay.subtract(1, 'months').endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
+      expect(subject.subtract(2, "months").endOfMonth).toStrictEqual(new ProperDate("2023-10-31"));
+      expect(postLeapDay.subtract(1, "months").endOfMonth).toStrictEqual(
+        new ProperDate("2024-02-29"),
+      );
     });
   });
 
@@ -207,7 +209,7 @@ describe("model", () => {
       const subject = new ProperDate("2023-12-25");
 
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNYearsAgo(1)
+      subject.getEndOfNYearsAgo(1);
       expect(warnSpy).toHaveBeenCalledWith(
         "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
       );
@@ -218,7 +220,7 @@ describe("model", () => {
       expect(subject.getEndOfNYearsAgo(10)).toStrictEqual(new ProperDate("2013-12-31"));
 
       // new pattern
-      expect(subject.subtract(2, 'years').endOfYear).toStrictEqual(new ProperDate("2021-12-31"));
+      expect(subject.subtract(2, "years").endOfYear).toStrictEqual(new ProperDate("2021-12-31"));
     });
   });
 });
