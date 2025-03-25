@@ -1,4 +1,3 @@
-
 import { parseInput } from "./utils";
 import { add, subtract, difference } from "./arithmetic";
 import type { Period, ArithmeticOptions } from "./types";
@@ -20,11 +19,11 @@ export default class ProperDate {
   }
 
   get priorMonthEnd(): ProperDate {
-    return this.subtract(1, 'month').endOfMonth;
+    return this.subtract(1, "month").endOfMonth;
   }
 
   get priorYearEnd(): ProperDate {
-    return this.subtract(1, 'year').endOfYear;
+    return this.subtract(1, "year").endOfYear;
   }
 
   get endOfMonth(): ProperDate {
@@ -58,7 +57,11 @@ export default class ProperDate {
    * @returns A new ProperDate instance with the added units.
    */
   add(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
-    return add(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
+    return add(
+      this,
+      n,
+      typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions,
+    );
   }
 
   /**
@@ -68,7 +71,11 @@ export default class ProperDate {
    * @returns A new ProperDate instance with the subtracted units.
    */
   subtract(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
-    return subtract(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
+    return subtract(
+      this,
+      n,
+      typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions,
+    );
   }
 
   /**
@@ -83,15 +90,18 @@ export default class ProperDate {
     return difference(this, other, options);
   }
 
-
   getEndOfNMonthsAgo(n: number): ProperDate {
-    console.warn("DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.");
+    console.warn(
+      "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
+    );
     return this.subtract(n, "months").endOfMonth;
   }
 
   // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
   getEndOfNYearsAgo(n: number): ProperDate {
-    console.warn("DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.");
+    console.warn(
+      "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
+    );
     return this.subtract(n, "years").endOfYear;
   }
 
