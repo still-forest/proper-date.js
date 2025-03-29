@@ -1,6 +1,6 @@
-import { beforeEach, afterEach, vi, describe, expect, test } from "vitest";
-import ProperDate from "../lib/model";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { getToday, getYesterday } from "../lib/factory";
+import ProperDate from "../lib/model";
 
 describe("factory", () => {
   beforeEach(() => {

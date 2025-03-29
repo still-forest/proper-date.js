@@ -1,6 +1,6 @@
+import { add, difference, subtract } from "./arithmetic";
+import type { ArithmeticOptions, Period } from "./types";
 import { parseInput } from "./utils";
-import { add, subtract, difference } from "./arithmetic";
-import type { Period, ArithmeticOptions } from "./types";
 
 export default class ProperDate {
   year: number;
