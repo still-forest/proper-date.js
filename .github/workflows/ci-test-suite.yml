@@ -38,7 +38,7 @@ jobs:
           elif [ "${{ matrix.task }}" == "test" ]; then
             pnpm test
           elif [ "${{ matrix.task }}" == "lint" ]; then
-            pnpm lint
+            pnpm lint:ci
           elif [ "${{ matrix.task }}" == "build" ]; then
             pnpm build
           fi

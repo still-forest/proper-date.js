@@ -1,4 +1,4 @@
-import { beforeEach, afterEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import ProperDate, { getToday, getYesterday } from "../lib";
 
 describe("ProperDate", () => {

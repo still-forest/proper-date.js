@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import ProperDate from "../lib";
-import { add, subtract, difference } from "../lib/arithmetic";
+import { add, difference, subtract } from "../lib/arithmetic";
 
 describe("arithmetic", () => {
   // TODO: Review these results, particularly months-related logic: https://github.com/jszymanowski/proper-date.js/issues/22
