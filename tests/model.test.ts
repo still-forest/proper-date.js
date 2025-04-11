@@ -198,9 +198,7 @@ describe("model", () => {
 
       // new pattern
       expect(subject.subtract(2, "months").endOfMonth).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(postLeapDay.subtract(1, "months").endOfMonth).toStrictEqual(
-        new ProperDate("2024-02-29"),
-      );
+      expect(postLeapDay.subtract(1, "months").endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
     });
   });
 

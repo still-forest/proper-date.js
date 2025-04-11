@@ -3,11 +3,7 @@ import type { ArithmeticOptions } from "./types";
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
-export const add = (
-  base: ProperDate,
-  n: number,
-  options: ArithmeticOptions = DEFAULT_OPTIONS,
-): ProperDate => {
+export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DEFAULT_OPTIONS): ProperDate => {
   // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
 
   const { period = "days" } = options;
@@ -24,9 +20,7 @@ export const add = (
   }
   if (period === "month" || period === "months") {
     const baseDate = base.toDate();
-    const targetDate = new Date(
-      Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()),
-    );
+    const targetDate = new Date(Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()));
 
     // Handle cases where the target date overflows to the next month
     // // Calculate expected month: original month + n, then take modulo 12
@@ -39,19 +33,13 @@ export const add = (
   }
   if (period === "year" || period === "years") {
     const baseDate = base.toDate();
-    return new ProperDate(
-      new Date(Date.UTC(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate())),
-    );
+    return new ProperDate(new Date(Date.UTC(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate())));
   }
 
   throw new Error(`Period '${period}' is not supported`);
 };
 
-export const subtract = (
-  base: ProperDate,
-  n: number,
-  options: ArithmeticOptions = DEFAULT_OPTIONS,
-): ProperDate => {
+export const subtract = (base: ProperDate, n: number, options: ArithmeticOptions = DEFAULT_OPTIONS): ProperDate => {
   return add(base, -1 * n, options);
 };
 

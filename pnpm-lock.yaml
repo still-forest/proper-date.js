@@ -12,8 +12,8 @@ importers:
         specifier: 2.0.0-beta.1
         version: 2.0.0-beta.1
       '@jszymanowski/biomejs-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.0
+        version: 1.1.0
       '@vitest/coverage-v8':
         specifier: 3.1.1
         version: 3.1.1(vitest@3.1.1)
@@ -286,8 +286,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@jszymanowski/biomejs-config@1.0.0':
-    resolution: {integrity: sha512-rKHv9LVllwTtgfUbO4UvvvDD/JDp4DyUPvOuqrzNIp0k9x39oZRbs7AOXDC9dvooxRcZlnI6WKTim6rhs8AoFQ==}
+  '@jszymanowski/biomejs-config@1.1.0':
+    resolution: {integrity: sha512-kHIYPm3pfxJMaOqwUvI6I4UpuW+z9f8mcfOf/X9274lchmEmxeMXc6GQ2me4lTp24xVuy5/IlsXN4++sBTDTww==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1121,7 +1121,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@jszymanowski/biomejs-config@1.0.0': {}
+  '@jszymanowski/biomejs-config@1.1.0': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
