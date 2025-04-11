@@ -57,11 +57,7 @@ export default class ProperDate {
    * @returns A new ProperDate instance with the added units.
    */
   add(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
-    return add(
-      this,
-      n,
-      typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions,
-    );
+    return add(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
   /**
@@ -71,11 +67,7 @@ export default class ProperDate {
    * @returns A new ProperDate instance with the subtracted units.
    */
   subtract(n: number, periodOrOptions: Period | ArithmeticOptions): ProperDate {
-    return subtract(
-      this,
-      n,
-      typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions,
-    );
+    return subtract(this, n, typeof periodOrOptions === "string" ? { period: periodOrOptions } : periodOrOptions);
   }
 
   /**
