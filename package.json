@@ -35,14 +35,17 @@
     "lint:ci": "biome ci .",
     "lint:fix": "biome check --write --unsafe .",
     "prepublishOnly": "pnpm build",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0-beta.1",
     "@jszymanowski/biomejs-config": "1.1.0",
+    "@types/jest": "29.5.14",
     "conventional-changelog-conventionalcommits": "8.0.0",
-    "mocha": "11.2.2",
+    "jest": "29.7.0",
+    "ts-jest": "29.3.2",
+    "ts-node": "10.9.2",
     "tsup": "8.4.0",
     "typescript": "5.8.3"
   },

@@ -1,4 +1,3 @@
-import { describe, expect, test, vi } from "vitest";
 import ProperDate from "../lib";
 
 describe("model", () => {
@@ -181,7 +180,7 @@ describe("model", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");
 
-      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
       subject.getEndOfNMonthsAgo(1);
       expect(warnSpy).toHaveBeenCalledWith(
         "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
@@ -206,7 +205,7 @@ describe("model", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");
 
-      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
       subject.getEndOfNYearsAgo(1);
       expect(warnSpy).toHaveBeenCalledWith(
         "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",

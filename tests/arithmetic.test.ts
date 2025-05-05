@@ -1,4 +1,3 @@
-import { describe, expect, test } from "vitest";
 import ProperDate from "../lib";
 import { add, difference, subtract } from "../lib/arithmetic";
 

@@ -1,14 +1,14 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { getToday, getYesterday } from "../lib/factory";
 import ProperDate from "../lib/model";
 
 describe("factory", () => {
   beforeEach(() => {
-    vi.setSystemTime(new Date("2025-01-02T00:00:00Z"));
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2025-01-02T00:00:00Z"));
   });
 
   afterEach(() => {
-    vi.restoreAllMocks();
+    jest.useRealTimers();
   });
 
   describe("today", () => {
