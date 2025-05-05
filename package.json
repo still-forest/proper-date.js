@@ -40,7 +40,7 @@
     "test:coverage": "jest --coverage"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0-beta.1",
+    "@biomejs/biome": "2.0.0-beta.2",
     "@jszymanowski/biomejs-config": "1.1.0",
     "@types/jest": "29.5.14",
     "conventional-changelog-conventionalcommits": "8.0.0",
