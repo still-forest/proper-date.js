@@ -2,12 +2,12 @@
 
 A simple, lightweight date object library for JavaScript/TypeScript, without the time and timezone nonsense.
 
-[![codecov](https://codecov.io/gh/jszymanowski/proper-date.js/branch/main/graph/badge.svg)](https://codecov.io/gh/jszymanowski/proper-date.js)
+[![codecov](https://codecov.io/gh/still-forest/proper-date.js/branch/main/graph/badge.svg)](https://codecov.io/gh/still-forest/proper-date.js)
 
 ## Usage
 
 ```js
-import ProperDate from "@jszymanowski/proper-date.js";
+import ProperDate from "@still-forest/proper-date.js";
 
 const date = ProperDate("2024-12-25");
 date.formatted; // '2024-12-25'
@@ -37,19 +37,19 @@ yalc publish
 ## This will copy the local version of this library into the `.yalc` folder and modify your
 ## package.json to look for this library there.  You will want to add `.yalc` to your `.gitignore`,
 ## and be sure to change back to the real published version before shipping.
-yalc add @jszymanowski/proper-date.js
+yalc add @still-forest/proper-date.js
 
 # As needed: update the locally "published" package
-yalc update @jszymanowski/proper-date.js
+yalc update @still-forest/proper-date.js
 yalc update # all packages in yalc.lock
 
 # When done
 ## In consuming app/library:
-yalc remove @jszymanowski/proper-date.js
+yalc remove @still-forest/proper-date.js
 yalc remove --all # all packages in yalc.lock
 
 ## In this package:
-yalc installations clean @jszymanowski/proper-date.js # unpublish / reverts yalc publish
+yalc installations clean @still-forest/proper-date.js # unpublish / reverts yalc publish
 ```
 
 ### Publishing

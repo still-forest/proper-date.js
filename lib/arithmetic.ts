@@ -4,7 +4,7 @@ import type { ArithmeticOptions } from "./types";
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
 export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DEFAULT_OPTIONS): ProperDate => {
-  // TODO: Refactor this to not use Date: https://github.com/jszymanowski/proper-date.js/issues/21
+  // TODO: Refactor this to not use Date: https://github.com/still-forest/proper-date.js/issues/21
 
   const { period = "days" } = options;
 

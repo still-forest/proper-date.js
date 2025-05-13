@@ -2,7 +2,7 @@ import ProperDate from "../lib";
 import { add, difference, subtract } from "../lib/arithmetic";
 
 describe("arithmetic", () => {
-  // TODO: Review these results, particularly months-related logic: https://github.com/jszymanowski/proper-date.js/issues/22
+  // TODO: Review these results, particularly months-related logic: https://github.com/still-forest/proper-date.js/issues/22
   describe("add", () => {
     test("by default, returns ProperDate with days added", () => {
       const base = new ProperDate("2023-12-25");
@@ -45,7 +45,7 @@ describe("arithmetic", () => {
       expect(add(base, 120, { period: "years" })).toStrictEqual(new ProperDate("2143-12-25"));
     });
 
-    // TODO: Review this leap year handling: https://github.com/jszymanowski/proper-date.js/issues/23
+    // TODO: Review this leap year handling: https://github.com/still-forest/proper-date.js/issues/23
     test("leap day as base handling", () => {
       const leapDay = new ProperDate("2020-02-29");
 
@@ -139,7 +139,7 @@ describe("arithmetic", () => {
       expect(subtract(base, 120, { period: "years" })).toStrictEqual(new ProperDate("1903-12-25"));
     });
 
-    // TODO: Review this leap year handling: https://github.com/jszymanowski/proper-date.js/issues/23
+    // TODO: Review this leap year handling: https://github.com/still-forest/proper-date.js/issues/23
     test("leap day as base handling", () => {
       const leapDay = new ProperDate("2020-02-29");
 
