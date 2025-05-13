@@ -89,7 +89,7 @@ export default class ProperDate {
     return this.subtract(n, "months").endOfMonth;
   }
 
-  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/jszymanowski/proper-date.js/issues/20
+  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/still-forest/proper-date.js/issues/20
   getEndOfNYearsAgo(n: number): ProperDate {
     console.warn(
       "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",

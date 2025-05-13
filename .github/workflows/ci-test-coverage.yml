@@ -36,6 +36,4 @@ jobs:
         uses: codecov/codecov-action@ad3126e916f78f00edff4ed0317cf185271ccc2d # v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./coverage/
-          flags: react
-          fail_ci_if_error: true
+          slug: still-forest/proper-date.js
