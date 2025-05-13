@@ -1,6 +1,6 @@
 ## PR title
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/) specification to enable [Release Please](https://github.com/googleapis/release-please) to determine how to bump version numbers and generate CHANGELOG entires.
+Follow [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ### Non-release (no version bump or package release)
 
