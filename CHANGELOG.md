@@ -1,5 +1,12 @@
 # ProperDate - changelog
 
+## [0.6.2](https://github.com/still-forest/proper-date.js/compare/v0.6.1...v0.6.2) (2025-05-13)
+
+
+### Minor tweaks
+
+* Move to still-forest organization ([#84](https://github.com/still-forest/proper-date.js/issues/84)) ([e268590](https://github.com/still-forest/proper-date.js/commit/e268590bcb5facdb793a54fbc1317d95f095523d))
+
 ## [0.6.1](https://github.com/still-forest/proper-date.js/compare/v0.6.0...v0.6.1) (2025-03-25)
 
 
