@@ -135,7 +135,7 @@ describe("model", () => {
 
     test("throws an error for unsupported units", () => {
       // @ts-expect-error Testing invalid input
-      expect(() => subject.difference(new ProperDate(), { period: "hours" })).toThrowError(
+      expect(() => subject.difference(new ProperDate(), { period: "hours" })).toThrow(
         "Unsupported option: period=hours",
       );
     });
