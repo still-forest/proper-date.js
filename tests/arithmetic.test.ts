@@ -90,9 +90,9 @@ describe("arithmetic", () => {
     test("throws error for unsupported period", () => {
       const base = new ProperDate();
       // @ts-expect-error Testing invalid input
-      expect(() => add(base, 1, { period: "minutes" })).toThrowError("Period 'minutes' is not supported");
+      expect(() => add(base, 1, { period: "minutes" })).toThrow("Period 'minutes' is not supported");
 
-      expect(() => add(base, 1.5, { period: "days" })).toThrowError("Value '1.5' is not an integer");
+      expect(() => add(base, 1.5, { period: "days" })).toThrow("Value '1.5' is not an integer");
     });
   });
 
@@ -184,7 +184,7 @@ describe("arithmetic", () => {
     test("throws error for unsupported period", () => {
       const base = new ProperDate();
       // @ts-expect-error Testing invalid input
-      expect(() => subtract(base, 1, { period: "minutes" })).toThrowError("Period 'minutes' is not supported");
+      expect(() => subtract(base, 1, { period: "minutes" })).toThrow("Period 'minutes' is not supported");
     });
   });
 
@@ -208,7 +208,7 @@ describe("arithmetic", () => {
 
     test("throws an error for unsupported units", () => {
       // @ts-expect-error Testing invalid input
-      expect(() => difference(base, new ProperDate(), { period: "hours" })).toThrowError(
+      expect(() => difference(base, new ProperDate(), { period: "hours" })).toThrow(
         "Unsupported option: period=hours",
       );
     });
