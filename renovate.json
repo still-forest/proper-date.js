@@ -1,3 +1,3 @@
 {
-  "extends": ["github>still-forest/renovate-config:npm-package#v0.15.0"]
+  "extends": ["github>still-forest/renovate-config:npm-package#v0.16.0"]
 }
