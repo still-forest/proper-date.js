@@ -44,7 +44,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.0.5",
     "@still-forest/biomejs-config": "1.3.1",
-    "@types/jest": "29.5.14",
+    "@types/jest": "30.0.0",
     "conventional-changelog-conventionalcommits": "9.0.0",
     "jest": "30.0.3",
     "release-it": "19.0.3",
