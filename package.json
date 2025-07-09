@@ -1,6 +1,6 @@
 {
   "name": "@still-forest/proper-date.js",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": "John Szymanowski <john@stillforest.dev>",
   "license": "MIT",
   "description": "Simple, lightweight date object library for JavaScript/TypeScript, without the time nonsense.",
