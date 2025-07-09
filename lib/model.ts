@@ -7,7 +7,7 @@ export default class ProperDate {
   month: number;
   day: number;
 
-  constructor(date: Date | ProperDate | string = new Date()) {
+  constructor(date: Date | ProperDate | string = new Date().toISOString().split("T")[0]) {
     const { year, month, day } = parseInput(date);
     this.year = year;
     this.month = month;
@@ -39,15 +39,15 @@ export default class ProperDate {
   }
 
   toString(): string {
-    return this.jsDate.toISOString().split("T")[0];
+    return `${this.year}-${this.month.toString().padStart(2, "0")}-${this.day.toString().padStart(2, "0")}`;
   }
 
   toJSON(): string {
     return this.toString();
   }
 
-  toDate(): Date {
-    return new Date(this.toString());
+  toUtcDate(): Date {
+    return new Date(Date.UTC(this.year, this.month, this.day));
   }
 
   /**
@@ -95,9 +95,5 @@ export default class ProperDate {
       "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
     );
     return this.subtract(n, "years").endOfYear;
-  }
-
-  private get jsDate(): Date {
-    return new Date(Date.UTC(this.year, this.month, this.day));
   }
 }

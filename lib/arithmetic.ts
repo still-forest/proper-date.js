@@ -13,13 +13,13 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
   }
 
   if (period === "day" || period === "days") {
-    const baseDate = base.toDate();
+    const baseDate = base.toUtcDate();
     const newDate = new Date(baseDate.getTime());
     newDate.setDate(baseDate.getDate() + n);
     return new ProperDate(newDate);
   }
   if (period === "month" || period === "months") {
-    const baseDate = base.toDate();
+    const baseDate = base.toUtcDate();
     const targetDate = new Date(Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()));
 
     // Handle cases where the target date overflows to the next month
@@ -32,7 +32,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
     return new ProperDate(targetDate);
   }
   if (period === "year" || period === "years") {
-    const baseDate = base.toDate();
+    const baseDate = base.toUtcDate();
     return new ProperDate(new Date(Date.UTC(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate())));
   }
 
@@ -61,7 +61,7 @@ export const difference = (
   if (period !== "days") {
     throw new Error(`Unsupported option: period=${period}`);
   }
-  const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
+  const diffInMilliseconds = Math.abs(base.toUtcDate().getTime() - other.toUtcDate().getTime());
   const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
   return diffInDays;
 };
