@@ -94,21 +94,6 @@ export default class ProperDate {
     return difference(this, other, options);
   }
 
-  getEndOfNMonthsAgo(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
-    );
-    return this.subtract(n, "months").endOfMonth;
-  }
-
-  // TODO: Refactor to use the new period-based arithmetic. See https://github.com/still-forest/proper-date.js/issues/20
-  getEndOfNYearsAgo(n: number): ProperDate {
-    console.warn(
-      "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
-    );
-    return this.subtract(n, "years").endOfYear;
-  }
-
   private get jsDate(): Date {
     return buildDate(this.year, this.actualMonth, this.day);
   }
