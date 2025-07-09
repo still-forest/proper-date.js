@@ -4,10 +4,10 @@ import { parseInput } from "./utils";
 
 export default class ProperDate {
   year: number;
-  month: number;
+  month: number; // TODO: follows JS data convention of 0-11 for months; change this to 1-12
   day: number;
 
-  constructor(date: Date | ProperDate | string = new Date()) {
+  constructor(date: Date | ProperDate | string | number[] = new Date()) {
     const { year, month, day } = parseInput(date);
     this.year = year;
     this.month = month;

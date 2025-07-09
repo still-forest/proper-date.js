@@ -18,6 +18,23 @@ describe("utils", () => {
       expect(result.day).toStrictEqual(25);
     });
 
+    test("with a [year, month, day] array", () => {
+      let result = parseInput([2023, 12, 25]);
+      expect(result.year).toStrictEqual(2023);
+      expect(result.month).toStrictEqual(11);
+      expect(result.day).toStrictEqual(25);
+
+      result = parseInput([2023, 1, 25]);
+      expect(result.year).toStrictEqual(2023);
+      expect(result.month).toStrictEqual(0);
+      expect(result.day).toStrictEqual(25);
+
+      result = parseInput([2023, 0, 25]);
+      expect(result.year).toStrictEqual(2022);
+      expect(result.month).toStrictEqual(11);
+      expect(result.day).toStrictEqual(25);
+    });
+
     describe("with a JavaScript date, without a specific timezone", () => {
       test("when constructed from a string", () => {
         const date = new Date("2023-12-25");
