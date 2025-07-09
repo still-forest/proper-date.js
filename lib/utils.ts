@@ -14,7 +14,7 @@ export const parseInput = (date: ProperDate | Date | string | number[]) => {
     month = date.getMonth();
     day = date.getDate();
   } else if (Array.isArray(date) && date.length === 3) {
-    const parsedDate = new Date(date[0], date[1] - 1, date[2]);
+    const parsedDate = new Date(Date.UTC(date[0], date[1] - 1, date[2]));
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();

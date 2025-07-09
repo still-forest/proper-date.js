@@ -31,7 +31,7 @@ export default class ProperDate {
   }
 
   get endOfYear(): ProperDate {
-    return new ProperDate(new Date(Date.UTC(this.year, 11, 31)));
+    return new ProperDate([this.year, 12, 31]);
   }
 
   equals(other: ProperDate): boolean {
