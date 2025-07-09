@@ -12,16 +12,6 @@ describe("model", () => {
       expect(subject.day).toStrictEqual(25);
     });
 
-    test("with a JavaScript date", () => {
-      const date = new Date("2023-12-25");
-      const subject = new ProperDate(date);
-      expect(subject.toString()).toStrictEqual("2023-12-25");
-      expectEqualDates(subject.toDate(), new Date(2023, 11, 25));
-      expect(subject.year).toStrictEqual(2023);
-      expect(subject.month).toStrictEqual(11);
-      expect(subject.day).toStrictEqual(25);
-    });
-
     test("with a ProperDate", () => {
       const properDate = new ProperDate("2023-12-25");
       const subject = new ProperDate(properDate);
@@ -66,15 +56,15 @@ describe("model", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.equals(new ProperDate("2023-12-25"))).toBe(true);
-      expect(subject.equals(new ProperDate(new Date("2023-12-25")))).toBe(true);
-      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 25))))).toBe(true);
+      expect(subject.equals(new ProperDate([2023, 12, 25]))).toBe(true);
+      expect(subject.equals(new ProperDate(subject))).toBe(true);
     });
 
     test("returns false when the dates are not equal", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.equals(new ProperDate("2023-12-24"))).toBe(false);
-      expect(subject.equals(new ProperDate(new Date("2023-12-24")))).toBe(false);
-      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 24))))).toBe(false);
+      expect(subject.equals(new ProperDate([2023, 11, 25]))).toBe(false);
+      expect(subject.equals(new ProperDate(subject.subtract(1, "day")))).toBe(false);
     });
   });
 

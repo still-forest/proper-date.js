@@ -63,63 +63,19 @@ describe("utils", () => {
       expect(result.day).toStrictEqual(25);
     });
 
-    describe("with a JavaScript date, without a specific timezone", () => {
-      test("when constructed from a string", () => {
-        const date = new Date("2023-12-25");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-
-      test("when constructed numerically", () => {
-        const date = new Date(2023, 11, 25);
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-    });
-
-    describe("with a JavaScript date and a specific timezone", () => {
-      test("UTC/GMT", () => {
-        const date = new Date("2023-12-25T00:00:00.000Z");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-
-      test("before UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000-13:00");
-
-        // When 16:00 at 25th in the -13:00 timezone, it's already after 00:00 on the 26th in UTC.
-        // TODO: is the desirable behavior?  Or should it be 25?
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(26);
-      });
-
-      test("ahead of UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000+13:00");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-    });
-
     test("throws error for invalid input types", () => {
-      const expectedErrorMessage = "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string";
+      const buildExpectedErrorMessage = (input: string, type: string) =>
+        `[proper-date.js] Input must be either a ProperDate, YYYY-MM-DD formatted string, or an array of [year, month, day]. Received: ${input} of type ${type}`;
 
-      expect(() => parseInput("my birthday last year")).toThrow(expectedErrorMessage);
+      expect(() => parseInput("my birthday last year")).toThrow(
+        buildExpectedErrorMessage("my birthday last year", "string"),
+      );
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(123)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(123)).toThrow(buildExpectedErrorMessage("123", "number"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(null)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(null)).toThrow(buildExpectedErrorMessage("null", "object"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(undefined)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(undefined)).toThrow(buildExpectedErrorMessage("undefined", "undefined"));
     });
   });
 });
