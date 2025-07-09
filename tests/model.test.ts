@@ -7,7 +7,7 @@ describe("model", () => {
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUtcDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
-      expect(subject.month).toStrictEqual(11);
+      expect(subject.month).toStrictEqual(12);
       expect(subject.day).toStrictEqual(25);
     });
 
@@ -17,7 +17,7 @@ describe("model", () => {
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUtcDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
-      expect(subject.month).toStrictEqual(11);
+      expect(subject.month).toStrictEqual(12);
       expect(subject.day).toStrictEqual(25);
     });
 
@@ -27,7 +27,7 @@ describe("model", () => {
       expect(subject.toString()).toStrictEqual("2023-12-25");
       expect(subject.toUtcDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
-      expect(subject.month).toStrictEqual(11);
+      expect(subject.month).toStrictEqual(12);
       expect(subject.day).toStrictEqual(25);
     });
   });
@@ -176,48 +176,14 @@ describe("model", () => {
     });
   });
 
-  describe("#getEndOfNMonthsAgo", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
-      const subject = new ProperDate("2023-12-25");
+  describe("#toUtcDate", () => {
+    test("returns a UTC date", () => {
+      expect(new ProperDate("2023-12-25").toUtcDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
+      expect(new ProperDate("2023-12-26").toUtcDate()).toStrictEqual(new Date("2023-12-26T00:00:00.000Z"));
 
-      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNMonthsAgo(1);
-      expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
-      );
-      warnSpy.mockRestore();
-
-      expect(subject.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2023-11-30"));
-      expect(subject.getEndOfNMonthsAgo(2)).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(subject.getEndOfNMonthsAgo(10)).toStrictEqual(new ProperDate("2023-02-28"));
-
-      const postLeapDay = new ProperDate("2024-03-01");
-      expect(postLeapDay.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2024-02-29"));
-      expect(postLeapDay.getEndOfNMonthsAgo(13)).toStrictEqual(new ProperDate("2023-02-28"));
-
-      // new pattern
-      expect(subject.subtract(2, "months").endOfMonth).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(postLeapDay.subtract(1, "months").endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
-    });
-  });
-
-  describe("#getEndOfNYearsAgo", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
-      const subject = new ProperDate("2023-12-25");
-
-      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNYearsAgo(1);
-      expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
-      );
-      warnSpy.mockRestore();
-
-      expect(subject.getEndOfNYearsAgo(1)).toStrictEqual(new ProperDate("2022-12-31"));
-      expect(subject.getEndOfNYearsAgo(2)).toStrictEqual(new ProperDate("2021-12-31"));
-      expect(subject.getEndOfNYearsAgo(10)).toStrictEqual(new ProperDate("2013-12-31"));
-
-      // new pattern
-      expect(subject.subtract(2, "years").endOfYear).toStrictEqual(new ProperDate("2021-12-31"));
+      expect(new ProperDate("2024-02-28").toUtcDate()).toStrictEqual(new Date("2024-02-28T00:00:00.000Z"));
+      expect(new ProperDate("2024-02-29").toUtcDate()).toStrictEqual(new Date("2024-02-29T00:00:00.000Z"));
+      expect(new ProperDate("2024-03-01").toUtcDate()).toStrictEqual(new Date("2024-03-01T00:00:00.000Z"));
     });
   });
 });

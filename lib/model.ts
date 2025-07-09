@@ -19,12 +19,10 @@ export default class ProperDate {
   }
 
   get priorMonthEnd(): ProperDate {
-    return this;
     return this.subtract(1, "month").endOfMonth;
   }
 
   get priorYearEnd(): ProperDate {
-    return this;
     return this.subtract(1, "year").endOfYear;
   }
 
@@ -52,7 +50,7 @@ export default class ProperDate {
 
   toUtcDate(): Date {
     // TODO: can toString() be used here?
-    return new Date(Date.UTC(this.year, this.month, this.day));
+    return new Date(Date.UTC(this.year, this.month - 1, this.day));
   }
 
   /**

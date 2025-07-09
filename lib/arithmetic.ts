@@ -1,26 +1,23 @@
 import ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
+import { getDaysInMonth } from "./utils";
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
 export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DEFAULT_OPTIONS): ProperDate => {
-  // TODO: Refactor this to not use Date: https://github.com/still-forest/proper-date.js/issues/21
-
+  
   const { period = "days" } = options;
-
+  
   if (n !== Math.round(n)) {
     throw new Error(`Value '${n}' is not an integer`);
   }
-
+  
   if (period === "day" || period === "days") {
-    // const baseDate = base.toUtcDate();
-    // const newDate = new Date(baseDate.getTime());
-    // newDate.setDate(baseDate.getDate() + n);
-    // console.log("newDate", newDate);
-    // return new ProperDate(newDate);
-
-    const { year, month, day } = base;
-    return new ProperDate([year, month, day + n]);
+    // TODO: Refactor this to not use Date: https://github.com/still-forest/proper-date.js/issues/21
+    const baseDate = base.toUtcDate();
+    const newDate = new Date(baseDate.getTime());
+    newDate.setDate(baseDate.getDate() + n);
+    return new ProperDate(newDate);
   }
   if (period === "month" || period === "months") {
     const { year, month, day } = base;

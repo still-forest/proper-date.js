@@ -51,3 +51,9 @@ function isValidDateString(dateString: string): boolean {
 
   return true;
 }
+
+
+export const getDaysInMonth = (year: number, month: number) => {
+  const date = new Date(year, month, 0);
+  return date.getDate();
+};
