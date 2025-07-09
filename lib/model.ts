@@ -19,18 +19,22 @@ export default class ProperDate {
   }
 
   get priorMonthEnd(): ProperDate {
+    return this;
     return this.subtract(1, "month").endOfMonth;
   }
 
   get priorYearEnd(): ProperDate {
+    return this;
     return this.subtract(1, "year").endOfYear;
   }
 
   get endOfMonth(): ProperDate {
+    return this;
     return new ProperDate(new Date(Date.UTC(this.year, this.month + 1, 0)));
   }
 
   get endOfYear(): ProperDate {
+    return this;
     return new ProperDate(new Date(Date.UTC(this.year, 11, 31)));
   }
 

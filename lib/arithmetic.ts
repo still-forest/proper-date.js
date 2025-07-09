@@ -13,25 +13,31 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
   }
 
   if (period === "day" || period === "days") {
-    const baseDate = base.toUtcDate();
-    const newDate = new Date(baseDate.getTime());
-    newDate.setDate(baseDate.getDate() + n);
-    console.log("newDate", newDate);
-    return new ProperDate(newDate);
+    // const baseDate = base.toUtcDate();
+    // const newDate = new Date(baseDate.getTime());
+    // newDate.setDate(baseDate.getDate() + n);
+    // console.log("newDate", newDate);
+    // return new ProperDate(newDate);
+
+    const { year, month, day } = base;
+    return new ProperDate([year, month, day + n]);
   }
   if (period === "month" || period === "months") {
-    const baseDate = base.toUtcDate();
-    const targetDate = new Date(Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()));
+    const { year, month, day } = base;
+    const targetMonth = month + n;
 
-    // Handle cases where the target date overflows to the next month
-    // // Calculate expected month: original month + n, then take modulo 12
-    const expectedMonth = (((baseDate.getMonth() + n) % 12) + 12) % 12;
-    if (targetDate.getMonth() !== expectedMonth) {
-      targetDate.setDate(0); // Set to the last day of the previous month
+    if (targetMonth > 12) {
+      const incrementedYear = year + Math.floor(targetMonth / 12);
+      const incrementedMonth = targetMonth % 12;
+      return new ProperDate([incrementedYear, incrementedMonth, day]);
+    }
+    if (targetMonth < 1) {
+      const decrementedYear = year - Math.floor(targetMonth / 12);
+      const decrementedMonth = 12 + (targetMonth % 12);
+      return new ProperDate([decrementedYear, decrementedMonth, day]);
     }
 
-    console.log("targetDate", targetDate);
-    return new ProperDate(targetDate);
+    return new ProperDate([year, targetMonth, day]);
   }
   if (period === "year" || period === "years") {
     const baseDate = base.toUtcDate();

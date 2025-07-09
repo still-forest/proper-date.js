@@ -176,7 +176,7 @@ describe("arithmetic", () => {
       expect(subtract(base, 0, { period: "months" })).toStrictEqual(base);
       expect(subtract(base, 0, { period: "years" })).toStrictEqual(base);
 
-      expect(subtract(base, -1, { period: "days" })).toStrictEqual(new ProperDate("2023-12-26"));
+      expect(subtract(base, -1, { period: "days" })).toStrictEqual(new ProperDate("2023-12-26"))
       expect(subtract(base, -1, { period: "months" })).toStrictEqual(new ProperDate("2024-01-25"));
       expect(subtract(base, -1, { period: "year" })).toStrictEqual(new ProperDate("2024-12-25"));
     });

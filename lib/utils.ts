@@ -17,26 +17,28 @@ export const parseInput = (date: ProperDate | Date | string | number[]) => {
     year = date[0];
     month = date[1];
     day = date[2];
-  } else if (typeof date === "string" && isValidDateFormat(date)) {
+  } else if (typeof date === "string" && isValidDateString(date)) {
     const parsedDate = new Date(date);
     year = parsedDate.getFullYear();
-    month = parsedDate.getMonth();
-    day = parsedDate.getDate();
+    month = parsedDate.getMonth() + 1; // JS Date is 0-indexed, so we add 1 to get the correct day
+    day = parsedDate.getDate() + 1; // JS Date is 0-indexed, so we add 1 to get the correct day
   } else {
     throw new Error(
-      `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${date} of type ${typeof date}`,
+      `[proper-date.js] Invalid date input: must be either a Date, ProperDate, a YYYY-MM-DD formatted string, or an array of [year, month, day]; got ${date} of type ${typeof date}`,
     );
   }
   return { year, month, day };
 };
 
-function isValidDateFormat(dateString: string): boolean {
+function isValidDateString(dateString: string): boolean {
   // This pattern checks for YYYY-MM-DD format and basic validity
   const pattern = /^\d{4}-\d{2}-\d{2}$/;
 
   if (!pattern.test(dateString)) {
     return false;
   }
+
+  return true;
 
   // Further validate the date is real
   const date = new Date(dateString);
