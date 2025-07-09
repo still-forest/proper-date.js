@@ -10,16 +10,14 @@ export const parseInput = (date: ProperDate | Date | string) => {
     month = date.month;
     day = date.day;
   } else if (date instanceof Date) {
-    year = date.getFullYear();
-    month = date.getMonth();
-    day = date.getDate();
+    const dateString = date.toISOString().split("T")[0];
+    const [year, month, day] = dateString.split("-").map(Number);
+    return { year, month: month - 1, day };
   } else if (typeof date === "string" && isValidDateFormat(date)) {
-    const parsedDate = new Date(date);
-    year = parsedDate.getFullYear();
-    month = parsedDate.getMonth();
-    day = parsedDate.getDate();
+    const [year, month, day] = date.split("-").map(Number);
+    return { year, month: month - 1, day };
   } else {
-    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string");
+    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got " + date + " of type " + typeof date);
   }
   return { year, month, day };
 };
@@ -33,8 +31,17 @@ function isValidDateFormat(dateString: string): boolean {
   }
 
   // Further validate the date is real
-  const date = new Date(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
 
-  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+  if(month <= 0 || month > 12) {
+    return false;
+  }
+  if(day <= 0 || day > 31) {
+    return false;
+  }
+  if(year < 1000 || year > 9999) {
+    return false;
+  }
+
+  return true;
 }
