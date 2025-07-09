@@ -12,11 +12,9 @@ export default class ProperDate {
   day: number;
 
   constructor(date: Date | ProperDate | string | number[] | undefined = undefined) {
-    if (date === undefined) {
-      date = getDefaultDate();
-    }
+    const inputDate = date ?? getDefaultDate();
 
-    const { year, month, day } = parseInput(date);
+    const { year, month, day } = parseInput(inputDate);
     this.year = year;
     this.month = month;
     this.day = day;
