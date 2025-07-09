@@ -20,13 +20,13 @@ describe("utils", () => {
     });
 
     test("handles month wrapping", () => {
-      expectEqualDates(buildDate(2023, 13, 2), new Date("2024-01-02:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 0, 2), new Date("2023-12-02:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 13, 2), new Date("2024-01-02T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 0, 2), new Date("2023-12-02T00:00:00.000Z"));
     });
 
     test("handles end of month utilities", () => {
-      expectEqualDates(buildDate(2023, 12, 0), new Date("2023-11-30:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 3, 0), new Date("2024-02-29:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 12, 0), new Date("2023-11-30T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 3, 0), new Date("2024-02-29T00:00:00.000Z"));
     });
   });
 
