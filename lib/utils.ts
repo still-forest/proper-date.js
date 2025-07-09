@@ -11,13 +11,13 @@ export const parseInput = (date: ProperDate | Date | string) => {
     day = date.day;
   } else if (date instanceof Date) {
     const dateString = date.toISOString().split("T")[0];
-    const [year, month, day] = dateString.split("-").map(Number);
-    return { year, month: month - 1, day };
+    [year, month, day] = dateString.split("-").map(Number);
   } else if (typeof date === "string" && isValidDateFormat(date)) {
-    const [year, month, day] = date.split("-").map(Number);
-    return { year, month: month - 1, day };
+    [year, month, day] = date.split("-").map(Number);
   } else {
-    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got " + date + " of type " + typeof date);
+    throw new Error(
+      `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${date} of type ${typeof date}`,
+    );
   }
   return { year, month, day };
 };
@@ -31,15 +31,16 @@ function isValidDateFormat(dateString: string): boolean {
   }
 
   // Further validate the date is real
+  const date = new Date(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
 
-  if(month <= 0 || month > 12) {
+  if (date.getFullYear() !== year) {
     return false;
   }
-  if(day <= 0 || day > 31) {
+  if (date.getMonth() !== month - 1) {
     return false;
   }
-  if(year < 1000 || year > 9999) {
+  if (date.getDate() !== day) {
     return false;
   }
 
