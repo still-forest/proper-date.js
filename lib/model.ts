@@ -7,7 +7,7 @@ export default class ProperDate {
   month: number;
   day: number;
 
-  constructor(date: Date | ProperDate | string = new Date().toISOString().split("T")[0]) {
+  constructor(date: Date | ProperDate | string | number[]= new Date().toISOString().split("T")[0]) {
     const { year, month, day } = parseInput(date);
     this.year = year;
     this.month = month;
@@ -47,6 +47,7 @@ export default class ProperDate {
   }
 
   toUtcDate(): Date {
+    // TODO: can toString() be used here?
     return new Date(Date.UTC(this.year, this.month, this.day));
   }
 

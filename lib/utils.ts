@@ -1,6 +1,6 @@
 import ProperDate from "./model";
 
-export const parseInput = (date: ProperDate | Date | string) => {
+export const parseInput = (date: ProperDate | Date | string | number[]) => {
   let year: number;
   let month: number;
   let day: number;
@@ -13,6 +13,10 @@ export const parseInput = (date: ProperDate | Date | string) => {
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();
+  } else if (Array.isArray(date) && date.length === 3) {
+    year = date[0];
+    month = date[1];
+    day = date[2];
   } else if (typeof date === "string" && isValidDateFormat(date)) {
     const parsedDate = new Date(date);
     year = parsedDate.getFullYear();

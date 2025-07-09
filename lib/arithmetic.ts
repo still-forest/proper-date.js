@@ -16,6 +16,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
     const baseDate = base.toUtcDate();
     const newDate = new Date(baseDate.getTime());
     newDate.setDate(baseDate.getDate() + n);
+    console.log("newDate", newDate);
     return new ProperDate(newDate);
   }
   if (period === "month" || period === "months") {
@@ -29,11 +30,13 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
       targetDate.setDate(0); // Set to the last day of the previous month
     }
 
+    console.log("targetDate", targetDate);
     return new ProperDate(targetDate);
   }
   if (period === "year" || period === "years") {
     const baseDate = base.toUtcDate();
-    return new ProperDate(new Date(Date.UTC(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate())));
+    const { year, month, day } = base;
+    return new ProperDate([year + n, month, day]);
   }
 
   throw new Error(`Period '${period}' is not supported`);
