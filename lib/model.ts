@@ -2,12 +2,20 @@ import { add, difference, subtract } from "./arithmetic";
 import type { ArithmeticOptions, Period } from "./types";
 import { buildUtcDate, parseInput } from "./utils";
 
+const getDefaultDate = (): string => {
+  return new Date().toISOString().split("T")[0];
+}
+
 export default class ProperDate {
   year: number;
   month: number; // TODO: follows JS data convention of 0-11 for months; change this to 1-12
   day: number;
 
-  constructor(date: Date | ProperDate | string | number[] = new Date()) {
+  constructor(date: Date | ProperDate | string | number[] | undefined = undefined) {
+    if (date === undefined) {
+      date = getDefaultDate();
+    }
+
     const { year, month, day } = parseInput(date);
     this.year = year;
     this.month = month;
