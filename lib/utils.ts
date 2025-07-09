@@ -12,8 +12,10 @@ export const parseInput = (date: ProperDate | Date | string) => {
   } else if (date instanceof Date) {
     const dateString = date.toISOString().split("T")[0];
     [year, month, day] = dateString.split("-").map(Number);
+    month = month - 1; // Convert from 1-indexed to 0-indexed
   } else if (typeof date === "string" && isValidDateFormat(date)) {
     [year, month, day] = date.split("-").map(Number);
+    month = month - 1; // Convert from 1-indexed to 0-indexed
   } else {
     throw new Error(
       `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${date} of type ${typeof date}`,
@@ -30,29 +32,17 @@ function isValidDateFormat(dateString: string): boolean {
     return false;
   }
 
-  // Further validate the date is real
-  const date = new Date(dateString);
+  // Parse the components
   const [year, month, day] = dateString.split("-").map(Number);
-  console.debug("isValidDateFormat", {
-    dateString,
-    year,
-    month,
-    day,
-    date,
-    dateYear: date.getFullYear(),
-    dateMonth: date.getMonth(),
-    dateDay: date.getDate(),
-    dateYearEqualsYear: date.getFullYear() === year,
-    dateMonthEqualsMonth: date.getMonth() === month,
-    dateDayEqualsDay: date.getDate() === day,
-  });
-  if (date.getFullYear() !== year) {
-    return false;
-  }
+  
+  // Basic range validation without creating Date objects
   if (month < 1 || month > 12) {
     return false;
   }
   if (day < 1 || day > 31) {
+    return false;
+  }
+  if (year < 1000 || year > 9999) {
     return false;
   }
 
