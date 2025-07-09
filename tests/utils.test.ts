@@ -63,7 +63,7 @@ describe("utils", () => {
       expect(result.day).toStrictEqual(25);
     });
 
-    describe.skip("with a JavaScript date, without a specific timezone", () => {
+    describe("with a JavaScript date, without a specific timezone", () => {
       test("when constructed from a string", () => {
         const date = new Date("2023-12-25");
         const result = parseInput(date);
@@ -81,7 +81,7 @@ describe("utils", () => {
       });
     });
 
-    describe.skip("with a JavaScript date and a specific timezone", () => {
+    describe("with a JavaScript date and a specific timezone", () => {
       test("UTC/GMT", () => {
         const date = new Date("2023-12-25T00:00:00.000Z");
         const result = parseInput(date);
