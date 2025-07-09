@@ -19,10 +19,10 @@ export const buildDateFromString = (value: string): Date => {
  *     Date at local midnight of Dec 26.
  */
 export const normalizeDate = (date: Date): Date => {
-  return buildDateFromString(date.toISOString().split("T")[0]);
+  return buildDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
 };
 
-export const parseInput = (date: ProperDate | Date | string | number[]) => {
+export const parseInput = (date: ProperDate | string | number[]) => {
   let year: number;
   let month: number;
   let day: number;
@@ -31,11 +31,6 @@ export const parseInput = (date: ProperDate | Date | string | number[]) => {
     year = date.year;
     month = date.month;
     day = date.day;
-  } else if (date instanceof Date) {
-    const parsedDate = normalizeDate(date);
-    year = parsedDate.getFullYear();
-    month = parsedDate.getMonth();
-    day = parsedDate.getDate();
   } else if (Array.isArray(date) && date.length === 3) {
     const parsedDate = buildDate(date[0], date[1], date[2]);
     year = parsedDate.getFullYear();
@@ -47,7 +42,12 @@ export const parseInput = (date: ProperDate | Date | string | number[]) => {
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else {
-    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string");
+    throw new Error(
+      "[proper-date.js] Input must be either a ProperDate, YYYY-MM-DD formatted string, or an array of [year, month, day]. Received: " +
+        date +
+        " of type " +
+        typeof date,
+    );
   }
   return { year, month, day };
 };

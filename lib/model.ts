@@ -1,4 +1,5 @@
 import { add, difference, subtract } from "./arithmetic";
+import { getProperDateFromDate } from "./factory";
 import type { ArithmeticOptions, Period } from "./types";
 import { buildDate, parseInput } from "./utils";
 
@@ -11,7 +12,7 @@ export default class ProperDate {
   month: number; // TODO: follows JS data convention of 0-11 for months; change this to 1-12
   day: number;
 
-  constructor(date: Date | ProperDate | string | number[] | undefined = undefined) {
+  constructor(date: ProperDate | string | number[] | undefined = undefined) {
     const inputDate = date ?? getDefaultDate();
 
     const { year, month, day } = parseInput(inputDate);
@@ -37,11 +38,13 @@ export default class ProperDate {
   }
 
   get endOfMonth(): ProperDate {
-    return new ProperDate(buildDate(this.year, this.actualMonth + 1, 0));
+    const date = new Date(this.year, this.month + 1, 0);
+    return getProperDateFromDate(date);
   }
 
   get endOfYear(): ProperDate {
-    return new ProperDate(buildDate(this.year, 12, 31));
+    const date = new Date(this.year, 11, 31);
+    return getProperDateFromDate(date);
   }
 
   equals(other: ProperDate): boolean {
@@ -49,7 +52,7 @@ export default class ProperDate {
   }
 
   toString(): string {
-    return this.jsDate.toISOString().split("T")[0];
+    return `${this.year}-${this.actualMonth.toString().padStart(2, "0")}-${this.day.toString().padStart(2, "0")}`;
   }
 
   toJSON(): string {

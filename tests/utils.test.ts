@@ -5,28 +5,28 @@ import { expectEqualDates } from "./support/matchers";
 describe("utils", () => {
   describe("buildDate", () => {
     test("returns a date in the local timezone", () => {
-      expectEqualDates(buildDate(2023, 12, 25), new Date("2023-12-25T00:00:00.000Z"));
-      expectEqualDates(buildDate(2023, 12, 26), new Date("2023-12-26T00:00:00.000Z"));
-      expectEqualDates(buildDate(2023, 12, 31), new Date("2023-12-31T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 12, 25), new Date(2023, 11, 25));
+      expectEqualDates(buildDate(2023, 12, 26), new Date(2023, 11, 26));
+      expectEqualDates(buildDate(2023, 12, 31), new Date(2023, 11, 31));
 
-      expectEqualDates(buildDate(2024, 2, 28), new Date("2024-02-28T00:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 2, 29), new Date("2024-02-29T00:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 3, 1), new Date("2024-03-01T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 2, 28), new Date(2024, 1, 28));
+      expectEqualDates(buildDate(2024, 2, 29), new Date(2024, 1, 29));
+      expectEqualDates(buildDate(2024, 3, 1), new Date(2024, 2, 1));
     });
 
     test("handles day wrapping", () => {
-      expectEqualDates(buildDate(2023, 2, 35), new Date("2023-03-07T00:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 1, 15 + 366), new Date("2025-01-15T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 2, 35), new Date(2023, 2, 7));
+      expectEqualDates(buildDate(2024, 1, 15 + 366), new Date(2025, 0, 15));
     });
 
     test("handles month wrapping", () => {
-      expectEqualDates(buildDate(2023, 13, 2), new Date("2024-01-02T00:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 0, 2), new Date("2023-12-02T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 13, 2), new Date(2024, 0, 2));
+      expectEqualDates(buildDate(2024, 0, 2), new Date(2023, 11, 2));
     });
 
     test("handles end of month utilities", () => {
-      expectEqualDates(buildDate(2023, 12, 0), new Date("2023-11-30T00:00:00.000Z"));
-      expectEqualDates(buildDate(2024, 3, 0), new Date("2024-02-29T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 12, 0), new Date(2023, 10, 30));
+      expectEqualDates(buildDate(2024, 3, 0), new Date(2024, 1, 29));
     });
   });
 
@@ -63,63 +63,19 @@ describe("utils", () => {
       expect(result.day).toStrictEqual(25);
     });
 
-    describe("with a JavaScript date, without a specific timezone", () => {
-      test("when constructed from a string", () => {
-        const date = new Date("2023-12-25");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-
-      test("when constructed numerically", () => {
-        const date = new Date(2023, 11, 25);
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-    });
-
-    describe("with a JavaScript date and a specific timezone", () => {
-      test("UTC/GMT", () => {
-        const date = new Date("2023-12-25T00:00:00.000Z");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-
-      test("before UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000-13:00");
-
-        // When 16:00 at 25th in the -13:00 timezone, it's already after 00:00 on the 26th in UTC.
-        // TODO: is the desirable behavior?  Or should it be 25?
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(26);
-      });
-
-      test("ahead of UTC/GMT", () => {
-        const date = new Date("2023-12-25T16:00:00.000+13:00");
-        const result = parseInput(date);
-        expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
-        expect(result.day).toStrictEqual(25);
-      });
-    });
-
     test("throws error for invalid input types", () => {
-      const expectedErrorMessage = "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string";
+      const buildExpectedErrorMessage = (input: string, type: string) =>
+        `[proper-date.js] Input must be either a ProperDate, YYYY-MM-DD formatted string, or an array of [year, month, day]. Received: ${input} of type ${type}`;
 
-      expect(() => parseInput("my birthday last year")).toThrow(expectedErrorMessage);
+      expect(() => parseInput("my birthday last year")).toThrow(
+        buildExpectedErrorMessage("my birthday last year", "string"),
+      );
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(123)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(123)).toThrow(buildExpectedErrorMessage("123", "number"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(null)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(null)).toThrow(buildExpectedErrorMessage("null", "object"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(undefined)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(undefined)).toThrow(buildExpectedErrorMessage("undefined", "undefined"));
     });
   });
 });
