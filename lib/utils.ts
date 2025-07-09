@@ -22,7 +22,7 @@ export const parseInput = (date: ProperDate | Date | string) => {
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();
-  } else if (typeof date === "string" && isValidDateFormat(date)) {
+  } else if (typeof date === "string"){//} && isValidDateFormat(date)) {
     const parsedDate = buildUtcDateFromString(date);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
