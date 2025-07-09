@@ -4,7 +4,7 @@ import { buildUtcDate, parseInput } from "./utils";
 
 const getDefaultDate = (): string => {
   return new Date().toISOString().split("T")[0];
-}
+};
 
 export default class ProperDate {
   year: number;

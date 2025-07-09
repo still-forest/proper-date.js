@@ -1,13 +1,13 @@
 import ProperDate from "./model";
 
 export const buildUtcDate = (year: number, month: number, day: number): Date => {
-  return new Date(Date.UTC(year, month - 1, day))
-}
+  return new Date(Date.UTC(year, month - 1, day));
+};
 
 export const buildUtcDateFromString = (value: string): Date => {
   const [year, month, day] = value.split("-").map(Number);
   return buildUtcDate(year, month, day);
-}
+};
 
 export const parseInput = (date: ProperDate | Date | string | number[]) => {
   let year: number;

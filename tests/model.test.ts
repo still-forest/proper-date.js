@@ -66,7 +66,7 @@ describe("model", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
 
-      expectEqualDates(subject, new ProperDate("2023-12-25"))
+      expectEqualDates(subject, new ProperDate("2023-12-25"));
       expect(subject.equals(new ProperDate(new Date("2023-12-25")))).toStrictEqual(true);
       expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 25))))).toStrictEqual(true);
     });

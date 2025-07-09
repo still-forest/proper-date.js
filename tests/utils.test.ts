@@ -2,7 +2,6 @@ import ProperDate from "../lib";
 import { buildUtcDate, parseInput } from "../lib/utils";
 
 describe("utils", () => {
-
   describe("buildUtcDate", () => {
     test("returns a UTC date", () => {
       expect(buildUtcDate(2023, 12, 25)).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
@@ -29,7 +28,7 @@ describe("utils", () => {
       expect(buildUtcDate(2024, 3, 0)).toStrictEqual(new Date("2024-02-29:00:00.000Z"));
     });
   });
-    
+
   describe("parseInput", () => {
     test("with a ProperDate", () => {
       const input = new ProperDate("2023-12-25");
