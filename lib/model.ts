@@ -1,6 +1,6 @@
 import { add, difference, subtract } from "./arithmetic";
 import type { ArithmeticOptions, Period } from "./types";
-import { buildUtcDate, parseInput } from "./utils";
+import { buildDate, parseInput } from "./utils";
 
 const getDefaultDate = (): string => {
   return new Date().toISOString().split("T")[0];
@@ -39,11 +39,11 @@ export default class ProperDate {
   }
 
   get endOfMonth(): ProperDate {
-    return new ProperDate(buildUtcDate(this.year, this.actualMonth + 1, 0));
+    return new ProperDate(buildDate(this.year, this.actualMonth + 1, 0));
   }
 
   get endOfYear(): ProperDate {
-    return new ProperDate(buildUtcDate(this.year, 12, 31));
+    return new ProperDate(buildDate(this.year, 12, 31));
   }
 
   equals(other: ProperDate): boolean {
@@ -110,6 +110,6 @@ export default class ProperDate {
   }
 
   private get jsDate(): Date {
-    return buildUtcDate(this.year, this.actualMonth, this.day);
+    return buildDate(this.year, this.actualMonth, this.day);
   }
 }
