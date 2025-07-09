@@ -7,14 +7,14 @@ describe("utils", () => {
       const input = new ProperDate("2023-12-25");
       const result = parseInput(input);
       expect(result.year).toStrictEqual(2023);
-      expect(result.month).toStrictEqual(11);
+      expect(result.month).toStrictEqual(12);
       expect(result.day).toStrictEqual(25);
     });
 
     test("with a yyyy-mm-dd formatted string", () => {
       const result = parseInput("2023-12-25");
       expect(result.year).toStrictEqual(2023);
-      expect(result.month).toStrictEqual(11);
+      expect(result.month).toStrictEqual(12);
       expect(result.day).toStrictEqual(25);
     });
 
@@ -23,7 +23,7 @@ describe("utils", () => {
         const date = new Date("2023-12-25");
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
+        expect(result.month).toStrictEqual(12);
         expect(result.day).toStrictEqual(25);
       });
 
@@ -31,7 +31,7 @@ describe("utils", () => {
         const date = new Date(Date.UTC(2023, 11, 25));
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
+        expect(result.month).toStrictEqual(12);
         expect(result.day).toStrictEqual(25);
       });
     });
@@ -41,7 +41,7 @@ describe("utils", () => {
         const date = new Date("2023-12-25T00:00:00.000Z");
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
+        expect(result.month).toStrictEqual(12);
         expect(result.day).toStrictEqual(25);
       });
 
@@ -52,7 +52,7 @@ describe("utils", () => {
         // TODO: is the desirable behavior?  Or should it be 25?
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
+        expect(result.month).toStrictEqual(12);
         expect(result.day).toStrictEqual(26);
       });
 
@@ -60,14 +60,14 @@ describe("utils", () => {
         const date = new Date("2023-12-25T16:00:00.000+13:00");
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
-        expect(result.month).toStrictEqual(11);
+        expect(result.month).toStrictEqual(12);
         expect(result.day).toStrictEqual(25);
       });
     });
 
     test("throws error for invalid input types", () => {
       const buildExpectedErrorMessage = (input: string, type: string) =>
-        `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${input} of type ${type}`;
+        `[proper-date.js] Invalid date input: must be either a Date, ProperDate, a YYYY-MM-DD formatted string, or an array of [year, month, day]; got ${input} of type ${type}`;
 
       expect(() => parseInput("my birthday last year")).toThrow(buildExpectedErrorMessage("my birthday last year", "string"));
       // @ts-expect-error Testing invalid input
