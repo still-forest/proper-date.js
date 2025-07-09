@@ -33,14 +33,26 @@ function isValidDateFormat(dateString: string): boolean {
   // Further validate the date is real
   const date = new Date(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
-
+  console.debug("isValidDateFormat", {
+    dateString,
+    year,
+    month,
+    day,
+    date,
+    dateYear: date.getFullYear(),
+    dateMonth: date.getMonth(),
+    dateDay: date.getDate(),
+    dateYearEqualsYear: date.getFullYear() === year,
+    dateMonthEqualsMonth: date.getMonth() === month,
+    dateDayEqualsDay: date.getDate() === day,
+  });
   if (date.getFullYear() !== year) {
     return false;
   }
-  if (date.getMonth() !== month - 1) {
+  if (month < 1 || month > 12) {
     return false;
   }
-  if (date.getDate() !== day) {
+  if (day < 1 || day > 31) {
     return false;
   }
 

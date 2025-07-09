@@ -16,6 +16,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
     const baseDate = base.toDate();
     const newDate = new Date(baseDate.getTime());
     newDate.setDate(baseDate.getDate() + n);
+    console.log("newDate", newDate);
     return new ProperDate(newDate);
   }
   if (period === "month" || period === "months") {
