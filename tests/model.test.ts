@@ -1,11 +1,12 @@
 import ProperDate from "../lib";
+import { expectEqualDates, expectEqualProperDates } from "./support/matchers";
 
 describe("model", () => {
   describe("constructor", () => {
     test("with a yyyy-mm-dd formatted string", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.toString()).toStrictEqual("2023-12-25");
-      expect(subject.toDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
+      expectEqualDates(subject.toDate(), new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
       expect(subject.day).toStrictEqual(25);
@@ -15,7 +16,7 @@ describe("model", () => {
       const date = new Date("2023-12-25");
       const subject = new ProperDate(date);
       expect(subject.toString()).toStrictEqual("2023-12-25");
-      expect(subject.toDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
+      expectEqualDates(subject.toDate(), new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
       expect(subject.day).toStrictEqual(25);
@@ -25,7 +26,7 @@ describe("model", () => {
       const properDate = new ProperDate("2023-12-25");
       const subject = new ProperDate(properDate);
       expect(subject.toString()).toStrictEqual("2023-12-25");
-      expect(subject.toDate()).toStrictEqual(new Date("2023-12-25T00:00:00.000Z"));
+      expectEqualDates(subject.toDate(), new Date("2023-12-25T00:00:00.000Z"));
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
       expect(subject.day).toStrictEqual(25);
@@ -64,17 +65,16 @@ describe("model", () => {
   describe("#equals", () => {
     test("returns true if the dates are equal", () => {
       const subject = new ProperDate("2023-12-25");
-
-      expect(subject.equals(new ProperDate("2023-12-25"))).toStrictEqual(true);
-      expect(subject.equals(new ProperDate(new Date("2023-12-25")))).toStrictEqual(true);
-      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 25))))).toStrictEqual(true);
+      expect(subject.equals(new ProperDate("2023-12-25"))).toBe(true);
+      expect(subject.equals(new ProperDate(new Date("2023-12-25")))).toBe(true);
+      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 25))))).toBe(true);
     });
 
     test("returns false when the dates are not equal", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.equals(new ProperDate("2023-12-24"))).toStrictEqual(false);
-      expect(subject.equals(new ProperDate(new Date("2023-12-24")))).toStrictEqual(false);
-      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 24))))).toStrictEqual(false);
+      expect(subject.equals(new ProperDate("2023-12-24"))).toBe(false);
+      expect(subject.equals(new ProperDate(new Date("2023-12-24")))).toBe(false);
+      expect(subject.equals(new ProperDate(new Date(Date.UTC(2023, 11, 24))))).toBe(false);
     });
   });
 
@@ -95,32 +95,32 @@ describe("model", () => {
   describe("#add", () => {
     test("adds days, months, or years to the date, returning a new ProperDate", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.add(1, "day")).toStrictEqual(new ProperDate("2023-12-26"));
-      expect(subject.add(2, "months")).toStrictEqual(new ProperDate("2024-02-25"));
-      expect(subject.add(10, "years")).toStrictEqual(new ProperDate("2033-12-25"));
+      expectEqualProperDates(subject.add(1, "day"), new ProperDate("2023-12-26"));
+      expectEqualProperDates(subject.add(2, "months"), new ProperDate("2024-02-25"));
+      expectEqualProperDates(subject.add(10, "years"), new ProperDate("2033-12-25"));
     });
 
     test("accepts an option object", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.add(1, { period: "day" })).toStrictEqual(new ProperDate("2023-12-26"));
-      expect(subject.add(2, { period: "months" })).toStrictEqual(new ProperDate("2024-02-25"));
-      expect(subject.add(10, { period: "years" })).toStrictEqual(new ProperDate("2033-12-25"));
+      expectEqualProperDates(subject.add(1, { period: "day" }), new ProperDate("2023-12-26"));
+      expectEqualProperDates(subject.add(2, { period: "months" }), new ProperDate("2024-02-25"));
+      expectEqualProperDates(subject.add(10, { period: "years" }), new ProperDate("2033-12-25"));
     });
   });
 
   describe("#subtract", () => {
     test("subtracts days, months, or years to the date, returning a new ProperDate", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.subtract(1, "day")).toStrictEqual(new ProperDate("2023-12-24"));
-      expect(subject.subtract(2, "months")).toStrictEqual(new ProperDate("2023-10-25"));
-      expect(subject.subtract(10, "years")).toStrictEqual(new ProperDate("2013-12-25"));
+      expectEqualProperDates(subject.subtract(1, "day"), new ProperDate("2023-12-24"));
+      expectEqualProperDates(subject.subtract(2, "months"), new ProperDate("2023-10-25"));
+      expectEqualProperDates(subject.subtract(10, "years"), new ProperDate("2013-12-25"));
     });
 
     test("accepts an option object", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.subtract(1, { period: "day" })).toStrictEqual(new ProperDate("2023-12-24"));
-      expect(subject.subtract(2, { period: "months" })).toStrictEqual(new ProperDate("2023-10-25"));
-      expect(subject.subtract(10, { period: "years" })).toStrictEqual(new ProperDate("2013-12-25"));
+      expectEqualProperDates(subject.subtract(1, { period: "day" }), new ProperDate("2023-12-24"));
+      expectEqualProperDates(subject.subtract(2, { period: "months" }), new ProperDate("2023-10-25"));
+      expectEqualProperDates(subject.subtract(10, { period: "years" }), new ProperDate("2013-12-25"));
     });
   });
 
@@ -144,80 +144,36 @@ describe("model", () => {
   describe("#priorYearEnd", () => {
     test("returns a ProperDate for 12/31 of the prior year", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.priorYearEnd).toStrictEqual(new ProperDate("2022-12-31"));
+      expectEqualProperDates(subject.priorYearEnd, new ProperDate("2022-12-31"));
     });
   });
 
   describe("#priorMonthEnd", () => {
     test("returns a ProperDate for the end of the prior month", () => {
       const subject = new ProperDate("2023-12-25");
-      expect(subject.priorMonthEnd).toStrictEqual(new ProperDate("2023-11-30"));
+      expectEqualProperDates(subject.priorMonthEnd, new ProperDate("2023-11-30"));
     });
   });
 
   describe("#endOfMonth", () => {
     test("returns a ProperDate for the last day of the given month", () => {
-      expect(new ProperDate("2023-12-25").endOfMonth).toStrictEqual(new ProperDate("2023-12-31"));
-      expect(new ProperDate("2023-12-31").endOfMonth).toStrictEqual(new ProperDate("2023-12-31"));
-      expect(new ProperDate("2025-11-11").endOfMonth).toStrictEqual(new ProperDate("2025-11-30"));
+      expectEqualProperDates(new ProperDate("2023-12-25").endOfMonth, new ProperDate("2023-12-31"));
+      expectEqualProperDates(new ProperDate("2023-12-31").endOfMonth, new ProperDate("2023-12-31"));
+      expectEqualProperDates(new ProperDate("2025-11-11").endOfMonth, new ProperDate("2025-11-30"));
 
       // February
-      expect(new ProperDate("2024-02-01").endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
-      expect(new ProperDate("2023-02-01").endOfMonth).toStrictEqual(new ProperDate("2023-02-28"));
+      expectEqualProperDates(new ProperDate("2024-02-01").endOfMonth, new ProperDate("2024-02-29"));
+      expectEqualProperDates(new ProperDate("2023-02-01").endOfMonth, new ProperDate("2023-02-28"));
     });
   });
 
   describe("#endOfYear", () => {
     test("returns a ProperDate for 12/31 of the given year", () => {
-      expect(new ProperDate("2023-12-25").endOfYear).toStrictEqual(new ProperDate("2023-12-31"));
-      expect(new ProperDate("2023-12-31").endOfYear).toStrictEqual(new ProperDate("2023-12-31"));
-      expect(new ProperDate("2025-11-11").endOfYear).toStrictEqual(new ProperDate("2025-12-31"));
-      expect(new ProperDate("1981-01-01").endOfYear).toStrictEqual(new ProperDate("1981-12-31"));
-    });
-  });
-
-  describe("#getEndOfNMonthsAgo", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
-      const subject = new ProperDate("2023-12-25");
-
-      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNMonthsAgo(1);
-      expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getEndOfNMonthsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'months').endOfMonth instead.",
-      );
-      warnSpy.mockRestore();
-
-      expect(subject.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2023-11-30"));
-      expect(subject.getEndOfNMonthsAgo(2)).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(subject.getEndOfNMonthsAgo(10)).toStrictEqual(new ProperDate("2023-02-28"));
-
-      const postLeapDay = new ProperDate("2024-03-01");
-      expect(postLeapDay.getEndOfNMonthsAgo(1)).toStrictEqual(new ProperDate("2024-02-29"));
-      expect(postLeapDay.getEndOfNMonthsAgo(13)).toStrictEqual(new ProperDate("2023-02-28"));
-
-      // new pattern
-      expect(subject.subtract(2, "months").endOfMonth).toStrictEqual(new ProperDate("2023-10-31"));
-      expect(postLeapDay.subtract(1, "months").endOfMonth).toStrictEqual(new ProperDate("2024-02-29"));
-    });
-  });
-
-  describe("#getEndOfNYearsAgo", () => {
-    test("returns a ProperDate for 12/31 of the prior year", () => {
-      const subject = new ProperDate("2023-12-25");
-
-      const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-      subject.getEndOfNYearsAgo(1);
-      expect(warnSpy).toHaveBeenCalledWith(
-        "DEPRECATION WARNING: getEndOfNYearsAgo() is deprecated and will be removed in a future release. Use subtract(n, 'years').endOfYear instead.",
-      );
-      warnSpy.mockRestore();
-
-      expect(subject.getEndOfNYearsAgo(1)).toStrictEqual(new ProperDate("2022-12-31"));
-      expect(subject.getEndOfNYearsAgo(2)).toStrictEqual(new ProperDate("2021-12-31"));
-      expect(subject.getEndOfNYearsAgo(10)).toStrictEqual(new ProperDate("2013-12-31"));
-
-      // new pattern
-      expect(subject.subtract(2, "years").endOfYear).toStrictEqual(new ProperDate("2021-12-31"));
+      expectEqualProperDates(new ProperDate("2023-12-25").endOfYear, new ProperDate("2023-12-31"));
+      expectEqualProperDates(new ProperDate("2023-12-31").endOfYear, new ProperDate("2023-12-31"));
+      expectEqualProperDates(new ProperDate("2025-11-11").endOfYear, new ProperDate("2025-12-31"));
+      expectEqualProperDates(new ProperDate("1981-01-01").endOfYear, new ProperDate("1981-12-31"));
+      expectEqualProperDates(new ProperDate("1981-01-01").endOfYear, new ProperDate("1981-12-31"));
     });
   });
 });

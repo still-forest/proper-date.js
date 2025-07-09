@@ -1,7 +1,35 @@
 import ProperDate from "../lib";
-import { parseInput } from "../lib/utils";
+import { buildDate, parseInput } from "../lib/utils";
+import { expectEqualDates } from "./support/matchers";
 
 describe("utils", () => {
+  describe("buildDate", () => {
+    test("returns a date in the local timezone", () => {
+      expectEqualDates(buildDate(2023, 12, 25), new Date("2023-12-25T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 12, 26), new Date("2023-12-26T00:00:00.000Z"));
+      expectEqualDates(buildDate(2023, 12, 31), new Date("2023-12-31T00:00:00.000Z"));
+
+      expectEqualDates(buildDate(2024, 2, 28), new Date("2024-02-28T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 2, 29), new Date("2024-02-29T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 3, 1), new Date("2024-03-01T00:00:00.000Z"));
+    });
+
+    test("handles day wrapping", () => {
+      expectEqualDates(buildDate(2023, 2, 35), new Date("2023-03-07T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 1, 15 + 366), new Date("2025-01-15T00:00:00.000Z"));
+    });
+
+    test("handles month wrapping", () => {
+      expectEqualDates(buildDate(2023, 13, 2), new Date("2024-01-02T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 0, 2), new Date("2023-12-02T00:00:00.000Z"));
+    });
+
+    test("handles end of month utilities", () => {
+      expectEqualDates(buildDate(2023, 12, 0), new Date("2023-11-30T00:00:00.000Z"));
+      expectEqualDates(buildDate(2024, 3, 0), new Date("2024-02-29T00:00:00.000Z"));
+    });
+  });
+
   describe("parseInput", () => {
     test("with a ProperDate", () => {
       const input = new ProperDate("2023-12-25");
@@ -18,6 +46,23 @@ describe("utils", () => {
       expect(result.day).toStrictEqual(25);
     });
 
+    test("with a [year, month, day] array", () => {
+      let result = parseInput([2023, 12, 25]);
+      expect(result.year).toStrictEqual(2023);
+      expect(result.month).toStrictEqual(11);
+      expect(result.day).toStrictEqual(25);
+
+      result = parseInput([2023, 1, 25]);
+      expect(result.year).toStrictEqual(2023);
+      expect(result.month).toStrictEqual(0);
+      expect(result.day).toStrictEqual(25);
+
+      result = parseInput([2023, 0, 25]);
+      expect(result.year).toStrictEqual(2022);
+      expect(result.month).toStrictEqual(11);
+      expect(result.day).toStrictEqual(25);
+    });
+
     describe("with a JavaScript date, without a specific timezone", () => {
       test("when constructed from a string", () => {
         const date = new Date("2023-12-25");
@@ -28,7 +73,7 @@ describe("utils", () => {
       });
 
       test("when constructed numerically", () => {
-        const date = new Date(Date.UTC(2023, 11, 25));
+        const date = new Date(2023, 11, 25);
         const result = parseInput(date);
         expect(result.year).toStrictEqual(2023);
         expect(result.month).toStrictEqual(11);
