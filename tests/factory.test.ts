@@ -1,6 +1,6 @@
 import { getToday, getYesterday } from "../lib/factory";
 import ProperDate from "../lib/model";
-import { expectEqualDates } from "./support/matchers";
+import { expectEqualProperDates } from "./support/matchers";
 
 describe("factory", () => {
   beforeEach(() => {
@@ -15,14 +15,14 @@ describe("factory", () => {
   describe("today", () => {
     test("returns a ProperDate instance for today's date", () => {
       const subject = getToday();
-      expectEqualDates(subject, new ProperDate("2025-01-02"));
+      expectEqualProperDates(subject, new ProperDate("2025-01-02"));
     });
   });
 
   describe("yesterday", () => {
     test("returns a ProperDate instance for yesterday's date", () => {
       const subject = getYesterday();
-      expectEqualDates(subject, new ProperDate("2025-01-01"));
+      expectEqualProperDates(subject, new ProperDate("2025-01-01"));
     });
   });
 });
