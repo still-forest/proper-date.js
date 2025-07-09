@@ -1,5 +1,14 @@
 import ProperDate from "./model";
 
+export const buildUtcDate = (year: number, month: number, day: number): Date => {
+  return new Date(Date.UTC(year, month - 1, day))
+}
+
+export const buildUtcDateFromString = (value: string): Date => {
+  const [year, month, day] = value.split("-").map(Number);
+  return buildUtcDate(year, month, day);
+}
+
 export const parseInput = (date: ProperDate | Date | string) => {
   let year: number;
   let month: number;
@@ -14,12 +23,14 @@ export const parseInput = (date: ProperDate | Date | string) => {
     month = date.getMonth();
     day = date.getDate();
   } else if (typeof date === "string" && isValidDateFormat(date)) {
-    const parsedDate = new Date(date);
+    const parsedDate = buildUtcDateFromString(date);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else {
-    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string");
+   throw new Error(
+      `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${date} of type ${typeof date}`,
+    );
   }
   return { year, month, day };
 };
@@ -33,8 +44,29 @@ function isValidDateFormat(dateString: string): boolean {
   }
 
   // Further validate the date is real
-  const date = new Date(dateString);
+  const date = buildUtcDateFromString(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
+  const dayDiff = Math.abs(date.getDate() - day);
+  console.log("dayDiff", dayDiff);
 
-  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+  const yearMatch = (date.getFullYear()) === year;
+  const monthMatch = date.getMonth() + 1 === month;
+  const dayMatch = dayDiff <= 1;
+
+  console.log("isValidDateFormat",
+    {
+      date,
+      year,
+      month,
+      dateGetFullYear: date.getFullYear(),
+      dateGetMonth: date.getMonth(),
+      dateGetDate: date.getDate(),
+      day,
+      dayDiff,
+      yearMatch,
+      monthMatch,
+      dayMatch,
+    }
+  )
+  return yearMatch && monthMatch && dayMatch;
 }

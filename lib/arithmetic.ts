@@ -1,5 +1,6 @@
 import ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
+import { buildUtcDate } from "./utils";
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
@@ -14,13 +15,13 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
 
   if (period === "day" || period === "days") {
     const baseDate = base.toDate();
-    const newDate = new Date(baseDate.getTime());
+    const newDate = buildUtcDate(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate() + n);
     newDate.setDate(baseDate.getDate() + n);
     return new ProperDate(newDate);
   }
   if (period === "month" || period === "months") {
     const baseDate = base.toDate();
-    const targetDate = new Date(Date.UTC(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate()));
+    const targetDate = buildUtcDate(baseDate.getFullYear(), baseDate.getMonth() + n, baseDate.getDate());
 
     // Handle cases where the target date overflows to the next month
     // // Calculate expected month: original month + n, then take modulo 12
