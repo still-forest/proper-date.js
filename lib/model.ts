@@ -49,7 +49,7 @@ export default class ProperDate {
   }
 
   toString(): string {
-    return this.jsDate.toISOString().split("T")[0];
+    return `${this.year}-${this.actualMonth.toString().padStart(2, "0")}-${this.day.toString().padStart(2, "0")}`;
   }
 
   toJSON(): string {

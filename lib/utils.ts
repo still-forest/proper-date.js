@@ -19,7 +19,7 @@ export const buildDateFromString = (value: string): Date => {
  *     Date at local midnight of Dec 26.
  */
 export const normalizeDate = (date: Date): Date => {
-  return buildDateFromString(date.toISOString().split("T")[0]);
+  return buildDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
 };
 
 export const parseInput = (date: ProperDate | Date | string | number[]) => {
