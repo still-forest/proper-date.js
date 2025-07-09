@@ -9,6 +9,15 @@ export const buildDateFromString = (value: string): Date => {
   return buildDate(year, month, day);
 };
 
+/**
+ * Normalize a Date by extracting its UTC calendar date and returning
+ * a new Date set to 00:00:00 local time for that UTC date.
+ *
+ * This uses `date.toISOString().split("T")[0]`, so inputs with timezones
+ * that cross UTC midnight will shift the calendar day:
+ * e.g., new Date("2023-12-25T16:00:00.000-13:00") → "2023-12-26" →
+ *     Date at local midnight of Dec 26.
+ */
 export const normalizeDate = (date: Date): Date => {
   return buildDateFromString(date.toISOString().split("T")[0]);
 };
