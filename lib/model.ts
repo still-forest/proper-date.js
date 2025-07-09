@@ -1,5 +1,5 @@
 import { add, difference, subtract } from "./arithmetic";
-import { buildFromDate } from "./factory";
+import { getProperDateFromDate } from "./factory";
 import type { ArithmeticOptions, Period } from "./types";
 import { buildDate, parseInput } from "./utils";
 
@@ -39,12 +39,12 @@ export default class ProperDate {
 
   get endOfMonth(): ProperDate {
     const date = new Date(this.year, this.month + 1, 0);
-    return buildFromDate(date);
+    return getProperDateFromDate(date);
   }
 
   get endOfYear(): ProperDate {
     const date = new Date(this.year, 11, 31);
-    return buildFromDate(date);
+    return getProperDateFromDate(date);
   }
 
   equals(other: ProperDate): boolean {

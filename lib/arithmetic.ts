@@ -1,4 +1,4 @@
-import { buildFromDate } from "./factory";
+import { getProperDateFromDate } from "./factory";
 import type ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
 import { buildDate } from "./utils";
@@ -17,7 +17,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
   if (period === "day" || period === "days") {
     const baseDate = base.toDate();
     const newDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
-    return buildFromDate(newDate);
+    return getProperDateFromDate(newDate);
   }
   if (period === "month" || period === "months") {
     const baseDate = base.toDate();
@@ -30,12 +30,12 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
       targetDate.setDate(0); // Set to the last day of the previous month
     }
 
-    return buildFromDate(targetDate);
+    return getProperDateFromDate(targetDate);
   }
   if (period === "year" || period === "years") {
     const baseDate = base.toDate();
     const newDate = new Date(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate());
-    return buildFromDate(newDate);
+    return getProperDateFromDate(newDate);
   }
 
   throw new Error(`Period '${period}' is not supported`);
