@@ -66,15 +66,16 @@ describe("utils", () => {
     });
 
     test("throws error for invalid input types", () => {
-      const expectedErrorMessage = "Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string";
+      const buildExpectedErrorMessage = (input: string, type: string) =>
+        `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${input} of type ${type}`;
 
-      expect(() => parseInput("my birthday last year")).toThrow(expectedErrorMessage);
+      expect(() => parseInput("my birthday last year")).toThrow(buildExpectedErrorMessage("my birthday last year", "string"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(123)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(123)).toThrow(buildExpectedErrorMessage(123, "number"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(null)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(null)).toThrow(buildExpectedErrorMessage(null, "object"));
       // @ts-expect-error Testing invalid input
-      expect(() => parseInput(undefined)).toThrow(expectedErrorMessage);
+      expect(() => parseInput(undefined)).toThrow(buildExpectedErrorMessage(undefined, "undefined"));
     });
   });
 });

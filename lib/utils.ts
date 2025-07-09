@@ -19,7 +19,9 @@ export const parseInput = (date: ProperDate | Date | string) => {
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else {
-    throw new Error("Date must be either a Date, ProperDate, or YYYY-MM-DD formatted string");
+    throw new Error(
+      `[proper-date.js] Invalid date input: must be either a Date, ProperDate, or YYYY-MM-DD formatted string; got ${date} of type ${typeof date}`,
+    );
   }
   return { year, month, day };
 };
