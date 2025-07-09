@@ -1,5 +1,14 @@
 import ProperDate from "./model";
 
+export const buildUtcDate = (year: number, month: number, day: number): Date => {
+  return new Date(Date.UTC(year, month - 1, day))
+}
+
+export const buildUtcDateFromString = (value: string): Date => {
+  const [year, month, day] = value.split("-").map(Number);
+  return buildUtcDate(year, month, day);
+}
+
 export const parseInput = (date: ProperDate | Date | string | number[]) => {
   let year: number;
   let month: number;
@@ -14,12 +23,12 @@ export const parseInput = (date: ProperDate | Date | string | number[]) => {
     month = date.getMonth();
     day = date.getDate();
   } else if (Array.isArray(date) && date.length === 3) {
-    const parsedDate = new Date(Date.UTC(date[0], date[1] - 1, date[2]));
+    const parsedDate = buildUtcDate(date[0], date[1], date[2]);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else if (typeof date === "string" && isValidDateFormat(date)) {
-    const parsedDate = new Date(date);
+    const parsedDate = buildUtcDateFromString(date);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
@@ -38,7 +47,7 @@ function isValidDateFormat(dateString: string): boolean {
   }
 
   // Further validate the date is real
-  const date = new Date(dateString);
+  const date = buildUtcDateFromString(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
 
   return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
