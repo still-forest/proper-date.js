@@ -208,10 +208,9 @@ describe("arithmetic", () => {
     });
 
     test("including daylight savings time shifts", () => {
-      // real example
       const start = new ProperDate("2024-12-25");
       const end = new ProperDate("2025-04-10");
-      expect(difference(start, end)).toBe(106); // 105.958333333
+      expect(difference(start, end)).toBe(106);
     });
 
     test("throws an error for unsupported units", () => {
