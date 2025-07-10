@@ -15,12 +15,12 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
   }
 
   if (period === "day" || period === "days") {
-    const baseDate = base.toDate();
+    const baseDate = base.toLocalDate();
     const newDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
     return getProperDateFromDate(newDate);
   }
   if (period === "month" || period === "months") {
-    const baseDate = base.toDate();
+    const baseDate = base.toLocalDate();
     const targetDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1 + n, baseDate.getDate());
 
     // Handle cases where the target date overflows to the next month
@@ -33,7 +33,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
     return getProperDateFromDate(targetDate);
   }
   if (period === "year" || period === "years") {
-    const baseDate = base.toDate();
+    const baseDate = base.toLocalDate();
     const newDate = new Date(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate());
     return getProperDateFromDate(newDate);
   }

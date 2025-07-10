@@ -6,7 +6,8 @@ describe("model", () => {
     test("with a yyyy-mm-dd formatted string", () => {
       const subject = new ProperDate("2023-12-25");
       expect(subject.toString()).toStrictEqual("2023-12-25");
-      expectEqualDates(subject.toDate(), new Date(2023, 11, 25));
+      expectEqualDates(subject.toLocalDate(), new Date(2023, 11, 25));
+      expectEqualDates(subject.toUTCDate(), new Date(Date.UTC(2023, 11, 25)));
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
       expect(subject.day).toStrictEqual(25);
@@ -16,7 +17,8 @@ describe("model", () => {
       const properDate = new ProperDate("2023-12-25");
       const subject = new ProperDate(properDate);
       expect(subject.toString()).toStrictEqual("2023-12-25");
-      expectEqualDates(subject.toDate(), new Date(2023, 11, 25));
+      expectEqualDates(subject.toLocalDate(), new Date(2023, 11, 25));
+      expectEqualDates(subject.toUTCDate(), new Date(Date.UTC(2023, 11, 25)));
       expect(subject.year).toStrictEqual(2023);
       expect(subject.month).toStrictEqual(11);
       expect(subject.day).toStrictEqual(25);

@@ -59,7 +59,7 @@ export default class ProperDate {
     return this.toString();
   }
 
-  toDate(): Date {
+  toLocalDate(): Date {
     return this.jsDate;
   }
 
