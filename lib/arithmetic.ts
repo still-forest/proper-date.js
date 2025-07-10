@@ -1,7 +1,7 @@
 import { getProperDateFromDate } from "./factory";
 import type ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
-import { buildDate } from "./utils";
+import { buildLocalDate } from "./utils";
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
@@ -15,13 +15,13 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
   }
 
   if (period === "day" || period === "days") {
-    const baseDate = base.toDate();
-    const newDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
+    const baseDate = base.toLocalDate();
+    const newDate = buildLocalDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
     return getProperDateFromDate(newDate);
   }
   if (period === "month" || period === "months") {
-    const baseDate = base.toDate();
-    const targetDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1 + n, baseDate.getDate());
+    const baseDate = base.toLocalDate();
+    const targetDate = buildLocalDate(baseDate.getFullYear(), baseDate.getMonth() + 1 + n, baseDate.getDate());
 
     // Handle cases where the target date overflows to the next month
     // // Calculate expected month: original month + n, then take modulo 12
@@ -33,7 +33,7 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
     return getProperDateFromDate(targetDate);
   }
   if (period === "year" || period === "years") {
-    const baseDate = base.toDate();
+    const baseDate = base.toLocalDate();
     const newDate = new Date(baseDate.getFullYear() + n, baseDate.getMonth(), baseDate.getDate());
     return getProperDateFromDate(newDate);
   }
@@ -63,7 +63,11 @@ export const difference = (
   if (period !== "days") {
     throw new Error(`Unsupported option: period=${period}`);
   }
-  const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
-  const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-  return diffInDays;
+
+  const baseUtcDate = base.toUTCDate();
+  const otherUtcDate = other.toUTCDate();
+
+  const diffInMilliseconds = Math.abs(baseUtcDate.getTime() - otherUtcDate.getTime());
+  const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
+  return Math.floor(diffInDays);
 };
