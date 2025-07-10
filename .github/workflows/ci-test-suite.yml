@@ -13,6 +13,10 @@ jobs:
     strategy:
       matrix:
         task: [lint, test, build]
+        timezone: 
+          - 'America/New_York'
+          - 'Europe/London'
+          - 'Asia/Tokyo'
 
     steps:
       - name: Checkout code
@@ -28,6 +32,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Set timezone
+        run: |
+          sudo timedatectl set-timezone ${{ matrix.timezone }}
+          date
 
       - name: Run ${{ matrix.task }}
         run: |
