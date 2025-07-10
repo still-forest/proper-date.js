@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
+    strategy:
+      matrix:
+        timezone:
+          - 'America/New_York'
+          - 'Europe/London'
+          - 'Asia/Tokyo'
+          - 'UTC'
+
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -28,12 +36,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Set timezone
+        run: |
+          sudo timedatectl set-timezone ${{ matrix.timezone }}
+          date
+
       - name: Run coverage report
         run: |
           pnpm test:coverage
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5
+        if: ${{ matrix.timezone == 'UTC' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: still-forest/proper-date.js
