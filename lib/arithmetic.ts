@@ -1,7 +1,7 @@
 import { getProperDateFromDate } from "./factory";
 import type ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
-import { buildDate } from "./utils";
+import { buildLocalDate } from "./utils";
 
 const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
 
@@ -16,12 +16,12 @@ export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DE
 
   if (period === "day" || period === "days") {
     const baseDate = base.toLocalDate();
-    const newDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
+    const newDate = buildLocalDate(baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate() + n);
     return getProperDateFromDate(newDate);
   }
   if (period === "month" || period === "months") {
     const baseDate = base.toLocalDate();
-    const targetDate = buildDate(baseDate.getFullYear(), baseDate.getMonth() + 1 + n, baseDate.getDate());
+    const targetDate = buildLocalDate(baseDate.getFullYear(), baseDate.getMonth() + 1 + n, baseDate.getDate());
 
     // Handle cases where the target date overflows to the next month
     // // Calculate expected month: original month + n, then take modulo 12

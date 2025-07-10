@@ -1,12 +1,12 @@
 import ProperDate from "./model";
 
-export const buildDate = (year: number, month: number, day: number): Date => {
+export const buildLocalDate = (year: number, month: number, day: number): Date => {
   return new Date(year, month - 1, day);
 };
 
-export const buildDateFromString = (value: string): Date => {
+export const buildLocalDateFromString = (value: string): Date => {
   const [year, month, day] = value.split("-").map(Number);
-  return buildDate(year, month, day);
+  return buildLocalDate(year, month, day);
 };
 
 /**
@@ -19,7 +19,7 @@ export const buildDateFromString = (value: string): Date => {
  *     Date at local midnight of Dec 26.
  */
 export const normalizeDate = (date: Date): Date => {
-  return buildDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  return buildLocalDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
 };
 
 export const parseInput = (date: ProperDate | string | number[]) => {
@@ -32,12 +32,12 @@ export const parseInput = (date: ProperDate | string | number[]) => {
     month = date.month;
     day = date.day;
   } else if (Array.isArray(date) && date.length === 3) {
-    const parsedDate = buildDate(date[0], date[1], date[2]);
+    const parsedDate = buildLocalDate(date[0], date[1], date[2]);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
   } else if (typeof date === "string" && isValidDateFormat(date)) {
-    const parsedDate = buildDateFromString(date);
+    const parsedDate = buildLocalDateFromString(date);
     year = parsedDate.getFullYear();
     month = parsedDate.getMonth();
     day = parsedDate.getDate();
@@ -61,7 +61,7 @@ function isValidDateFormat(dateString: string): boolean {
   }
 
   // Further validate the date is real
-  const date = buildDateFromString(dateString);
+  const date = buildLocalDateFromString(dateString);
   const [year, month, day] = dateString.split("-").map(Number);
 
   return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
