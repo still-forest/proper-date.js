@@ -207,6 +207,12 @@ describe("arithmetic", () => {
       expect(difference(dayAfterLeapDay, new ProperDate("2019-03-01"))).toBe(366);
     });
 
+    test("including daylight savings time shifts", () => {
+      const start = new ProperDate("2024-12-25");
+      const end = new ProperDate("2025-04-10");
+      expect(difference(start, end)).toBe(106);
+    });
+
     test("throws an error for unsupported units", () => {
       // @ts-expect-error Testing invalid input
       expect(() => difference(base, new ProperDate(), { period: "hours" })).toThrow("Unsupported option: period=hours");
