@@ -63,6 +63,10 @@ export default class ProperDate {
     return this.jsDate;
   }
 
+  toUTCDate(): Date {
+    return new Date(Date.UTC(this.year, this.month, this.day));
+  }
+
   /**
    * Adds a specified number of units to the current date.
    * @param n - The number of units to add.

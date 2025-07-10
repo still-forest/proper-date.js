@@ -63,7 +63,11 @@ export const difference = (
   if (period !== "days") {
     throw new Error(`Unsupported option: period=${period}`);
   }
-  const diffInMilliseconds = Math.abs(base.toDate().getTime() - other.toDate().getTime());
-  const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-  return diffInDays;
+
+  const baseUtcDate = base.toUTCDate();
+  const otherUtcDate = other.toUTCDate();
+
+  const diffInMilliseconds = Math.abs(baseUtcDate.getTime() - otherUtcDate.getTime());
+  const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
+  return Math.floor(diffInDays);
 };
