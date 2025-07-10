@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 2
 
     strategy:
+      fail-fast: false
       matrix:
         timezone:
           - 'America/New_York'
@@ -36,12 +37,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set timezone
+      - name: Set timezone to ${{ matrix.timezone }}
         run: |
           sudo timedatectl set-timezone ${{ matrix.timezone }}
           date
 
-      - name: Run coverage report
+      - name: Run tests in ${{ matrix.timezone }} timezone
         run: |
           pnpm test:coverage
 
