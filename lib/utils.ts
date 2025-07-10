@@ -4,6 +4,10 @@ export const buildLocalDate = (year: number, month: number, day: number): Date =
   return new Date(year, month - 1, day);
 };
 
+export const buildUTCDate = (year: number, month: number, day: number): Date => {
+  return new Date(Date.UTC(year, month - 1, day));
+};
+
 export const buildLocalDateFromString = (value: string): Date => {
   const [year, month, day] = value.split("-").map(Number);
   return buildLocalDate(year, month, day);

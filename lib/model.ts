@@ -1,7 +1,7 @@
 import { add, difference, subtract } from "./arithmetic";
 import { getProperDateFromDate } from "./factory";
 import type { ArithmeticOptions, Period } from "./types";
-import { buildLocalDate, parseInput } from "./utils";
+import { buildLocalDate, buildUTCDate, parseInput } from "./utils";
 
 const getDefaultDate = (): string => {
   return new Date().toISOString().split("T")[0];
@@ -64,7 +64,7 @@ export default class ProperDate {
   }
 
   toUTCDate(): Date {
-    return new Date(Date.UTC(this.year, this.month, this.day));
+    return buildUTCDate(this.year, this.actualMonth, this.day);
   }
 
   /**
