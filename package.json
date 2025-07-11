@@ -46,7 +46,7 @@
     "@still-forest/biomejs-config": "2.0.0",
     "@types/jest": "30.0.0",
     "conventional-changelog-conventionalcommits": "9.0.0",
-    "jest": "30.0.3",
+    "jest": "30.0.4",
     "release-it": "19.0.3",
     "ts-jest": "29.4.0",
     "ts-node": "10.9.2",
