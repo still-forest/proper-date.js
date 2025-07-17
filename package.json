@@ -42,7 +42,7 @@
     "test:coverage": "jest --coverage"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.6",
+    "@biomejs/biome": "2.1.1",
     "@still-forest/biomejs-config": "2.0.1",
     "@types/jest": "30.0.0",
     "conventional-changelog-conventionalcommits": "9.0.0",
