@@ -51,6 +51,14 @@ export default class ProperDate {
     return this.toString() === other.toString();
   }
 
+  isBefore(other: ProperDate): boolean {
+    return this.toUTCDate() < other.toUTCDate();
+  }
+
+  isAfter(other: ProperDate): boolean {
+    return this.toUTCDate() > other.toUTCDate();
+  }
+
   toString(): string {
     return `${this.year}-${this.actualMonth.toString().padStart(2, "0")}-${this.day.toString().padStart(2, "0")}`;
   }

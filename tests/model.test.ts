@@ -70,6 +70,24 @@ describe("model", () => {
     });
   });
 
+  describe("#isBefore", () => {
+    test("returns true if the date is before the other date", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.isBefore(new ProperDate("2023-12-24"))).toBe(false);
+      expect(subject.isBefore(new ProperDate("2023-12-25"))).toBe(false);
+      expect(subject.isBefore(new ProperDate("2023-12-26"))).toBe(true);
+    });
+  });
+
+  describe("#isAfter", () => {
+    test("returns true if the date is after the other date", () => {
+      const subject = new ProperDate("2023-12-25");
+      expect(subject.isAfter(new ProperDate("2023-12-24"))).toBe(true);
+      expect(subject.isAfter(new ProperDate("2023-12-25"))).toBe(false);
+      expect(subject.isAfter(new ProperDate("2023-12-26"))).toBe(false);
+    });
+  });
+
   describe("#formatted", () => {
     test("returns the date as a string", () => {
       const subject = new ProperDate("2023-12-25");
