@@ -51,11 +51,11 @@ export default class ProperDate {
     return this.toString() === other.toString();
   }
 
-  isBefore(other: ProperDate): boolean {
+  before(other: ProperDate): boolean {
     return this.toUTCDate() < other.toUTCDate();
   }
 
-  isAfter(other: ProperDate): boolean {
+  after(other: ProperDate): boolean {
     return this.toUTCDate() > other.toUTCDate();
   }
 
