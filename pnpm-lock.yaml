@@ -27,8 +27,8 @@ importers:
         specifier: 30.4.2
         version: 30.4.2(@types/node@25.9.2)(ts-node@10.9.2(@types/node@25.9.2)(typescript@6.0.3))
       release-it:
-        specifier: 20.0.1
-        version: 20.0.1(@types/node@25.9.2)
+        specifier: 20.2.0
+        version: 20.2.0(@types/node@25.9.2)
       ts-jest:
         specifier: 29.4.11
         version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(esbuild@0.27.7)(jest-util@30.4.1)(jest@30.4.2(@types/node@25.9.2)(ts-node@10.9.2(@types/node@25.9.2)(typescript@6.0.3)))(typescript@6.0.3)
@@ -2194,8 +2194,8 @@ packages:
     resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
     engines: {node: '>= 20.19.0'}
 
-  release-it@20.0.1:
-    resolution: {integrity: sha512-3ob1P1aV+3+ZOoR7qgobfYyMlQbpitzOK09iKTtQ145vFi4rWxlRTgHwtVl8kokCvqiF/cJPxRlfcmZmF5aDJA==}
+  release-it@20.2.0:
+    resolution: {integrity: sha512-9ZTk9ripgctC6VTqH+P54KuboK29A5mG/I3tFfS5hnoAnkwtFFAMHRidYz93ylrW995vF50Ny1aOGJiyRmEN7w==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     hasBin: true
 
@@ -4788,7 +4788,7 @@ snapshots:
 
   readdirp@5.0.0: {}
 
-  release-it@20.0.1(@types/node@25.9.2):
+  release-it@20.2.0(@types/node@25.9.2):
     dependencies:
       '@inquirer/prompts': 8.4.2(@types/node@25.9.2)
       '@octokit/rest': 22.0.1
