@@ -194,23 +194,42 @@ describe("arithmetic", () => {
 
     test("returns the number of days between two dates", () => {
       expect(difference(base, new ProperDate(base))).toBe(0);
-      expect(difference(base, new ProperDate("2023-12-25"))).toBe(0);
-      expect(difference(base, new ProperDate("2023-12-26"))).toBe(1);
-      expect(difference(base, new ProperDate("2023-12-24"))).toBe(1);
-
-      expect(difference(base, new ProperDate("2024-01-24"))).toBe(30);
       expect(difference(base, new ProperDate("2022-12-25"))).toBe(365);
+
+      expect(difference(base, new ProperDate("2023-12-24"))).toBe(1);
+      expect(difference(base, new ProperDate("2023-12-25"))).toBe(0);
+      expect(difference(base, new ProperDate("2023-12-26"))).toBe(-1);
+
+      expect(difference(base, new ProperDate("2024-01-24"))).toBe(-30);
 
       // leap year
       const dayAfterLeapDay = new ProperDate("2020-03-01");
-      expect(difference(dayAfterLeapDay, new ProperDate("2021-03-01"))).toBe(365);
+      expect(difference(dayAfterLeapDay, new ProperDate("2021-03-01"))).toBe(-365);
       expect(difference(dayAfterLeapDay, new ProperDate("2019-03-01"))).toBe(366);
+    });
+
+    test("returns the absolute number of days between two dates", () => {
+      expect(difference(base, new ProperDate(base), { absolute: true })).toBe(0);
+
+      expect(difference(base, new ProperDate("2022-12-25"), { absolute: true })).toBe(365);
+
+      expect(difference(base, new ProperDate("2023-12-24"), { absolute: true })).toBe(1);
+      expect(difference(base, new ProperDate("2023-12-25"), { absolute: true })).toBe(0);
+      expect(difference(base, new ProperDate("2023-12-26"), { absolute: true })).toBe(1);
+
+      expect(difference(base, new ProperDate("2024-01-24"), { absolute: true })).toBe(30);
+
+      // leap year
+      const dayAfterLeapDay = new ProperDate("2020-03-01");
+      expect(difference(dayAfterLeapDay, new ProperDate("2021-03-01"), { absolute: true })).toBe(365);
+      expect(difference(dayAfterLeapDay, new ProperDate("2019-03-01"), { absolute: true })).toBe(366);
     });
 
     test("including daylight savings time shifts", () => {
       const start = new ProperDate("2024-12-25");
       const end = new ProperDate("2025-04-10");
-      expect(difference(start, end)).toBe(106);
+      expect(difference(start, end)).toBe(-106);
+      expect(difference(start, end, { absolute: true })).toBe(106);
     });
 
     test("throws an error for unsupported units", () => {

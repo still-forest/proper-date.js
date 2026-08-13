@@ -3,7 +3,7 @@ import type ProperDate from "./model";
 import type { ArithmeticOptions } from "./types";
 import { buildLocalDate } from "./utils";
 
-const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days" };
+const DEFAULT_OPTIONS: ArithmeticOptions = { period: "days", absolute: false };
 
 export const add = (base: ProperDate, n: number, options: ArithmeticOptions = DEFAULT_OPTIONS): ProperDate => {
   // TODO: Refactor this to not use Date: https://github.com/still-forest/proper-date.js/issues/21
@@ -67,7 +67,8 @@ export const difference = (
   const baseUtcDate = base.toUTCDate();
   const otherUtcDate = other.toUTCDate();
 
-  const diffInMilliseconds = Math.abs(baseUtcDate.getTime() - otherUtcDate.getTime());
+  const diffInMilliseconds = baseUtcDate.getTime() - otherUtcDate.getTime();
   const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
-  return Math.floor(diffInDays);
+  const roundedDiffInDays = Math.round(diffInDays);
+  return options.absolute ? Math.abs(roundedDiffInDays) : roundedDiffInDays;
 };

@@ -139,7 +139,7 @@ describe("model", () => {
 
     test("returns the number of days between another dates", () => {
       expect(subject.difference(new ProperDate(subject))).toBe(0);
-      expect(subject.difference(new ProperDate("2023-12-26"))).toBe(1);
+      expect(subject.difference(new ProperDate("2023-12-26"))).toBe(-1);
       expect(subject.difference(new ProperDate("2023-12-24"))).toBe(1);
     });
 
