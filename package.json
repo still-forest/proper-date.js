@@ -45,7 +45,7 @@
     "@biomejs/biome": "2.5.11",
     "@still-forest/biomejs-config": "2.2.0",
     "@types/jest": "30.0.0",
-    "jest": "30.4.2",
+    "jest": "30.5.1",
     "release-it": "21.0.2",
     "ts-jest": "29.4.12",
     "ts-node": "10.9.2",
