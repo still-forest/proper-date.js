@@ -173,8 +173,8 @@ importers:
         specifier: 2.5.15
         version: 2.5.15
       '@still-forest/biomejs-config':
-        specifier: 2.2.0
-        version: 2.2.0(@biomejs/biome@2.5.15)
+        specifier: 2.3.1
+        version: 2.3.1(@biomejs/biome@2.5.15)
       '@types/jest':
         specifier: 30.0.0
         version: 30.0.0
@@ -1132,10 +1132,10 @@ packages:
   '@sinonjs/fake-timers@15.4.0':
     resolution: {integrity: sha512-DsG+8/LscQIQg68J6Ef3dv10u6nVyetYn923s3/sus5eaGfTo1of5WMZSLf0UJc9KDuKPilPH0UDJCjvNbDNCA==}
 
-  '@still-forest/biomejs-config@2.2.0':
-    resolution: {integrity: sha512-+KomUBvMv9ld/djnhGEATM/c19/3Ihfr+GcI1g6OsAbVVXDHnczj0Ig1CHhG3FHTN/qkcep3va2nke/g78+1Rw==}
+  '@still-forest/biomejs-config@2.3.1':
+    resolution: {integrity: sha512-s/iTtCyWNdECTnnwD2w05AcZTNgA7OtqTpMcKG4UgZ/qFhZM41XkZkLsv1zjTCM/p0R2DIu93ILJKTvmPrAMhQ==}
     peerDependencies:
-      '@biomejs/biome': ^2.3.2
+      '@biomejs/biome': ^2.6.2
 
   '@tsconfig/node10@1.0.13':
     resolution: {integrity: sha512-gcLdvR9HO1ZJBypsOGqaP6TFEzb6vIta0KSTLt9NAQ6pXQO3cRgSVyCN6pzYqI9DlJgY71XKO0dpDhCf08b3pg==}
@@ -3619,7 +3619,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@still-forest/biomejs-config@2.2.0(@biomejs/biome@2.5.15)':
+  '@still-forest/biomejs-config@2.3.1(@biomejs/biome@2.5.15)':
     dependencies:
       '@biomejs/biome': 2.5.15
 
